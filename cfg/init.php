@@ -7,6 +7,9 @@
 	$json = json_decode($json,true); // Transformation du fichier en array
 
 	$bddName = $json['BDD'];
-	$bdd = new BDD($bddName);
+	$url = $json['url'];
+	$user = $json['user'];
+	$password = $json['password'];
+	$bdd = new BDD($url,$bddName,$user,$password);
 
   $opatity = $json['opacity'];
