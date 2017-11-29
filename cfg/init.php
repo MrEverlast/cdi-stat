@@ -11,7 +11,6 @@
 	$user = $json['user'];
 	$password = $json['password'];
 	$port = $json['port'];
-	print_r($url.$bddName.$user.$password);
 	$bdd = new BDD($ip,$bddName,$user,$password,$port);
 
   $opatity = $json['opacity'];
