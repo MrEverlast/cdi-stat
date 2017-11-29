@@ -1,7 +1,8 @@
 {
-	"url" : "max-brooks.fr",
+	"ip" : "localhost",
 	"user" : "max-brooks",
 	"password" : "6pDEQEcAr8jYTW8w",
 	"BDD" : "bts_cdi_test_2017",
+	"port" : 5432,
 	"opacity" : "40"
 }
