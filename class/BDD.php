@@ -1,16 +1,18 @@
 <?php 
 class BDD { 
-	private $db;
+	private $url;
+	private $dbName;
 	private $user;
-	private $pwd;
+	private $password;
 	private $bdd;
 
-	function __construct($new_db) {
-		$this->db = $new_db;
-		$this->user = 'root';
-		$this->pwd = '';
+	function __construct($url,$dbName,$user,$password) {
+		$this->url = $url;
+		$this->dbName = $dbName;
+		$this->user = $user;
+		$this->password = $password;
 		
-		$this->bdd = new PDO('mysql:host=localhost;dbname='.$this->db, $this->user, $this->pwd);
+		$this->bdd = new PDO('mysql:host='.$this->url.';dbname='.$this->dbName, $this->user, $this->password);
 	}
 	
 	function requeteBDD($requete){
