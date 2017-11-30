@@ -96,7 +96,7 @@ $(document).on( "click", '.data_elv',function( event ) {
 		</div>
 	</div>
 	
-	<div class="ui modal">
+	<div id="modal_main" class="ui modal">
 			  
 		</div>
 </div>
