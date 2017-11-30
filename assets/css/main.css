@@ -1,4 +1,4 @@
-/* --- inscription --- */
+/* --- activity --- */
 .color-picker-h,.color-picker-sv {
   display: none;
 }
@@ -21,7 +21,7 @@ body {
   background-color: #DADADA;
 }
 body > .grid {
-  height: 100%;
+  height: calc(100% - 40px);
 }
 .image {
   margin-top: -100px;
