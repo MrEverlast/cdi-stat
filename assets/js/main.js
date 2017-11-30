@@ -30,7 +30,7 @@ function loadModal(object) {
   setTimeout(function() {
     $('#modal_main').modal({
       onShow: function() {
-        if (res[1] !== 'delete') {
+        if (res[0]!== 'elv' && res[1] !== 'delete') {
           loadColor();
         }
       },
@@ -58,6 +58,14 @@ $(document).on('click','[data-submit]',function() {
   var color = $('#color').css('backgroundColor');
   var type = $('#checkbox_grp').is(':checked');
   var idActivity = $("#id_activity").val();
+  
+  var first_name = $('#first_name').val();
+  var last_name = $('#last_name').val();
+  var postal_code = $('#post_code').val();
+  var city = $('#city').val();
+  var id_classe = $('#id_classe').val();
+  
+  
   if (color != undefined) {
     color = rgb2hex(color);
   }
@@ -71,12 +79,12 @@ $(document).on('click','[data-submit]',function() {
       }
     }).modal('show');
   } else {
-    query(targetDir,name,color,type,idActivity);
+    query(targetDir,name,color,type,idActivity,first_name,last_name,postal_code,city,id_classe);
   } 
 
 });
 
-function query(targetDir,name,color,type,idActivity) {
+function query(targetDir,name,color,type,idActivity,first_name,last_name,postal_code,city,id_classe) {
   $.ajax({
     method: "POST",
     url: "/ajax/query.php",
@@ -85,7 +93,12 @@ function query(targetDir,name,color,type,idActivity) {
       type: type,
       color: color,
       name: name,
-      idActivity: idActivity
+      idActivity: idActivity,
+	  first_name: first_name,
+	  last_name: last_name,
+	  postal_code: postal_code,
+	  city: city,
+	  id_classe: id_classe
     }
   });
 }
@@ -224,3 +237,28 @@ $(document).on( "click", '.data_elv',function( event ) {
   }
 
 //// ------------------------------------- ////
+
+//////////// MODIFIER ELEVE //////////////////
+
+$(document).on("change",'[data-selected]',function() {
+	var id_eleve = $("#select_elev").val();
+	var targetDir = "req_elv_edit";
+		$.ajax({
+				method:"POST",
+				url: '/ajax/query.php',
+				data: { targetDir: targetDir, id_eleve:id_eleve },
+				success: function(reponse) {
+				alert(reponse);
+				location.reload();
+				},
+				success: function(data){
+					alert(data);
+					var res =data.split('_');
+					$("#id_classe [data-value=4]").attr("selected","true");
+					$("#id_classe [data-value=4]").addClass("active selected");
+					
+					$("#city").val(res[2]);
+					$("#postal_code").val(res[3]);
+				}
+			});
+});
