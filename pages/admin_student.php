@@ -2,7 +2,8 @@
 $(document).on( "click", '.data_elv',function( event ) {
 	var val = $( this ).children().text();
 	var targetDir = "list_stud_stud";
-	
+	$(".data_elv").removeClass("myActive");
+	$(this).addClass("myActive");
 	
   $.ajax({
     method: "POST",
@@ -15,7 +16,12 @@ $(document).on( "click", '.data_elv',function( event ) {
 	success: function(data){
 
 		$("#data_tbody").html(data);
-		
+		$('#data_tbody').transition({
+			animation  :'fade up',
+			onComplete : function() {
+			  $('#data_tbody').removeClass("transition");
+			}
+			});
 		
 	}
   });
@@ -23,6 +29,16 @@ $(document).on( "click", '.data_elv',function( event ) {
 });
 
 </script>
+<style>
+.data_elv:hover {
+	cursor: pointer;
+}
+.myActive {
+	-webkit-box-shadow: 0 0 5px 0 #888888;
+	box-shadow: 0 0 5px 0 #888888;
+	transition: 0.2s;
+}
+</style>
 <div class="ui basic segment">
 		<div class="ui buttons">
 		  <button id="elv_create" class="ui green button myTrigger"><i class="icon add"></i>Créer</button>
