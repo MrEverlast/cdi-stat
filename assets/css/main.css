@@ -31,10 +31,35 @@ body > .grid {
 }
 /* --- Admin_student --- */
 .data_elv:hover {
-	cursor: pointer;
+  cursor: pointer;
 }
 .myActive {
-	-webkit-box-shadow: 0 0 5px 0 #888888;
-	box-shadow: 0 0 5px 0 #888888;
-	transition: 0.2s;
+  -webkit-box-shadow: 0 0 5px 0 #888888;
+  box-shadow: 0 0 5px 0 #888888;
+  transition: 0.2s;
+}
+/* --- Admin_setting --- */
+.upload-area:hover{
+  cursor: pointer;
+}
+.upload-area{
+  border: 2px solid lightgray;
+  border-radius: 3px;
+  margin: 0 auto;
+  text-align: center;
+  overflow: auto;
+  padding: 5rem;
+}
+#file{
+  display: none;
+}
+
+/* Thumbnail */
+.thumbnail{
+  width: 80px;
+  height: 80px;
+  padding: 2px;
+  border: 2px solid lightgray;
+  border-radius: 3px;
+  float: left;
 }

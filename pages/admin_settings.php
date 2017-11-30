@@ -9,13 +9,15 @@
 
 	<div class="content">
 		<div class="container" >
-            <input type="file" name="file" id="file">
-            
-            <!-- Drag and Drop container-->
-            <div class="upload-area"  id="uploadfile">
-                <h1>Drag and Drop file here<br/>Or<br/>Click to select file</h1>
-            </div>
-        </div>
+      <input type="file" name="file" id="file" accept=".csv">
+      
+      <!-- Drag and Drop container-->
+      <div class="upload-area"  id="uploadfile">
+        <h3>Cliquez pour importer le fichier .csv</h3>
+        <div class="ui horizontal divider">OU</div>
+        <h3>Glissez déposez le fichier .csv</h3>
+      </div>
+    </div>
 	</div>
 
 	<div class="actions">
@@ -26,45 +28,6 @@
 
 </div>
 </div>
-<style type="text/css">
-.upload-area:hover{
-    cursor: pointer;
-}
-.upload-area{
-    width: 70%;
-    height: 200px;
-    border: 2px solid lightgray;
-    border-radius: 3px;
-    margin: 0 auto;
-    margin-top: 100px;
-    text-align: center;
-    overflow: auto;
-}
-.upload-area h1{
-    text-align: center;
-    font-weight: normal;
-    font-family: sans-serif;
-    line-height: 50px;
-    color: darkslategray;
-}
-#file{
-    display: none;
-}
-
-/* Thumbnail */
-.thumbnail{
-    width: 80px;
-    height: 80px;
-    padding: 2px;
-    border: 2px solid lightgray;
-    border-radius: 3px;
-    float: left;
-}
-
-.size{
-    font-size:12px;
-}
-</style>
 <script type="text/javascript">
 	$(document).on('click','#req_year_create',function() {
 		$("#modal_year").modal({
@@ -85,7 +48,7 @@
  $("html").on("dragover", function(e) {
     e.preventDefault();
     e.stopPropagation();
-    $("h1").text("Drag here");
+    $("h3").text("Drag here");
  });
 
  $("html").on("drop", function(e) { e.preventDefault(); e.stopPropagation(); });
@@ -98,7 +61,7 @@
     $("html").on("dragover", function(e) {
         e.preventDefault();
         e.stopPropagation();
-        $("h1").text("Drag here");
+        $("h3").text("Drag here");
     });
 
     $("html").on("drop", function(e) { e.preventDefault(); e.stopPropagation(); });
@@ -107,14 +70,14 @@
     $('.upload-area').on('dragenter', function (e) {
         e.stopPropagation();
         e.preventDefault();
-        $("h1").text("Drop");
+        $("h3").text("Drop");
     });
 
     // Drag over
     $('.upload-area').on('dragover', function (e) {
         e.stopPropagation();
         e.preventDefault();
-        $("h1").text("Drop");
+        $("h3").text("Drop");
     });
 
     // Drop
@@ -122,30 +85,34 @@
         e.stopPropagation();
         e.preventDefault();
 
-        $("h1").text("Upload");
+        $("h3").text("Upload");
 
         var file = e.originalEvent.dataTransfer.files;
         var fd = new FormData();
 
         fd.append('file', file[0]);
-
-        uploadData(fd);
+        var ext = file.name.slice((file.name.lastIndexOf(".") - 1 >>> 0) + 2);
+        alert(ext);
+        //uploadData(fd);
     });
 
     // Open file selector on div click
     $("#uploadfile").click(function(){
-        $("#file").click();
+      $("#file").click();
     });
 
     // file selected
     $("#file").change(function(){
-        var fd = new FormData();
+      var fd = new FormData();
 
-        var files = $('#file')[0].files[0];
+      var files = $('#file')[0].files[0];
+      var ext = files.name.slice((files.name.lastIndexOf(".") - 1 >>> 0) + 2);
+      
+      alert(ext);
 
-        fd.append('file',files);
+      fd.append('file',files);
 
-        uploadData(fd);
+      //uploadData(fd);
     });
 });
 

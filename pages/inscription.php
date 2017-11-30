@@ -10,9 +10,7 @@
 
 <div class="ui middle aligned center aligned grid">
   <div class="column">
-    <h2 class="ui blue image header">
-      <div class="content">CDI</div>
-    </h2>
+    <h1 class="ui blue image header">CDI</h1>
     <form class="ui large form aligned left">
       <div class="ui stacked segment">
 		
