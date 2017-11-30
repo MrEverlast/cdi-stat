@@ -1,11 +1,12 @@
 <?php 
   session_start();
   $_DIR = $_SERVER['DOCUMENT_ROOT'];
-  if (isset($_GET['p'])) $page = $_GET['p']; else $page = "inscription";
+  if (isset($_GET['p'])) $page = $_GET['p']; else $page = "main";
   if (isset($_GET['s'])) $setting = $_GET['s']; else $setting = "";
 
   include_once $_DIR.'/cfg/init.php';
-  $_SESSION['connected'] = true;
+  
+  
  ?>
 
 <!DOCTYPE html>
@@ -16,10 +17,10 @@
 <?php 
 $array = array("inscription","main","activity","student");
 if (in_array($page, $array)) {
-  if ($_SESSION['connected'] == true) {
+  if (isset($_SESSION['connected'])) {
   
     ##- START ADMIN -CONNECTED- -## 
-    if ($page != "inscription") {
+    
       include_once $_DIR.'/content/admin_navbar.php'; ?>
 
       <div class="ui bottom attached segment pushable" style="height: calc(100% - 3em);">
@@ -32,7 +33,7 @@ if (in_array($page, $array)) {
     } else { 
     include_once $_DIR.'/pages/inscription.php';
   }
-  } 
+   
 }
  ?>
 
