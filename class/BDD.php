@@ -14,9 +14,10 @@ class BDD {
 		$this->password = $password;
 		$this->port = $port;
 		
-		$str = 'mysql:host='.$this->ip.';dbname='.$this->dbName;
+		$url = 'mysql:host='.$this->ip.';dbname='.$this->dbName;
 
-		$this->bdd = new PDO($str, $this->user, $this->password);
+		$this->bdd = new PDO($url, $this->user, $this->password);
+		$this->bdd->exec('SET NAMES utf8');
 	}
 	
 	function requeteBDD($requete){

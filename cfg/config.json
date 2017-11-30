@@ -3,6 +3,6 @@
 	"user" : "root",
 	"password" : "",
 	"BDD" : "bts_cdi_test_2017",
-	"port" : 5432,
+	"port" : 3006,
 	"opacity" : "40"
 }
