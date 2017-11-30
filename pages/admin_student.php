@@ -1,34 +1,3 @@
-<script>
-$(document).on( "click", '.data_elv',function( event ) {
-	var val = $( this ).children().text();
-	var targetDir = "list_stud_stud";
-	$(".data_elv").removeClass("myActive");
-	$(this).addClass("myActive");
-	
-  $.ajax({
-    method: "POST",
-    url: "/ajax/query.php",
-    data: { 
-      targetDir: targetDir,
-      val: val
-
-    },
-	success: function(data){
-
-		$("#data_tbody").html(data);
-		$('#data_tbody').transition({
-			animation  :'fade up',
-			onComplete : function() {
-			  $('#data_tbody').removeClass("transition");
-			}
-			});
-		
-	}
-  });
-	
-});
-
-</script>
 <style>
 .data_elv:hover {
 	cursor: pointer;

@@ -15,57 +15,6 @@
  <?php 
  include_once $_DIR.'/cfg/init.php';
  ?>
-  <script>
-  function enregistrerEleve() {
-		var eleve = $("#eleve").val();
-		var activity = $("#activity").val();
-		var duree = $("#duree").val();
-		var targetDir = "req_inscr_inscription";
-		if(eleve != "" && activity != "" && duree != ""){
-			$.ajax({
-				method:"POST",
-				url: '/ajax/query.php',
-				data: { targetDir: targetDir, eleve:eleve, activity:activity, duree:duree},
-				success: function(reponse) {
-				alert(reponse);
-				location.reload();
-				}
-			});
-		}
-		
-		if(eleve=="") $("#divEleve").addClass('error');
-		else $("#divEleve").removeClass('error');
-		if(activity=="") $("#divActivity").addClass('error');
-		else $("#divActivity").removeClass('error');
-		if(duree=="") $("#divDuree").addClass('error');
-		else $("#divDuree").removeClass('error');
-		
-  }
-  
-  function afficheModalAdmin() {
-	  $('.ui.mini.basic.modal')
-		.modal('show')
-	;
-	  
-  }
-  
-  function enregistrerAdmin() {
-		var password = $("#password").val();
-		var targetDir = "req_inscr_inscription";
-		if(password != ""){
-			$.ajax({
-				method:"POST",
-				url: '/ajax/query.php',
-				data: { targetDir: targetDir, password:password },
-				success: function(reponse) {
-				alert(reponse);
-				location.reload();
-				}
-			});
-		}
-  }
-  </script>
-
  
 <div class="ui secondary  menu">
   <div class="right menu">

@@ -130,3 +130,97 @@ function loadColor() {
     picker.picker.firstChild.appendChild(box);
   }
 }
+
+////////////// Admin_student ////////
+
+$(document).on( "click", '.data_elv',function( event ) {
+	var val = $( this ).children().text();
+	var targetDir = "list_stud_stud";
+	$(".data_elv").removeClass("myActive");
+	$(this).addClass("myActive");
+	
+  $.ajax({
+    method: "POST",
+    url: "/ajax/query.php",
+    data: { 
+      targetDir: targetDir,
+      val: val
+
+    },
+	success: function(data){
+
+		$("#data_tbody").html(data);
+		// A MODIFIER //
+		/*$('#data_tbody').transition({
+			animation  :'fade up',
+			onComplete : function() {
+			  $('#data_tbody').removeClass("transition");
+			}
+			});*/
+		// -------- // 
+		
+	}
+  });
+	
+});
+
+
+//// ------------------------------------- ////
+
+//////////// INSCRIPTION //////////////
+
+  function enregistrerEleve() {
+		var eleve = $("#eleve").val();
+		var activity = $("#activity").val();
+		var duree = $("#duree").val();
+		var targetDir = "req_inscr_inscription";
+		if(eleve != "" && activity != "" && duree != ""){
+			$.ajax({
+				method:"POST",
+				url: '/ajax/query.php',
+				data: { targetDir: targetDir, eleve:eleve, activity:activity, duree:duree},
+				success: function(reponse) {
+				alert(reponse);
+				location.reload();
+				}
+			});
+		}
+		afficherError(eleve, activity, duree);
+		
+		
+		
+  }
+   function afficherError(eleve, activity, duree){
+	   
+	   if(eleve=="") $("#divEleve").addClass('error');
+		else $("#divEleve").removeClass('error');
+		if(activity=="") $("#divActivity").addClass('error');
+		else $("#divActivity").removeClass('error');
+		if(duree=="") $("#divDuree").addClass('error');
+		else $("#divDuree").removeClass('error');
+	   
+   }
+  function afficheModalAdmin() {
+	  $('.ui.mini.basic.modal')
+		.modal('show')
+	;
+	  
+  }
+  
+  function enregistrerAdmin() {
+		var password = $("#password").val();
+		var targetDir = "req_inscr_inscription";
+		if(password != ""){
+			$.ajax({
+				method:"POST",
+				url: '/ajax/query.php',
+				data: { targetDir: targetDir, password:password },
+				success: function(reponse) {
+				alert(reponse);
+				location.reload();
+				}
+			});
+		}
+  }
+
+//// ------------------------------------- ////
