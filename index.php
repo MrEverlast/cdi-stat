@@ -15,7 +15,7 @@
 <body>
 
 <?php 
-$array = array("inscription","main","activity","student");
+$array = array("inscription","main","activity","student","settings");
 if (in_array($page, $array)) {
   if (isset($_SESSION['connected'])) {
   

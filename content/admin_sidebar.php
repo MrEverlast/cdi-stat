@@ -1,5 +1,5 @@
 <div class="ui visible inverted left vertical sidebar menu">
-  <a class="item">
+  <a href="/" class="item">
     <i class="home icon"></i>
     Accueil
   </a>
