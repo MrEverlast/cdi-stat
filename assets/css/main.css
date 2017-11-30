@@ -1,0 +1,40 @@
+/* --- inscription --- */
+.color-picker-h,.color-picker-sv {
+  display: none;
+}
+.color-picker-control {
+  width: 200px;
+  border: solid #000;
+  border-width: 0px 1px 1px 1px;
+}
+.color-picker-box {
+  display:block;
+  border-top:1px solid;
+  border-color:inherit;
+  float:left;
+  width:10%;
+  height: 20px;
+  cursor:pointer;
+}
+/* --- inscription --- */
+body {
+  background-color: #DADADA;
+}
+body > .grid {
+  height: 100%;
+}
+.image {
+  margin-top: -100px;
+}
+.column {
+  max-width: 450px;
+}
+/* --- Admin_student --- */
+.data_elv:hover {
+	cursor: pointer;
+}
+.myActive {
+	-webkit-box-shadow: 0 0 5px 0 #888888;
+	box-shadow: 0 0 5px 0 #888888;
+	transition: 0.2s;
+}

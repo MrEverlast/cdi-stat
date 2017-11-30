@@ -1,13 +1,3 @@
-<style>
-.data_elv:hover {
-	cursor: pointer;
-}
-.myActive {
-	-webkit-box-shadow: 0 0 5px 0 #888888;
-	box-shadow: 0 0 5px 0 #888888;
-	transition: 0.2s;
-}
-</style>
 <div class="ui basic segment">
 		<div class="ui buttons">
 		  <button id="elv_create" class="ui green button myTrigger"><i class="icon add"></i>Créer</button>

@@ -1,17 +1,3 @@
- <style type="text/css">
-    body {
-      background-color: #DADADA;
-    }
-    body > .grid {
-      height: 100%;
-    }
-    .image {
-      margin-top: -100px;
-    }
-    .column {
-      max-width: 450px;
-    }
-  </style>
  <?php 
  include_once $_DIR.'/cfg/init.php';
  ?>

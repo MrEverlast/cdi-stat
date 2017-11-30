@@ -5,6 +5,7 @@
   <title>CDI - Accueil</title>
   <link rel="stylesheet" href="/assets/css/semantic.min.css">
   <link rel="stylesheet" href="/assets/css/color-picker.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
   <script type="text/javascript" src="/assets/js/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="/assets/js/semantic.min.js"></script>
   <script type="text/javascript" src="/assets/js/Chart.bundle.min.js"></script>
@@ -16,23 +17,4 @@
     $('.ui.checkbox').checkbox();
     $('select.dropdown').dropdown();
   </script>
-  <style type="text/css">
-    .color-picker-h,.color-picker-sv {
-      display: none;
-    }
-    .color-picker-control {
-      width: 200px;
-      border: solid #000;
-      border-width: 0px 1px 1px 1px;
-    }
-    .color-picker-box {
-      display:block;
-      border-top:1px solid;
-      border-color:inherit;
-      float:left;
-      width:10%;
-      height: 20px;
-      cursor:pointer;
-    }
-  </style>
 </head>
