@@ -12,15 +12,88 @@
       max-width: 450px;
     }
   </style>
+ <?php 
+ include_once $_DIR.'/cfg/init.php';
+ ?>
+  <script>
+  function enregistrerEleve() {
+		var eleve = $("#eleve").val();
+		var activity = $("#activity").val();
+		var duree = $("#duree").val();
+		var targetDir = "req_inscr_inscription";
+		if(eleve != "" && activity != "" && duree != ""){
+			$.ajax({
+				method:"POST",
+				url: '/ajax/query.php',
+				data: { targetDir: targetDir, eleve:eleve, activity:activity, duree:duree},
+				success: function(reponse) {
+				alert(reponse);
+				location.reload();
+				}
+			});
+		}
+		
+		if(eleve=="") $("#divEleve").addClass('error');
+		else $("#divEleve").removeClass('error');
+		if(activity=="") $("#divActivity").addClass('error');
+		else $("#divActivity").removeClass('error');
+		if(duree=="") $("#divDuree").addClass('error');
+		else $("#divDuree").removeClass('error');
+		
+  }
   
+  function afficheModalAdmin() {
+	  $('.ui.mini.basic.modal')
+		.modal('show')
+	;
+	  
+  }
+  
+  function enregistrerAdmin() {
+		var password = $("#password").val();
+		var targetDir = "req_inscr_inscription";
+		if(password != ""){
+			$.ajax({
+				method:"POST",
+				url: '/ajax/query.php',
+				data: { targetDir: targetDir, password:password },
+				success: function(reponse) {
+				alert(reponse);
+				location.reload();
+				}
+			});
+		}
+  }
+  </script>
+
  
 <div class="ui secondary  menu">
   <div class="right menu">
-    <a class="ui item">
-      Logout
+    <a onclick="afficheModalAdmin()" class="ui item">
+      Login
     </a>
   </div>
 </div>
+
+<!--    //// Modal Admin ////    -->
+<div class="ui mini basic modal ">
+<i class="close icon"></i>
+  <div class="ui icon header">
+    <i class="lock icon"></i>
+    Accès documentaliste
+  </div>
+  <div class="ui center aligned grid ">
+  <div class="ui row">
+    <div class="ui left icon input">
+		<input type="password" id="password" placeholder="Mot de passe...">
+	<i class="lock icon"></i>
+  </div>
+  </div>
+  <div class="ui teal submit button" onclick="enregistrerAdmin()">S'enregistrer</div>
+</div>
+
+</div>
+<!--        /////////////////     -->
 
 <div class="ui middle aligned center aligned grid">
   <div class="column">
@@ -34,46 +107,55 @@
 	
       <div class="ui stacked segment">
 		
-			<div class="field">
+			<div class="field" id="divEleve">
 				<a class="ui blue ribbon label" style="text_align_center=left" >Elève</a>
-				<select class="ui search dropdown">
+				<select id="eleve" class="ui search dropdown" >
 					<option value="">Selectionnez l'élève..</option>
-					// BASE //
-					<option value="AF">bonjours</option>
-					<option value="AX">Åland sfdghjkl;'</option>
-					////////
+					<!--          // BASE //           -->
+					<?php 
+					$sth = $bdd->requeteBDD("SELECT A.id,`last_name`,`first_name`,`nom` FROM `t_eleve` A INNER JOIN `t_division` B WHERE B.id = A.id_division");
+					while($result = $sth->fetch())
+					echo "<option value=".$result['id'].">".$result['last_name']." ".$result['first_name']." ".$result['nom']."</option> "; 
+					$sth = null;
+					?>
+					
+					<!--        /////////////////     -->
 					
 				</select>
 			</div>
 		
 		
         
-			<div class="field ">
+			<div class="field " id="divActivity">
 				<a class="ui blue ribbon label" style="text_align_center=left" >Acitivité</a>
-				<select class="ui search dropdown">
+				<select class="ui search dropdown" id="activity">
 					<option value="">Selectionnez l'activité..</option>
-					// BASE //
-					<option value="AF">Afghanistan</option>
-					<option value="AX">Åland Islands</option>
-					////////
+					<!--          // BASE //           -->
+					<?php 
+					$sth = $bdd->requeteBDD("SELECT `id`,`name` FROM `t_activity` ");
+					while($result = $sth->fetch())
+					echo "<option value=".$result[0].">".$result[1]."</option> "; 
+					$sth = null;
+					?>
+					<!--        /////////////////     -->
 				</select>
 			</div>
 		
 		
-			<div class="field">
+			<div class="field" id="divDuree">
 				<a class="ui blue ribbon label" style="text_align_center=left" >Durée</a>
-				<select class="ui search dropdown">
+				<select class="ui search dropdown" id="duree">
 					<option value="">Selectionnez la durée..</option>
-					// BASE //
-					<option value="AF">1h</option>
-					<option value="AX">2h</option>
-					<option value="AX">3h</option>
-					<option value="AX">4h</option>
-					/////////
+					<!--          // BASE //           -->
+					<option value="1">1h</option>
+					<option value="2">2h</option>
+					<option value="3">3h</option>
+					<option value="4">4h</option>
+					<!--        /////////////////     -->
 				</select>
 			</div>
 		
-        <div class="ui fluid large teal submit button">S'enregistrer</div>
+        <div class="ui fluid large teal submit button" onclick="enregistrerEleve()">S'enregistrer</div>
 		
       </div>
 
