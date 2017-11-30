@@ -39,8 +39,8 @@
 				<select class="ui search dropdown">
 					<option value="">Selectionnez l'élève..</option>
 					// BASE //
-					<option value="AF">Afghanistan</option>
-					<option value="AX">Åland Islands</option>
+					<option value="AF">bonjours</option>
+					<option value="AX">Åland sfdghjkl;'</option>
 					////////
 					
 				</select>
