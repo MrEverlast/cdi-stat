@@ -8,10 +8,10 @@
 	    Imprimer
 	  </a>
 	  <a href="/settings" class="item">
-	    Paramètres
+	    <i class="icon setting"></i>Paramètres
 	  </a>
 	  <a href="/disconnect.php" class="item">
-	    Déconnection
+	    <i class="icon power"></i>Déconnection
 	  </a>
   </div>
 </div>
