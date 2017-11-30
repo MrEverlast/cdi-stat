@@ -10,7 +10,7 @@
   <script type="text/javascript" src="/assets/js/Chart.bundle.min.js"></script>
   <script type="text/javascript" src="/assets/js/Chart.min.js"></script>
   <script type="text/javascript" src="/assets/js/color-picker.min.js"></script>
-  <script type="text/javascript" src="/assets/js/button.js"></script>
+  <script type="text/javascript" src="/assets/js/main.js"></script>
   <script type="text/javascript">
     // Semantic
     $('.ui.checkbox').checkbox();
