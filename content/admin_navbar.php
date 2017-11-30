@@ -1,4 +1,4 @@
-<div class="ui top attached demo menu">
+<div class="ui top attached menu">
   <a class="item">
     <i class="home icon"></i>
     CDI
@@ -6,6 +6,9 @@
   <div class="right menu">
 	  <a class="item">
 	    Imprimer
+	  </a>
+	  <a href="/settings" class="item">
+	    Paramètres
 	  </a>
 	  <a href="/disconnect.php" class="item">
 	    Déconnection
