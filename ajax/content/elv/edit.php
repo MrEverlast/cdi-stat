@@ -21,22 +21,28 @@ include_once $_DIR.'/cfg/init.php';
 	  </div>
 	  <div class="two fields">
 		 <div class="field">
-		<label>Classe</label>
-		<select id="id_classe" class="ui search dropdown">
-		  <option value="">Sélectionner une classe</option>
-		  <?php 
-			$req = $bdd->requeteBDD("SELECT * FROM `t_division`  
-									 ORDER BY `t_division`.`ordre` ASC, `t_division`.`nom` ASC"); 
-			
-			  while($data = $req->fetch()) { 
-			  ?> 
-			  <option value="<?php echo $data['id']; ?>"><?php echo $data['nom']; ?></option>
-			  <?php
-			  }
-		   ?>
-		</select>
-	  </div>
-	  </div>
+		 <label>Classe</label>
+		    <div class="ui teal">
+				<div class="ui action input">
+				  <div class="ui floating dropdown icon button">
+				  <i class="dropdown icon"></i>
+					<div class="menu">
+					<?php 
+					$req = $bdd->requeteBDD("SELECT * FROM `t_division`  
+											 ORDER BY `t_division`.`ordre` ASC, `t_division`.`nom` ASC"); 
+					
+					  while($data = $req->fetch()) { 
+					  ?>
+						<div class="item"><?php echo $data['nom']; ?></div>
+					  <?php
+					  }
+					  ?> 
+					</div>
+				  </div>
+				</div>
+			</div>
+		 </div>
+		</div>
 	  <div class="two fields">
 		 <div class="field">
 		    <label>Date de naissance</label>

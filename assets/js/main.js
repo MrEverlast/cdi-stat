@@ -5,9 +5,11 @@ $(document).ready(function() {
     setTimeout(function() {
       $('select.dropdown').dropdown();
       $('.ui.radio.checkbox').checkbox();
+	  $('.ui.floating.dropdown').dropdown();
     },150);
-  
-  });
+		
+	});
+	  
 });
 
 // Afficher le contenue d'un modal
@@ -64,8 +66,9 @@ $(document).on('click','[data-submit]',function() {
   var postal_code = $('#post_code').val();
   var city = $('#city').val();
   var id_classe = $('#id_classe').val();
-  
-  
+  var id_elev = $('#id_elev').val();
+
+
   if (color != undefined) {
     color = rgb2hex(color);
   }
@@ -74,17 +77,19 @@ $(document).on('click','[data-submit]',function() {
   if(target[2] == "delete") {
     $('#modal_del').modal({
       onApprove : function() {
-        query(targetDir,name,color,type,idActivity);
-        window.location.reload();
+        query(targetDir,name,color,type,idActivity,id_elev);
+
       }
     }).modal('show');
   } else {
-    query(targetDir,name,color,type,idActivity,first_name,last_name,postal_code,city,id_classe);
+    query(targetDir,name,color,type,idActivity,id_elev,first_name,last_name,postal_code,city,id_classe);
+	
   } 
 
 });
 
-function query(targetDir,name,color,type,idActivity,first_name,last_name,postal_code,city,id_classe) {
+function query(targetDir,name,color,type,idActivity,id_elev,first_name,last_name,postal_code,city,id_classe) {
+	  
   $.ajax({
     method: "POST",
     url: "/ajax/query.php",
@@ -94,6 +99,7 @@ function query(targetDir,name,color,type,idActivity,first_name,last_name,postal_
       color: color,
       name: name,
       idActivity: idActivity,
+	  id_elev:id_elev,
 	  first_name: first_name,
 	  last_name: last_name,
 	  postal_code: postal_code,
@@ -101,6 +107,10 @@ function query(targetDir,name,color,type,idActivity,first_name,last_name,postal_
 	  id_classe: id_classe
     }
   });
+  setTimeout(function(){
+	window.location.reload();  
+  },150);
+  
 }
 
 // Transforme une couleur RGB en Hex
@@ -177,6 +187,33 @@ $(document).on( "click", '.data_elv',function( event ) {
 	
 });
 
+//////////// MODIFIER ELEVE //////////////////
+
+$(document).on("change",'[data-selected]',function() {
+	var id_eleve = $("#select_elev").val();
+	var targetDir = "req_elv_edit";
+		$.ajax({
+				method:"POST",
+				url: '/ajax/query.php',
+				data: { targetDir: targetDir, id_eleve:id_eleve },
+				success: function(reponse) {
+				alert(reponse);
+				location.reload();
+				},
+				success: function(data){
+					alert(data);
+					var res =data.split('_');
+					
+					
+					$("#city").val(res[2]);
+					$("#postal_code").val(res[3]);
+				}
+			});
+});
+
+
+
+
 
 //// ------------------------------------- ////
 
@@ -238,27 +275,3 @@ $(document).on( "click", '.data_elv',function( event ) {
 
 //// ------------------------------------- ////
 
-//////////// MODIFIER ELEVE //////////////////
-
-$(document).on("change",'[data-selected]',function() {
-	var id_eleve = $("#select_elev").val();
-	var targetDir = "req_elv_edit";
-		$.ajax({
-				method:"POST",
-				url: '/ajax/query.php',
-				data: { targetDir: targetDir, id_eleve:id_eleve },
-				success: function(reponse) {
-				alert(reponse);
-				location.reload();
-				},
-				success: function(data){
-					alert(data);
-					var res =data.split('_');
-					$("#id_classe [data-value=4]").attr("selected","true");
-					$("#id_classe [data-value=4]").addClass("active selected");
-					
-					$("#city").val(res[2]);
-					$("#postal_code").val(res[3]);
-				}
-			});
-});
