@@ -1,14 +1,14 @@
 <div class="ui basic segment">
-	<h2 class="ui dividing header">
-		<i class="icon setting"></i>Paramètres
-	</h2>
+  <h2 class="ui dividing header">
+    <i class="icon setting"></i>Paramètres
+  </h2>
 
-<button id="req_year_create" class="ui button primary"><i class="icon add	"></i>Ajouter une nouvelle année</button>
+<button id="req_year_create" class="ui button primary"><i class="icon add "></i>Ajouter une nouvelle année</button>
 
 <div id="modal_year" class="ui modal">
 
-	<div class="content">
-		<div class="container" >
+  <div class="content">
+    <div class="container" >
       <input type="file" name="file" id="file" accept=".csv">
       
       <!-- Drag and Drop container-->
@@ -18,28 +18,28 @@
         <h3>Glissez déposez le fichier .csv</h3>
       </div>
     </div>
-	</div>
+  </div>
 
-	<div class="actions">
-		<button class="ui button cancel red"><i class="icon delete"></i>Annuler</button>
-		<button class="ui button disabled"><i class="icon chevron left"></i>Précédent</button>
-		<button id="next" class="ui button disabled">Suivant<i class="icon chevron right"></i></button>
-	</div>
+  <div class="actions">
+    <button class="ui button cancel red"><i class="icon delete"></i>Annuler</button>
+    <button class="ui button disabled"><i class="icon chevron left"></i>Précédent</button>
+    <button id="next" class="ui button disabled">Suivant<i class="icon chevron right"></i></button>
+  </div>
 
 </div>
 </div>
 <script type="text/javascript">
-	$(document).on('click','#req_year_create',function() {
-		$("#modal_year").modal({
-			closable: false,
-			onDeny    : function(){
+  $(document).on('click','#req_year_create',function() {
+    $("#modal_year").modal({
+      closable: false,
+      onDeny    : function(){
       },
       onApprove : function() {
         window.alert('Approved!');
         return false;
       }
-	  }).modal('show');
-	});
+    }).modal('show');
+  });
 
 
 // ----------------------------------------
@@ -91,7 +91,7 @@
     file = file[0];
 
     $('#file')[0].files[0] = file;
-
+.
     if (checkFile(file)) {
 
       fd.append('file',file);
@@ -135,8 +135,22 @@ $(document).on('click', '#next', function() {
   var file = $('#file')[0].files[0];
   fd.append('file',file);
   
-  uploadFile(fd);
+  //uploadFile(fd);
+
+  var modal = 1;
+
+  goToModal(modal);
 });
+
+function goToModal(modal) {
+  $.ajax({
+    method: 'POST',
+    url: '/ajax/imp/modal'+modal+'.php',
+    success: function(data) {
+      $("#modal_year").html(data);
+    }
+  })
+}
 
 function next() {
   $('#next').removeClass("disabled");
