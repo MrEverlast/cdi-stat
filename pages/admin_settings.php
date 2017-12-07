@@ -5,28 +5,8 @@
 
 <button id="req_year_create" class="ui button primary"><i class="icon add "></i>Ajouter une nouvelle année</button>
 
-<div id="modal_year" class="ui modal">
+<?php include_once $_DIR.'/ajax/imp.php'; ?>
 
-  <div class="content">
-    <div class="container" >
-      <input type="file" name="file" id="file" accept=".csv">
-      
-      <!-- Drag and Drop container-->
-      <div class="upload-area"  id="uploadfile">
-        <h3>Cliquez pour importer le fichier .csv</h3>
-        <div class="ui horizontal divider">OU</div>
-        <h3>Glissez déposez le fichier .csv</h3>
-      </div>
-    </div>
-  </div>
-
-  <div class="actions">
-    <button class="ui button cancel red"><i class="icon delete"></i>Annuler</button>
-    <button class="ui button disabled"><i class="icon chevron left"></i>Précédent</button>
-    <button id="next" class="ui button disabled">Suivant<i class="icon chevron right"></i></button>
-  </div>
-
-</div>
 </div>
 <script type="text/javascript">
   $(document).on('click','#req_year_create',function() {
@@ -84,26 +64,27 @@
     e.stopPropagation();
     e.preventDefault();
 
-    $("h3").text("Upload");
 
     var file = e.originalEvent.dataTransfer.files;
-    var fd = new FormData();
-    file = file[0];
+    $("#file").files = file;
 
-    $('#file')[0].files[0] = file;
-.
-    if (checkFile(file)) {
-
-      fd.append('file',file);
-
-      next();
-
-    } else {
-      alert("Il faut un fichier .csv");
-    }
+    console.log($("#file"));
+    console.log(file[0]);
+    console.log($("#file").files);
+    
+    var error = $('#modal_year .message.error');
     
 
-    //uploadData(fd);
+    if (checkFile(file)) {
+      $("h3").text(file.name);
+      error.addClass("hidden");
+      next();
+    } else {
+      error.removeClass("hidden");
+      $("#next").addClass("disabled");
+    }
+
+
   });
 
   // Open file selector on div click
@@ -112,30 +93,31 @@
   });
 
   // file selected
-  $("#file").change(function(){
-    var fd = new FormData();
+  $("#file").change(function(){ 
+    var error = $('#modal_year .message.error');   
+    var file = $("#file")[0].files[0];
 
-    var file = $('#file')[0].files[0];
-    
+    console.log(file);
+
     if (checkFile(file)) {
-
-      fd.append('file',file);
-
+      $("h3").text(file.name);
+      error.addClass("hidden");
       next();
-
     } else {
-      alert("Il faut un fichier .csv");
+      error.removeClass("hidden");
+      $("#next").addClass("disabled");
     }
-
   });
 });
 
 $(document).on('click', '#next', function() {
-  var fd = new FormData();
-  var file = $('#file')[0].files[0];
-  fd.append('file',file);
   
-  //uploadFile(fd);
+  var file = $('#file')[0].files[0];
+  var post = loadFile(file);
+
+  if (post) {
+    uploadFile(post);
+  }
 
   var modal = 1;
 
@@ -147,13 +129,27 @@ function goToModal(modal) {
     method: 'POST',
     url: '/ajax/imp/modal'+modal+'.php',
     success: function(data) {
-      $("#modal_year").html(data);
+      $("#modal_year .content").html(data);
     }
   })
 }
 
 function next() {
   $('#next').removeClass("disabled");
+}
+
+function loadFile(file) {
+  var fd = new FormData();
+  if (checkFile(file)) {
+
+    fd.append('file',file);
+
+    return fd;
+  } else {
+    alert("Il faut un fichier .csv");
+    return false;
+  }
+
 }
 
 function uploadFile(formdata) {
