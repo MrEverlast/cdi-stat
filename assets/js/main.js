@@ -67,7 +67,8 @@ $(document).on('click','[data-submit]',function() {
   var city = $('#city').val();
   var id_classe = $('#id_classe').val();
   var id_elev = $('#id_elev').val();
-
+  var date_born = $('#date_born').val();
+  var classe = $('#classe').val();
 
   if (color != undefined) {
     color = rgb2hex(color);
@@ -82,13 +83,13 @@ $(document).on('click','[data-submit]',function() {
       }
     }).modal('show');
   } else {
-    query(targetDir,name,color,type,idActivity,id_elev,first_name,last_name,postal_code,city,id_classe);
+    query(targetDir,name,color,type,idActivity,id_elev,first_name,last_name,postal_code,city,id_classe,date_born,classe);
 	
   } 
 
 });
 
-function query(targetDir,name,color,type,idActivity,id_elev,first_name,last_name,postal_code,city,id_classe) {
+function query(targetDir,name,color,type,idActivity,id_elev,first_name,last_name,postal_code,city,id_classe,date_born,classe) {
 	  
   $.ajax({
     method: "POST",
@@ -104,7 +105,9 @@ function query(targetDir,name,color,type,idActivity,id_elev,first_name,last_name
 	  last_name: last_name,
 	  postal_code: postal_code,
 	  city: city,
-	  id_classe: id_classe
+	  id_classe: id_classe,
+	  date_born: date_born,
+	  classe:classe
     }
   });
   setTimeout(function(){
@@ -190,31 +193,64 @@ $(document).on( "click", '.data_elv',function( event ) {
 //////////// MODIFIER ELEVE //////////////////
 
 $(document).on("change",'[data-selected]',function() {
-	var id_eleve = $("#select_elev").val();
+	var id_eleve = $("#id_elev").val();
 	var targetDir = "req_elv_edit";
 		$.ajax({
 				method:"POST",
 				url: '/ajax/query.php',
 				data: { targetDir: targetDir, id_eleve:id_eleve },
 				success: function(reponse) {
-				alert(reponse);
+				
 				location.reload();
 				},
 				success: function(data){
-					alert(data);
+					
 					var res =data.split('_');
 					
-					
+					$("#classe").val(res[4]);
+					$("#date_born").val(res[5]);
 					$("#city").val(res[2]);
-					$("#postal_code").val(res[3]);
+					$("#post_code").val(res[3]);
+					var class_deroulante = $(".class_deroulante");
+					for(var i=0; i<class_deroulante.length;i++)
+					{
+					
+						if (class_deroulante[i].innerText == res[4]){
+							var choice = class_deroulante[i];
+							choice.className = 'item class_deroulante active selected';
+						}
+						else {
+							var choice = class_deroulante[i];
+							choice.className = 'item class_deroulante';
+							}
+							
+					}
+					
 				}
 			});
 });
 
+$(document).on("click",'[class-selected]',function() {
 
+	var classe_name = $(".class_name");
+	for(var i=0; i<classe_name.length;i++)
+	{
+		
+		if (classe_name[i].className == "item class_deroulante active selected"){
+			
+		}
+	}
+	
+	var class_deroulante = $(".class_deroulante");
+	for(var i=0; i<class_deroulante.length;i++)
+	{		
+		var choice = class_deroulante[i];
+		if (choice.className == "item class_deroulante active selected"){
+			$("#classe").val(choice.innerText);
+		}
+	}
 
-
-
+});
 //// ------------------------------------- ////
 
 //////////// INSCRIPTION //////////////
