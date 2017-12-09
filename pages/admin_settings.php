@@ -98,8 +98,8 @@ function goToModal(modal) {
 			setTimeout(function() {
 				m.modal('show');
 				$('.ui.checkbox').checkbox();
-			},50);
-		},400);
+			},100);
+		},225);
 	} else {
 		$.ajax({
 	    method: 'POST',
