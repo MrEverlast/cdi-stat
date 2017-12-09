@@ -1,7 +1,6 @@
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CDI - Accueil</title>
   <link rel="stylesheet" href="/assets/css/semantic.min.css">
   <link rel="stylesheet" href="/assets/css/color-picker.min.css">
