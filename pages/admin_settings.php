@@ -3,15 +3,25 @@
     <i class="icon setting"></i>Paramètres
   </h2>
 
-<button id="req_year_create" class="ui button primary"><i class="icon add "></i>Ajouter une nouvelle année</button>
+	<button id="req_year_create" class="ui button primary"><i class="icon add "></i>Ajouter une nouvelle année</button>
 
-<?php include_once $_DIR.'/ajax/imp.php'; ?>
+	<?php include_once $_DIR.'/ajax/imp.php'; ?>
 
 </div>
 <script type="text/javascript">
   $(document).on('click','#req_year_create',function() {
+  	goToModal(0);
+  	var error = $('#modal_year .message.error');
+  	var next = $('#next');
+  	var previous = $('#previous');
+  	
+  	error.removeClass("hidden");
+  	next.addClass("disabled");
+  	previous.addClass("disabled");
+
     $("#modal_year").modal({
       closable: false,
+      transition : 'fade up',
       onDeny    : function(){
       },
       onApprove : function() {
@@ -23,58 +33,110 @@
 
 
 // ----------------------------------------
-  // Open file selector on div click
-  $("#uploadfile").click(function(){
-    $("#file").click();
-  });
 
-  // file selected
-  $("#file").change(function(){ 
-    var error = $('#modal_year .message.error');   
-    var file = $("#file")[0].files[0];
+// Open file selector on div click
+$(document).on('click', '#uploadfile', function() {
+  $("#file").click();
+});
 
-    if (checkFile(file)) {
-      $("h3").text(file.name);
-      error.addClass("hidden");
-      next();
-    } else {
-      error.removeClass("hidden");
-      $("#next").addClass("disabled");
-    }
-  });
+// file selected
+$(document).on('change', '#file', function(){ 
+  var error = $('#modal_year .message.error');
+  var next = $('#next');
+  var previous = $('#previous');
+
+  var file = $("#file")[0].files[0];
+
+  if (checkFile(file)) {
+    $("h3").text(file.name);
+    error.addClass("hidden");
+    next.removeClass("disabled");
+  	previous.addClass("disabled");
+  } else {
+    error.removeClass("hidden");
+    next.addClass("disabled");
+  	previous.addClass("disabled");
+  }
+});
 
 $(document).on('click', '#next', function() {
-  
-  var file = $('#file')[0].files[0];
-  var post = loadFile(file);
+  var modal = $('#modal_year').attr('data-page');
+	switch(modal) {
+	  case '0':
+	  	modal++;
+		  var file = $('#file')[0].files[0];
+		  var post = loadFile(file);
 
-  if (post) {
-    uploadFile(post);
-    var modal = 1;
-  	goToModal(modal);
-  } 
+		  if (post) {
+		  	$("#modal_year").modal('setting', 'transition', 'fade right');
+		    uploadFile(post);
+		  	goToModal(modal);
+		  }
+	    break;
+	  case '1':
+	    break;
+	}
+
+});
+
+$(document).on('click', '#previous', function() {
+  var modal = $('#modal_year').attr('data-page');
+	switch(modal) {
+	  case '0':
+	  	modal++;
+		  var file = $('#file')[0].files[0];
+		  var post = loadFile(file);
+
+		  if (post) {
+		    uploadFile(post);
+		  	goToModal(modal);
+		  }
+	    break;
+	  case '1':
+	    break;
+	}
 
 });
 
 function goToModal(modal) {
-  $.ajax({
-    method: 'POST',
-    url: '/ajax/imp/modal'+modal+'.php',
-    success: function(data) {
-      $("#modal_year .content").html(data);
-    }
-  })
-}
+	console.log('goToModal --> ' + modal);
+	var mContent = $("#modal_year .content");
+	var m = $("#modal_year");
+	if (modal > 0) {
+		m.modal('hide');
+		m.modal('setting', 'transition', 'fade left');
+		setTimeout(function() {
+			$.ajax({
+		    method: 'POST',
+		    url: '/ajax/imp/modal'+modal+'.php',
+		    success: function(data) {
+		      mContent.html(data);
+		      m.attr('data-page',modal);
+		    }
+		  });
+			setTimeout(function() {
+				m.modal('show')
+			},50);
+		},400);
+	} else {
+		$.ajax({
+	    method: 'POST',
+	    url: '/ajax/imp/modal'+modal+'.php',
+	    success: function(data) {
+	      mContent.html(data);
+	      m.attr('data-page',modal);
+	    }
+	  });
+	}
 
-function next() {
-  $('#next').removeClass("disabled");
+  
 }
 
 function loadFile(file) {
-  var fd = new FormData();
+  var formdata = new FormData();
   if (checkFile(file)) {
-    fd.append('file',file);
-    return fd;
+    formdata.append('file',file);
+    return formdata;
   } else {
     alert("Il faut un fichier .csv");
     return false;
@@ -84,15 +146,12 @@ function loadFile(file) {
 
 function uploadFile(formdata) {
   $.ajax({
+    method : 'POST',
     url: '/ajax/file_csv.php',
-    type : 'post',
     data: formdata,
     contentType: false,
     processData: false,
-    dataType: 'json',
-    success: function(response){
-      console.log(response);
-    }
+    dataType: 'json'
   });
 }
 

@@ -6,3 +6,9 @@
     <h3>Cliquez pour importer le fichier .csv</h3>
   </div>
 </div>
+<div id="error" class="ui error message hidden">
+  <ul class="list">
+    <li>Erreur lors de l'importation du fichier</li>
+    <li>Veuillez bien choisir un fichier .csv</li>
+  </ul>
+</div>
