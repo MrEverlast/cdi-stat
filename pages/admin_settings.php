@@ -79,25 +79,6 @@ $(document).on('click', '#next', function() {
 
 });
 
-$(document).on('click', '#previous', function() {
-  var modal = $('#modal_year').attr('data-page');
-	switch(modal) {
-	  case '0':
-	  	modal++;
-		  var file = $('#file')[0].files[0];
-		  var post = loadFile(file);
-
-		  if (post) {
-		    uploadFile(post);
-		  	goToModal(modal);
-		  }
-	    break;
-	  case '1':
-	    break;
-	}
-
-});
-
 function goToModal(modal) {
 	console.log('goToModal --> ' + modal);
 	var mContent = $("#modal_year .content");
@@ -115,7 +96,8 @@ function goToModal(modal) {
 		    }
 		  });
 			setTimeout(function() {
-				m.modal('show')
+				m.modal('show');
+				$('.ui.checkbox').checkbox();
 			},50);
 		},400);
 	} else {
