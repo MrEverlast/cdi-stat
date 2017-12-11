@@ -74,10 +74,41 @@ $(document).on('click', '#next', function() {
 		  }
 	    break;
 	  case '1':
+      modal++;
+      changeStatus(modal);
+      goToModal(modal);
 	    break;
 	}
 
 });
+
+function changeStatus(modal) {
+  var checkbox = $(".collapsing.ui.checkbox");
+  var selected = [];
+  console.log(checkbox);
+  for(var i=0; i<checkbox.length; i++) {
+    classes = checkbox[i].className.split(" ");
+    if (-1 != $.inArray("checked", classes)) {
+      selected[i] = true;
+      console.log(checkbox[i]);
+    } else {
+      selected[i] = false;
+    }
+  }
+  selected = JSON.stringify(selected);
+  console.log(selected);
+  $.ajax({
+    method: 'POST',
+    url: '/ajax/imp/req/modal.php',
+    data: {
+      modal: modal,
+      selected: selected
+    },
+    success: function(data) {
+      console.log(data);
+    }
+  });
+}
 
 function goToModal(modal) {
 	console.log('goToModal --> ' + modal);
