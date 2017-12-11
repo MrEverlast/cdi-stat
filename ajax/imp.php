@@ -1,3 +1,8 @@
+<?php 
+unset($_SESSION['class'],
+      $_SESSION['class_selected'],
+      $_SESSION['class_niveau']);
+   ?>
 <div id="modal_year" class="ui modal" data-page="0" style="height: 80%;">
 
   <div class="content scrolling" style="max-height: calc(100% - 64px);">
