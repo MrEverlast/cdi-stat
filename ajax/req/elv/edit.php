@@ -18,32 +18,31 @@
 			echo $result['last_name']."_".$result['first_name']."_".$result['city']."_".$result['post_code']."_".$result['nom']."_".$ndate."_";
 			
 		}
+		$sth=NULL;
 
 	$city = $_POST['city'];
-	$post_code = $_POST['postal_code'];
+	$post_code = $_POST['post_code'];
 	$classe = $_POST['classe'];
 	$date_born = $_POST['date_born'];
 	$id_elev = $_POST['id_elev'];
 
 	
-	/*
+	
 	$query = "SELECT * FROM `t_division` WHERE `nom`='$classe'";
 	$sth = $bdd->requeteBDD($query);
 	while($result = $sth->fetch()){
 			$id_division = $result['id'];
 		}
-
-	if($date_born != ""){
-				$datejr = date($result['date_born']);
-				$jour = substr($datejr, 0, 2);
-				$mois = substr($datejr, 3, 2);
-				$annnee = substr($datejr, 6, 4);
-				$date_born = $annnee.'-'.$mois.'-'.$jour;
-			}
+	
+	$ts = DateTime::createFromFormat('d/m/Y', $date_born);
+	$date_born = $ts->format('Y-m-d');
+			
 		
-	$query = "UPDATE `t_eleve` SET `city`='$city', `post_code`='$postal_code', `id_division`='$id_division', `date_born`='$date_born' 
+	$query = "UPDATE `t_eleve` SET `city`='$city', `post_code`='$post_code', `id_division`='$id_division', `date_born`='$date_born' 
 			WHERE `id`=$id_elev";
 	
 	$sth = $bdd->requeteBDD($query);
-	*/
+	
+	
+	
  ?>

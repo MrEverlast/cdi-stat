@@ -63,7 +63,7 @@ $(document).on('click','[data-submit]',function() {
   
   var first_name = $('#first_name').val();
   var last_name = $('#last_name').val();
-  var postal_code = $('#post_code').val();
+  var post_code = $('#post_code').val();
   var city = $('#city').val();
   var id_classe = $('#id_classe').val();
   var id_elev = $('#id_elev').val();
@@ -83,13 +83,13 @@ $(document).on('click','[data-submit]',function() {
       }
     }).modal('show');
   } else {
-    query(targetDir,name,color,type,idActivity,id_elev,first_name,last_name,postal_code,city,id_classe,date_born,classe);
+    query(targetDir,name,color,type,idActivity,id_elev,first_name,last_name,post_code,city,id_classe,date_born,classe);
 	
   } 
 
 });
 
-function query(targetDir,name,color,type,idActivity,id_elev,first_name,last_name,postal_code,city,id_classe,date_born,classe) {
+function query(targetDir,name,color,type,idActivity,id_elev,first_name,last_name,post_code,city,id_classe,date_born,classe) {
 	  
   $.ajax({
     method: "POST",
@@ -103,7 +103,7 @@ function query(targetDir,name,color,type,idActivity,id_elev,first_name,last_name
 	  id_elev:id_elev,
 	  first_name: first_name,
 	  last_name: last_name,
-	  postal_code: postal_code,
+	  post_code: post_code,
 	  city: city,
 	  id_classe: id_classe,
 	  date_born: date_born,
@@ -190,6 +190,37 @@ $(document).on( "click", '.data_elv',function( event ) {
 	
 });
 
+$(document).on( "click", '.data_elv_info',function( event ) {
+	var val = $( this ).children().text();
+	var targetDir = "list_stud_infostud";
+	$(".data_elv_info").removeClass("myActive");
+	$(this).addClass("myActive");
+	
+  $.ajax({
+    method: "POST",
+    url: "/ajax/query.php",
+    data: { 
+      targetDir: targetDir,
+      val: val
+
+    },
+	success: function(data){
+
+		$("#data_tbody_inf").html(data);
+
+		// A MODIFIER //
+		/*$('#data_tbody').transition({
+			animation  :'fade up',
+			onComplete : function() {
+			  $('#data_tbody').removeClass("transition");
+			}
+			});*/
+		// -------- // 
+		
+	}
+  });
+	
+});
 //////////// MODIFIER ELEVE //////////////////
 
 $(document).on("change",'[data-selected]',function() {
@@ -231,15 +262,6 @@ $(document).on("change",'[data-selected]',function() {
 });
 
 $(document).on("click",'[class-selected]',function() {
-
-	var classe_name = $(".class_name");
-	for(var i=0; i<classe_name.length;i++)
-	{
-		
-		if (classe_name[i].className == "item class_deroulante active selected"){
-			
-		}
-	}
 	
 	var class_deroulante = $(".class_deroulante");
 	for(var i=0; i<class_deroulante.length;i++)
@@ -255,6 +277,13 @@ $(document).on("click",'[class-selected]',function() {
 
 //////////// INSCRIPTION //////////////
 
+	$(document).on("keydown", "#password", function(e)
+    {
+        if (e.keyCode == 13)
+        {
+            enregistrerAdmin();
+        }
+    });
   function enregistrerEleve() {
 		var eleve = $("#eleve").val();
 		var activity = $("#activity").val();
@@ -266,7 +295,6 @@ $(document).on("click",'[class-selected]',function() {
 				url: '/ajax/query.php',
 				data: { targetDir: targetDir, eleve:eleve, activity:activity, duree:duree},
 				success: function(reponse) {
-				alert(reponse);
 				location.reload();
 				}
 			});
@@ -302,7 +330,6 @@ $(document).on("click",'[class-selected]',function() {
 				url: '/ajax/query.php',
 				data: { targetDir: targetDir, password:password },
 				success: function(reponse) {
-				alert(reponse);
 				location.reload();
 				}
 			});

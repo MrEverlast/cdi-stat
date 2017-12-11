@@ -51,6 +51,20 @@
 					  </tbody>
 					</table>
 				</div>
+				<div class="eight wide column">
+					<table class="ui very compact table">
+					  <thead>
+						<tr>
+							<th>Fiche élève</th>
+							<th></th>
+						</tr>
+					  </thead>
+					  <tbody id="data_tbody_inf">
+						
+						
+					  </tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>

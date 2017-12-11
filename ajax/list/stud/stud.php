@@ -4,7 +4,7 @@ $req = $bdd->requeteBDD("SELECT * FROM `t_eleve` A INNER JOIN `t_division` B on 
 $opatity=40;
 while($data=$req->fetch()){
 	?>
-	<tr style="background: <?php echo $data['color']. $opatity; ?>" >
+	<tr class="data_elv_info" style="background: <?php echo $data['color']. $opatity; ?>" >
 		<td ><?php echo $data['last_name']." ".$data['first_name']; ?></td>
 	</tr>
 <?php } ?>
