@@ -77,7 +77,6 @@ $(document).on('click', '#next', function() {
       previous.addClass("disabled");
 		  if (post) {
 		    uploadFile(post);
-		  	goToModal(modal, fade);
 		  }
 	    break;
 
@@ -221,13 +220,17 @@ function loadFile(file) {
 }
 
 function uploadFile(formdata) {
+  var mContent = $("#modal_year .content");
+  mContent.html('<img src="https://i.stack.imgur.com/ATB3o.gif">');
   $.ajax({
     method : 'POST',
     url: '/ajax/file_csv.php',
     data: formdata,
     contentType: false,
     processData: false,
-    dataType: 'json'
+    success: function(data) {
+      goToModal(1, 'right');
+    }
   });
 }
 
@@ -237,3 +240,4 @@ function checkFile(file) {
 }
 
 </script>
+
