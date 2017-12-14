@@ -41,7 +41,7 @@ while($data=$req->fetch()){
 		<td ><?php echo  $data['post_code']; ?></td>
 	</tr>
 	
-	<tr style="background: <?php echo $data['color']. $opatity; ?>" >
+	<tr style="background: #EEEEEE<?php echo $opatity; ?>" >
 		<th class="center aligned" colspan="2">GROUPE</th>
 		
 	</tr>
@@ -52,26 +52,28 @@ while($data=$req->fetch()){
 								  WHERE id_eleve='$id_eleve'");
 		while($data2=$req2->fetch()){
 	?>
-		<tr style="background: <?php echo $data2['color']. $opatity; ?>" >
+		<tr style="background: <?php echo $data['color']. $opatity; ?>" >
 			<td class="center aligned" colspan="2"><?php echo $data2['name'] ?></td>
 		</tr>
 	<?php }  ?>
 	
-	<tr style="background: <?php echo $data['color']. $opatity; ?>" >
+	<tr style="background: #EEEEEE<?php echo $opatity; ?>" >
 		<th class="center aligned" colspan="2">ACTIVITE</th>
 		
 	</tr>
 	<?php 
 	
-	//SELECT * FROM  `t_activity` AINNER JOIN  `t_groupe_join_activity` BINNER JOIN  `t_eleve_join_groupe` CINNER JOIN  `t_activity` D ON B.id = A.id_groupeAND A.id_activity = D.idWHERE id_eleve =  '4'
+	
 		$id_eleve=$data['id'];
-		$req3 = $bdd->requeteBDD("SELECT * FROM `t_groupe_join_activite` A 
-								  INNER JOIN `t_groupe` B ON B.id=A.id_groupe 
-								  WHERE id_eleve='$id_eleve'");
+		$req3 = $bdd->requeteBDD("SELECT A.name,A.color,DATE_FORMAT(B.date_prog,'le %d/%m/%Y') AS date_prog 
+								FROM `t_activity` A 
+								INNER JOIN `t_groupe_join_activity` B 
+								INNER JOIN `t_eleve_join_groupe` C ON B.id_activity = A.id 
+								WHERE C.id_eleve = '$id_eleve' AND B.id_groupe = C.id_groupe ORDER BY B.date_prog DESC");
 		while($data3=$req3->fetch()){
 	?>
-		<tr style="background: <?php echo $data3['color']. $opatity; ?>" >
-			<td class="center aligned" colspan="2"><?php echo $data3['name'] ?></td>
+		<tr style="background: <?php echo $data['color']. $opatity; ?>" >
+			<td class="center aligned" colspan="2"><?php echo $data3['name']." ".$data3['date_prog'];?></td>
 		</tr>
 	<?php }  ?>
 <?php } ?>

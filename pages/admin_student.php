@@ -1,13 +1,15 @@
 <div class="ui basic segment">
+	<h2 class="ui dividing header">
+    <i class="users icon"></i>Gestion d'élève
+  </h2>
 		<div class="ui buttons">
-		  <button id="elv_create" class="ui green button myTrigger"><i class="icon add"></i>Créer</button>
-		  <button id="elv_edit" class="ui blue button myTrigger"><i class="icon edit"></i>Modifier</button>
-		  <button id="elv_delete" class="ui red button myTrigger"><i class="icon delete"></i>Supprimer</button>
+		  <button id="elv_create" class="ui green button myTrigger"><i class="add user icon"></i>Créer</button>
+		  <button id="elv_edit" class="ui blue button myTrigger"><i class="user icon"></i>Modifier</button>
+		  <button id="elv_delete" class="ui red button myTrigger"><i class="remove user icon"></i>Supprimer</button>
 		</div>
 	<div class="ui container fluid">
-		<div class="ui grid padded">	
-			<div class="ui row">
-				<div class="eight wide column">
+		<div class="ui three column doubling stackable grid container">	
+				<div class="column">
 					<?php 
 
 					$opatity = "40";
@@ -38,7 +40,7 @@
 					<?php }  ?>
 		
 				</div>
-				<div class="eight wide column">
+				<div class="column">
 					<table class="ui very compact table">
 					  <thead>
 						<tr>
@@ -51,7 +53,7 @@
 					  </tbody>
 					</table>
 				</div>
-				<div class="eight wide column">
+				<div class="column">
 					<table class="ui very compact table">
 					  <thead>
 						<tr>
@@ -66,7 +68,7 @@
 					</table>
 				</div>
 			</div>
-		</div>
+		
 	</div>
 	
 	<div id="modal_main" class="ui modal">
