@@ -65,6 +65,8 @@ $(document).on('click', '#next', function() {
   var previous = $('#previous');
   var fade = 'left';
   $("#modal_year").modal('setting', 'transition', 'fade right');
+  next.removeClass("disabled");
+  previous.removeClass("disabled");
 
 	switch(modal) {
 	  case '0':
@@ -79,29 +81,11 @@ $(document).on('click', '#next', function() {
 		  }
 	    break;
 
-	  case '1':
+	  default:
       modal++;   
-      next.removeClass("disabled");
-      previous.removeClass("disabled");
       changeStatus(modal);
       goToModal(modal, fade);
 	    break;
-
-    case '2':
-      modal++;
-      next.removeClass("disabled");
-      previous.removeClass("disabled");
-      changeStatus(modal);
-      goToModal(modal, fade);
-      break;
-
-    case '3':
-      modal++;
-      next.removeClass("disabled");
-      previous.removeClass("disabled");
-      changeStatus(modal);
-      goToModal(modal, fade);
-      break;
 	}
 
 });
@@ -112,6 +96,8 @@ $(document).on('click', '#previous', function() {
   var previous = $('#previous');
   var fade = 'right';
   $("#modal_year").modal('setting', 'transition', 'fade left');
+  next.removeClass("disabled");
+  previous.removeClass("disabled");
 
   switch(modal) {
 
@@ -122,19 +108,11 @@ $(document).on('click', '#previous', function() {
       previous.addClass("disabled");
       break;
 
-    case '3':
+    default:
       modal--;
       goToModal(modal, fade);
-      next.removeClass("disabled");
-      previous.removeClass("disabled");
       break;
 
-    case '4':
-      modal--;
-      goToModal(modal, fade);
-      next.removeClass("disabled");
-      previous.removeClass("disabled");
-      break;
   }
 
 });
@@ -170,7 +148,10 @@ function goToModal(modal, fade) {
 		setTimeout(function() {
 			$.ajax({
 		    method: 'POST',
-		    url: '/ajax/imp/modal'+modal+'.php',
+        url: '/ajax/imp/modal.php',
+        data : {
+          modal: modal
+        },
 		    success: function(data) {
 		      mContent.html(data);
 		      m.attr('data-page',modal);
