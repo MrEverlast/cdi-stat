@@ -11,9 +11,6 @@
 		<div class="ui three column doubling stackable grid container">	
 				<div class="column">
 					<?php 
-
-					$opatity = "40";
-
 					$reqNiv = $bdd->requeteBDD("SELECT DISTINCT `niveau`,`ordre` FROM `t_division` ORDER BY `ordre` ASC");
 					while ($dataNiv =$reqNiv->fetch()){
 						$niveau=$dataNiv['niveau'];

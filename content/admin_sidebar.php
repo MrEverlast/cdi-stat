@@ -9,7 +9,7 @@
   <div class="item">
     <div class="header">GESTIONS</div>
       <a href="/student" class="item">Élèves</a>
-      <a href="/student" class="item">Groupes</a>
+      <a href="/group" class="item">Groupes</a>
       <a href="/activity" class="item">Activités</a>
   </div>
 </div>
