@@ -1,7 +1,6 @@
 <?php 
 	session_start();
 	$modal = $_POST['modal'];
-	//$_SESSION['class_selected'] = $_POST['selected'];
 
 	$selected = json_decode($_POST['selected']);
 
@@ -11,8 +10,6 @@
 			$_SESSION['class_selected'][$i] = 'true';
 		}
 	}
-
-	print_r($_SESSION['class_selected']);
 
 	switch ($modal) {
 		case '2':
@@ -32,7 +29,6 @@
 			print_r($modal);
 			break;
 	}
-
 
 	function init($class)
 	{

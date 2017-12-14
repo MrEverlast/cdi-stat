@@ -81,6 +81,10 @@ $(document).on('click', '#next', function() {
 		  }
 	    break;
 
+    case '5':
+      importBDD();
+      break;
+
 	  default:
       modal++;   
       changeStatus(modal);
@@ -89,6 +93,34 @@ $(document).on('click', '#next', function() {
 	}
 
 });
+
+function importBDD() {
+  addClass();
+  setTimeout(function() {
+    $.ajax({
+        method: 'POST',
+        url: '/ajax/imp/req/addColor.php'
+      });
+    
+  },500);
+}
+
+function addColorClass() {
+  var color = [
+    $('#color0').css('backgroundColor'),
+    $('#color1').css('backgroundColor'),
+    $('#color2').css('backgroundColor'),
+    $('#color3').css('backgroundColor')
+  ];
+  color = JSON.stringify(color);
+  $.ajax({
+    method: 'POST',
+    url: '/ajax/imp/req/addColor.php',
+    data: {
+      color: color
+    }
+  });
+}
 
 $(document).on('click', '#previous', function() {
   var modal = $('#modal_year').attr('data-page');
@@ -160,8 +192,8 @@ function goToModal(modal, fade) {
 			setTimeout(function() {
 				m.modal('show');
 				$('.ui.checkbox').checkbox();
-			},150);
-		},300);
+			},200);
+		},200);
 	} else {
 		$.ajax({
 	    method: 'POST',
