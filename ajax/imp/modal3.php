@@ -1,10 +1,10 @@
 <?php 
   $_DIR = $_SERVER['DOCUMENT_ROOT']; 
-  $_MODAL = 1;
+  $_MODAL = 2;
   ?>
 <h2 class="ui header">
   Sélectionner
-  <div class="sub header">Les classes de <b>1er</b>.</div>
+  <div class="sub header">Les classes de <b>Terminale</b>.</div>
 </h2>
 
 <div class="ui container">

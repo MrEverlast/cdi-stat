@@ -7,8 +7,8 @@
 
 
 	for($i=0; $i<count($selected); $i++) {
-		if ($selected[$i] == true) {
-			$_SESSION['class_selected'][$i] = true;
+		if ($selected[$i] == 'true') {
+			$_SESSION['class_selected'][$i] = 'true';
 		}
 	}
 
@@ -16,32 +16,38 @@
 
 	switch ($modal) {
 		case '2':
-			init2nd();
+			init('0');
+			break;
+		case '3':
+			init('1');
+			break;
+		case '4':
+			init('2');
+			break;
+		case '5':
+			init('3');
 			break;
 		
 		default:
-			# code...
+			print_r($modal);
 			break;
 	}
 
 
-	function init2nd()
+	function init($class)
 	{
-		$i=0;
-		while ($i < count($_SESSION['class_selected'])) {
-			if ($_SESSION['class_selected'][$i] == true)
-				$_SESSION['class_niveau'][$i] = 0;
-			$i++;
+		for ($i=0; $i < count($_SESSION['class_selected']); $i++) {
+			if ($_SESSION['class_selected'][$i] == 'true'){
+				$_SESSION['class_niveau'][$i] = $class;
+			}
 		}
 		resetSelected();
 	}
 
 	function resetSelected()
 	{
-		$i=0;
-		while ($i < count($_SESSION['class_selected'])) {
-			$_SESSION['class_selected'][$i] = false;
-			$i++;
+		for ($i=0; $i <= count($_SESSION['class']); $i++) {
+			$_SESSION['class_selected'][$i] = 'false';
 		}
 	}
  ?>
