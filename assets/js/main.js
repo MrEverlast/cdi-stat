@@ -338,3 +338,72 @@ $(document).on("click",'[class-selected]',function() {
 
 //// ------------------------------------- ////
 
+//////////// GROUPES //////////////
+
+$(document).on( "change", '[data_halfgroup]',function( event ) {
+	var val = $( this ).val();
+	var targetDir = "list_group_halfgroup";
+
+	
+  $.ajax({
+    method: "POST",
+    url: "/ajax/query.php",
+    data: { 
+      targetDir: targetDir,
+      val: val
+
+    },
+	success: function(data){
+
+		$("#data_halfgrp").html(data);
+		// A MODIFIER //
+		/*$('#data_tbody').transition({
+			animation  :'fade up',
+			onComplete : function() {
+			  $('#data_tbody').removeClass("transition");
+			}
+			});*/
+		// -------- // 
+		
+	}
+  });
+	
+});
+
+$(document).on( "click", '.data_halfgroup',function( event ) {
+	var val = $( this ).children().attr('id');
+	var choix = $( this ).children().attr('name');
+	
+	var targetDir = "list_group_halfgroupelev";
+	$(".data_halfgroup").removeClass("myActive");
+	$(this).addClass("myActive");
+	
+  $.ajax({
+    method: "POST",
+    url: "/ajax/query.php",
+    data: { 
+      targetDir: targetDir,
+      val: val,
+	  choix: choix
+
+    },
+	success: function(data){
+
+		$("#data_tbodyhalfgroup").html(data);
+
+		// A MODIFIER //
+		/*$('#data_tbody').transition({
+			animation  :'fade up',
+			onComplete : function() {
+			  $('#data_tbody').removeClass("transition");
+			}
+			});*/
+		// -------- // 
+		
+	}
+  });
+	
+});
+
+//// ------------------------------------- ////
+
