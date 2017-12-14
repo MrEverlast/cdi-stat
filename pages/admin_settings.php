@@ -61,62 +61,112 @@ $(document).on('change', '#file', function(){
 
 $(document).on('click', '#next', function() {
   var modal = $('#modal_year').attr('data-page');
+  var next = $('#next');
+  var previous = $('#previous');
+  var fade = 'left';
+  $("#modal_year").modal('setting', 'transition', 'fade right');
+
 	switch(modal) {
 	  case '0':
 	  	modal++;
 		  var file = $('#file')[0].files[0];
 		  var post = loadFile(file);
-
+      next.removeClass("disabled");
+      previous.addClass("disabled");
 		  if (post) {
-		  	$("#modal_year").modal('setting', 'transition', 'fade right');
 		    uploadFile(post);
-		  	goToModal(modal);
+		  	goToModal(modal, fade);
 		  }
 	    break;
+
 	  case '1':
-      modal++;
+      modal++;   
+      next.removeClass("disabled");
+      previous.removeClass("disabled");
       changeStatus(modal);
-      goToModal(modal);
+      goToModal(modal, fade);
 	    break;
+
+    case '2':
+      modal++;
+      next.removeClass("disabled");
+      previous.removeClass("disabled");
+      changeStatus(modal);
+      goToModal(modal, fade);
+      break;
+
+    case '3':
+      modal++;
+      next.removeClass("disabled");
+      previous.removeClass("disabled");
+      changeStatus(modal);
+      goToModal(modal, fade);
+      break;
 	}
+
+});
+
+$(document).on('click', '#previous', function() {
+  var modal = $('#modal_year').attr('data-page');
+  var next = $('#next');
+  var previous = $('#previous');
+  var fade = 'right';
+  $("#modal_year").modal('setting', 'transition', 'fade left');
+
+  switch(modal) {
+
+    case '2':
+      modal--;
+      goToModal(modal, fade);
+      next.removeClass("disabled");
+      previous.addClass("disabled");
+      break;
+
+    case '3':
+      modal--;
+      goToModal(modal, fade);
+      next.removeClass("disabled");
+      previous.removeClass("disabled");
+      break;
+
+    case '4':
+      modal--;
+      goToModal(modal, fade);
+      next.removeClass("disabled");
+      previous.removeClass("disabled");
+      break;
+  }
 
 });
 
 function changeStatus(modal) {
   var checkbox = $(".collapsing.ui.checkbox");
   var selected = [];
-  console.log(checkbox);
   for(var i=0; i<checkbox.length; i++) {
     classes = checkbox[i].className.split(" ");
     if (-1 != $.inArray("checked", classes)) {
       selected[i] = true;
-      console.log(checkbox[i]);
     } else {
       selected[i] = false;
     }
   }
   selected = JSON.stringify(selected);
-  console.log(selected);
   $.ajax({
     method: 'POST',
     url: '/ajax/imp/req/modal.php',
     data: {
       modal: modal,
       selected: selected
-    },
-    success: function(data) {
-      console.log(data);
     }
   });
 }
 
-function goToModal(modal) {
-	console.log('goToModal --> ' + modal);
+function goToModal(modal, fade) {
 	var mContent = $("#modal_year .content");
 	var m = $("#modal_year");
 	if (modal > 0) {
 		m.modal('hide');
-		m.modal('setting', 'transition', 'fade left');
+		m.modal('setting', 'transition', 'fade ' + fade);
 		setTimeout(function() {
 			$.ajax({
 		    method: 'POST',
@@ -129,8 +179,8 @@ function goToModal(modal) {
 			setTimeout(function() {
 				m.modal('show');
 				$('.ui.checkbox').checkbox();
-			},100);
-		},225);
+			},150);
+		},300);
 	} else {
 		$.ajax({
 	    method: 'POST',
