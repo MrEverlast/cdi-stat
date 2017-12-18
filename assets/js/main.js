@@ -300,10 +300,8 @@ $(document).on("click",'[class-selected]',function() {
 			});
 		}
 		afficherError(eleve, activity, duree);
-		
-		
-		
   }
+
    function afficherError(eleve, activity, duree){
 	   
 	   if(eleve=="") $("#divEleve").addClass('error');
@@ -323,18 +321,26 @@ $(document).on("click",'[class-selected]',function() {
   
   function enregistrerAdmin() {
 		var password = $("#password").val();
-		var targetDir = "req_inscr_inscription";
-		if(password != ""){
+    var targetDir = "req_inscr_inscription";
+    if(password!=""){
 			$.ajax({
 				method:"POST",
 				url: '/ajax/query.php',
 				data: { targetDir: targetDir, password:password },
 				success: function(reponse) {
-				location.reload();
-				}
-			});
-		}
-  }
+            if(reponse!="1"){
+              
+              location.reload();
+              $("#pass").removeClass('error');
+            }else{
+              $("#pass").addClass('error');
+            }
+          }
+         
+      }); 
+    }
+    $("#pass").addClass('error');
+	}
 
 //// ------------------------------------- ////
 
@@ -375,7 +381,8 @@ $(document).on( "click", '.data_halfgroup',function( event ) {
 	var choix = $( this ).children().attr('name');
 	
 	var targetDir = "list_group_halfgroupelev";
-	$(".data_halfgroup").removeClass("myActive");
+  $(".data_halfgroup").removeClass("myActive");
+  $(".data_grp").removeClass("myActive");
 	$(this).addClass("myActive");
 	
   $.ajax({
@@ -389,7 +396,41 @@ $(document).on( "click", '.data_halfgroup',function( event ) {
     },
 	success: function(data){
 
-		$("#data_tbodyhalfgroup").html(data);
+		$("#data_tbodygroup").html(data);
+
+		// A MODIFIER //
+		/*$('#data_tbody').transition({
+			animation  :'fade up',
+			onComplete : function() {
+			  $('#data_tbody').removeClass("transition");
+			}
+			});*/
+		// -------- // 
+		
+	}
+  });
+	
+});
+
+$(document).on( "click", '.data_grp',function( event ) {
+	var val = $( this ).children().attr('id');
+	
+  var targetDir = "list_group_group";
+  $(".data_halfgroup").removeClass("myActive");
+	$(".data_grp").removeClass("myActive");
+	$(this).addClass("myActive");
+	
+  $.ajax({
+    method: "POST",
+    url: "/ajax/query.php",
+    data: { 
+      targetDir: targetDir,
+      val: val
+
+    },
+	success: function(data){
+
+		$("#data_tbodygroup").html(data);
 
 		// A MODIFIER //
 		/*$('#data_tbody').transition({

@@ -18,6 +18,7 @@ if((isset($_POST['password'])) && (!empty($_POST['password']))){
 			
 		}
 	}
+	echo "1";
 }
 
 ?>

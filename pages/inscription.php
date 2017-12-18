@@ -87,7 +87,7 @@
   </div>
 	<div class="ui center aligned grid ">
 	  <div class="ui row">
-	    <div class="ui left icon input">
+	    <div id="pass" class="ui left icon input">
 				<input type="password" id="password" placeholder="Mot de passe...">
 				<i class="lock icon"></i>
 		  </div>

@@ -1,7 +1,7 @@
 <div class="ui basic segment">
 	<h2 class="ui dividing header">
     Gestion de groupe
-  </h2>
+    </h2>
 		<div class="ui buttons">
 		  <button id="grp_create" class="ui green button myTrigger"><i class="icon add"></i>Créer</button>
 		  <button id="grp_edit" class="ui blue button myTrigger"><i class="edit icon"></i>Modifier</button>
@@ -22,7 +22,7 @@
 						while ($data =$req->fetch()){
 					?>
 						<tr  class="data_grp" style="background: <?php echo $data['color'] . $opatity; ?>;">
-							<td ><?php echo $data['name']; ?></td>
+							<td id="<?php echo $data['id'] ?>"><?php echo $data['name']; ?></td>
 						  
 						</tr>
 						<?php }  ?>
@@ -59,7 +59,7 @@
 							<th>Eleve</th>
 						</tr>
 					  </thead>
-					  <tbody id="data_tbodyhalfgroup">
+					  <tbody id="data_tbodygroup">
 						
 						
 					  </tbody>
@@ -72,8 +72,6 @@
 			
 		</div>
 	</div>
+
 	<div id="modal_main" class="ui modal">
-			  
-	</div>
-	
-</div>
+	</div>		  
