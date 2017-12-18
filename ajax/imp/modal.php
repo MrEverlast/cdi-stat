@@ -27,20 +27,9 @@
 
 <?php 
 } elseif ($_MODAL == 4) {
-  include_once $_DIR.'/ajax/imp/content/submit.php';
+  include_once $_DIR.'/ajax/imp/content/color.php';
 
   ?>
-
-<h2 class="ui header">
-  Sélectionnez
-  <div class="sub header">Les couleurs de chaque <b>niveau</b>.</div>
-</h2>
-<?php for ($b=0; $b < count($class_name); $b++) { ?>
-  <h3 class="ui header">
-    <?php echo $class_name[$b]; ?>
-  </h3>
-  <button id="color<?php echo $b; ?>" class="ui button"></button>
-<?php } ?>
 
 <script type="text/javascript">
   var colors = [
@@ -140,5 +129,7 @@
 </script>
 
 <?php
+} elseif ($_MODAL == 5) {
+  include_once $_DIR.'/ajax/imp/content/submit.php';
 }
   ?>

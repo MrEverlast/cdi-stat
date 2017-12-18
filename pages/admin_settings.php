@@ -2,8 +2,9 @@
   <h2 class="ui dividing header">
     <i class="icon setting"></i>Paramètres
   </h2>
-
-	<button id="req_year_create" class="ui button primary"><i class="icon add "></i>Ajouter une nouvelle année</button>
+  <div class="ui segment basic">
+	  <button id="req_year_create" class="ui button primary"><i class="icon add "></i>Ajouter une nouvelle année</button>
+  </div>
 
 	<?php include_once $_DIR.'/ajax/imp.php'; ?>
 
@@ -23,10 +24,6 @@
       closable: false,
       transition : 'fade up',
       onDeny    : function(){
-      },
-      onApprove : function() {
-        window.alert('Approved!');
-        return false;
       }
     }).modal('show');
   });
@@ -81,8 +78,10 @@ $(document).on('click', '#next', function() {
 	    break;
 
     case '5':
-      importBDD();
+      modal++;
+      addColorClass(modal, fade);
       break;
+
 
 	  default:
       modal++;   
@@ -93,18 +92,8 @@ $(document).on('click', '#next', function() {
 
 });
 
-function importBDD() {
-  addClass();
-  setTimeout(function() {
-    $.ajax({
-        method: 'POST',
-        url: '/ajax/imp/req/addColor.php'
-      });
-    
-  },500);
-}
 
-function addColorClass() {
+function addColorClass(modal, fade) {
   var color = [
     $('#color0').css('backgroundColor'),
     $('#color1').css('backgroundColor'),
@@ -117,6 +106,9 @@ function addColorClass() {
     url: '/ajax/imp/req/addColor.php',
     data: {
       color: color
+    },
+    success: function() {
+      goToModal(modal, fade);
     }
   });
 }
