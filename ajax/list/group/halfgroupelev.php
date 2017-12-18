@@ -10,7 +10,7 @@ $req = $bdd->requeteBDD("SELECT A.id,A.last_name,A.first_name,B.color
 $statement = $bdd->requeteBDD("SELECT COUNT(*) compt FROM `t_eleve` WHERE `id_division`='$classe' GROUP BY `id_division`");
 $dataCount = $statement->fetch();
 $statement->closeCursor();
-$i=1;
+$i=0;
 $limit=($dataCount['compt'])/2;
 if($limit < 1){
 	$limit=0;
