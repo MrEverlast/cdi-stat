@@ -1,4 +1,8 @@
-<?php session_start(); unset($_SESSION['class'],$_SESSION['class_selected'],$_SESSION['class_niveau'],$_SESSION['class_color']); ?>
+<?php 
+  session_start(); 
+  unset($_SESSION['class'],$_SESSION['class_selected'],$_SESSION['class_niveau'],$_SESSION['class_color']); 
+  $_SESSION['class_color'] = array('EBEB0040', '00D70040', 'D7000040', '0000D740');
+?>
 <div class="container" >
   <input type="file" name="file" id="file" accept=".csv">
 

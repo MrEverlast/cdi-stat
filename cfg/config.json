@@ -2,7 +2,7 @@
 	"ip" : "localhost",
 	"user" : "root",
 	"password" : "",
-	"BDD" : "bts_cdi_test_2017",
+	"BDD" : "bts",
 	"port" : 3006,
 	"opacity" : "40"
 }

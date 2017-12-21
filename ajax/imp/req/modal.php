@@ -4,7 +4,6 @@
 
 	$selected = json_decode($_POST['selected']);
 
-
 	for($i=0; $i<count($selected); $i++) {
 		if ($selected[$i] == 'true') {
 			$_SESSION['class_selected'][$i] = 'true';

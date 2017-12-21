@@ -77,40 +77,37 @@ $(document).on('click', '#next', function() {
 		  }
 	    break;
 
-    case '5':
+    case '4':
       modal++;
-      addColorClass(modal, fade);
+      next.addClass("disabled");
+      changeStatus(modal,fade);
       break;
 
+    case '5':
+      importBDD();
+      break;
 
 	  default:
       modal++;   
-      changeStatus(modal);
-      goToModal(modal, fade);
+      changeStatus(modal, fade);
 	    break;
 	}
 
 });
 
+$(document).on('keyup', '#bddName', function(e) {
+  var next = $("#next");
+  if ($(this)["0"].value.length > 4) {
+    next.html("Importer<i class=\"icon chevron right\"></i>");
+    next.removeClass("disabled");
+  } else {
+    next.addClass("disabled");
+  }
+});
 
-function addColorClass(modal, fade) {
-  var color = [
-    $('#color0').css('backgroundColor'),
-    $('#color1').css('backgroundColor'),
-    $('#color2').css('backgroundColor'),
-    $('#color3').css('backgroundColor')
-  ];
-  color = JSON.stringify(color);
-  $.ajax({
-    method: 'POST',
-    url: '/ajax/imp/req/addColor.php',
-    data: {
-      color: color
-    },
-    success: function() {
-      goToModal(modal, fade);
-    }
-  });
+function importBDD() {
+  var bddName = $("#bddName").value;
+  alert(bddName);
 }
 
 $(document).on('click', '#previous', function() {
@@ -140,7 +137,7 @@ $(document).on('click', '#previous', function() {
 
 });
 
-function changeStatus(modal) {
+function changeStatus(modal, fade) {
   var checkbox = $(".collapsing.ui.checkbox");
   var selected = [];
   for(var i=0; i<checkbox.length; i++) {
@@ -158,6 +155,9 @@ function changeStatus(modal) {
     data: {
       modal: modal,
       selected: selected
+    },
+    success: function() {
+      goToModal(modal, fade);
     }
   });
 }
@@ -165,6 +165,7 @@ function changeStatus(modal) {
 function goToModal(modal, fade) {
 	var mContent = $("#modal_year .content");
 	var m = $("#modal_year");
+  $("#next").html("Suivant<i class=\"icon chevron right\"></i>");
 	if (modal > 0) {
 		m.modal('hide');
 		m.modal('setting', 'transition', 'fade ' + fade);
@@ -195,8 +196,6 @@ function goToModal(modal, fade) {
 	    }
 	  });
 	}
-
-  
 }
 
 function loadFile(file) {
@@ -213,7 +212,7 @@ function loadFile(file) {
 
 function uploadFile(formdata) {
   var mContent = $("#modal_year .content");
-  mContent.html('<img src="https://i.stack.imgur.com/ATB3o.gif">');
+  mContent.html('<img class="ui centered medium image" src="/assets/load.gif">');
   $.ajax({
     method : 'POST',
     url: '/ajax/file_csv.php',
@@ -221,7 +220,7 @@ function uploadFile(formdata) {
     contentType: false,
     processData: false,
     success: function(data) {
-      goToModal(1, 'right');
+      goToModal(1, 'left');
     }
   });
 }
