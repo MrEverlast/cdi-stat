@@ -1,15 +1,11 @@
 <?php 
 $classe = $_POST['val'];
-$req = $bdd->requeteBDD("SELECT * FROM `t_division` WHERE `id`='$classe'");
+$req = $bdd->requeteBDD("SELECT * FROM `t_groupe` WHERE `id_division`='$classe'");
 $opatity=40;
 while($data=$req->fetch()){
 	?>
 	<tr class="data_halfgroup" style="background: <?php echo $data['color']. $opatity; ?>" >
-		<td name="A" id='<?php echo $data['id']; ?>' colspan=2 >Groupe A</td>
-	</tr>
-	<tr  class="data_halfgroup" style="background: <?php echo $data['color']. $opatity; ?>" >
-
-		<td name="B" id='<?php echo $data['id']; ?>' colspan=2 >Groupe B</td>
+		<td name="<?php echo $data['id'] ?>" id='<?php echo $data['id_division']; ?>' colspan=2 ><?php echo $data['name']; ?></td>
 	</tr>
 <?php } ?>
 	

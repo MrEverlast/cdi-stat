@@ -7,18 +7,22 @@
 		  <button id="grp_edit" class="ui blue button myTrigger"><i class="edit icon"></i>Modifier</button>
 		  <button id="grp_delete" class="ui red button myTrigger"><i class="remove icon"></i>Supprimer</button>
 		</div>
-	<div class="ui container fluid">
-		<div class="ui three column doubling stackable grid container">	
-			<div class="column">
-				<table class="ui very compact table">
+<div class="ui container fluid">
+	<div class="ui grid padded">
+		<div class="row">
+		
+			<div class="five wide column">
+				<table class="ui very inverted  compact table">
+					
 					<thead>
 						<tr>
 							<th>Groupes</th>
 						</tr>
 					</thead>
-					<tbody>
+					
+					<tbody >
 					<?php 
-						$req = $bdd->requeteBDD("SELECT DISTINCT * FROM `t_groupe` ORDER BY `date_create` ASC");
+						$req = $bdd->requeteBDD("SELECT DISTINCT * FROM `t_groupe` WHERE `id_division`=NULL ORDER BY `date_create` ASC");
 						while ($data =$req->fetch()){
 					?>
 						<tr  class="data_grp" style="background: <?php echo $data['color'] . $opatity; ?>;">
@@ -28,13 +32,14 @@
 						<?php }  ?>
 					</tbody>
 				</table>	
-				<table class="ui very compact table">
+				
+				<table class="ui very inverted compact table">
 					<thead>
 						<tr>
 							<th>Demi-Groupes
 							</th>
 							<th>
-								<select data_halfgroup="data_halfgroup" class="ui search dropdown">
+								<select data_halfgroup="data_halfgroup" class="ui dropdown floating">
 								 <option value="">Choisir une classe</option>
 								<?php 
 									$reqClass = $bdd->requeteBDD("SELECT DISTINCT * FROM `t_division` ORDER BY `ordre` ASC");
@@ -52,8 +57,8 @@
 				</table>	
 			</div>		
 			
-			<div class="column">
-					<table class="ui very compact table">
+			<div class="five wide column">
+					<table class="ui very inverted  compact table">
 					  <thead>
 						<tr>
 							<th>Eleve</th>
@@ -66,10 +71,21 @@
 					</table>
 				</div>
 			
-			<div class="column">
-			
+			<div class="five wide column">
+					<table class="ui very inverted  compact table">
+					  <thead>
+						<tr>
+							<th>Activité</th>
+						</tr>
+					  </thead>
+					  <tbody id="data_tbodyacti">
+						
+						
+					  </tbody>
+					</table>
 			</div>	
 			
+		</div>
 		</div>
 	</div>
 

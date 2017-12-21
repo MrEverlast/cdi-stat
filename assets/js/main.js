@@ -398,14 +398,22 @@ $(document).on( "click", '.data_halfgroup',function( event ) {
 
 		$("#data_tbodygroup").html(data);
 
-		// A MODIFIER //
-		/*$('#data_tbody').transition({
-			animation  :'fade up',
-			onComplete : function() {
-			  $('#data_tbody').removeClass("transition");
-			}
-			});*/
-		// -------- // 
+	}
+  });
+  targetDir = "list_group_halfgrpacti";
+  $.ajax({
+    method: "POST",
+    url: "/ajax/query.php",
+    data: { 
+      targetDir: targetDir,
+      val: val,
+	  choix: choix
+
+    },
+	success: function(data){
+
+		$("#data_tbodyacti").html(data);
+
 		
 	}
   });

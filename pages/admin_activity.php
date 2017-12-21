@@ -18,7 +18,7 @@
 					while ($i < 2) {
 						$req = $bdd->requeteBDD("SELECT * FROM `t_activity` WHERE `type` = $i");
 					?>
-						<table class="ui very compact table">
+						<table class="ui very inverted compact table">
 						  <thead>
 						    <tr>
 							    <th>Activité</th>
@@ -44,7 +44,7 @@
 			</div>
 
 			<div class="five wide column">
-				<table class="ui very compact table">
+				<table class="ui very inverted compact table">
 					<thead>
 						<tr>
 							<th>Description</th>
@@ -55,7 +55,7 @@
 			</div>
 
 			<div class="five wide column">
-				<table class="ui very compact table">
+				<table class="ui very inverted compact table">
 					<thead>
 						<tr>
 							<th>Grp</th>
