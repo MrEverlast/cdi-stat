@@ -106,8 +106,18 @@ $(document).on('keyup', '#bddName', function(e) {
 });
 
 function importBDD() {
-  var bddName = $("#bddName").value;
-  alert(bddName);
+  var bddName = $("#bddName")["0"].value;
+  $.ajax({
+    method: 'POST',
+    url: '/ajax/imp/req/submit.php',
+    data: {
+      bddName: bddName
+    },
+    success: function(data) {
+      alert(bddName);
+    }
+  });
+
 }
 
 $(document).on('click', '#previous', function() {
@@ -132,14 +142,14 @@ $(document).on('click', '#previous', function() {
       modal--;
       goToModal(modal, fade);
       break;
-
   }
-
 });
 
 function changeStatus(modal, fade) {
   var checkbox = $(".collapsing.ui.checkbox");
   var selected = [];
+  var mContent = $("#modal_year .content");
+  mContent.html('<img class="ui centered medium image" src="/assets/load.gif">');
   for(var i=0; i<checkbox.length; i++) {
     classes = checkbox[i].className.split(" ");
     if (-1 != $.inArray("checked", classes)) {
@@ -166,9 +176,9 @@ function goToModal(modal, fade) {
 	var mContent = $("#modal_year .content");
 	var m = $("#modal_year");
   $("#next").html("Suivant<i class=\"icon chevron right\"></i>");
+  m.modal('hide');
+  m.modal('setting', 'transition', 'fade ' + fade);
 	if (modal > 0) {
-		m.modal('hide');
-		m.modal('setting', 'transition', 'fade ' + fade);
 		setTimeout(function() {
 			$.ajax({
 		    method: 'POST',
@@ -207,7 +217,6 @@ function loadFile(file) {
     alert("Il faut un fichier .csv");
     return false;
   }
-
 }
 
 function uploadFile(formdata) {
@@ -231,4 +240,3 @@ function checkFile(file) {
 }
 
 </script>
-
