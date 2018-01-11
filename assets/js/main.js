@@ -32,7 +32,7 @@ function loadModal(object) {
   setTimeout(function() {
     $('#modal_main').modal({
       onShow: function() {
-        if (res[0]!== 'elv' && res[1] !== 'delete') {
+        if (res[0]!== 'elv' && res[0]!== 'grp' && res[1] !== 'delete') {
           loadColor();
         }
       },
@@ -70,6 +70,11 @@ $(document).on('click','[data-submit]',function() {
   var date_born = $('#date_born').val();
   var classe = $('#classe').val();
 
+  var id_elevs = $('#id_elevs').val();
+  var groupe =$('#grp_name').val();
+  var id_grp=$('#id_grp').val();
+
+  
   if (color != undefined) {
     color = rgb2hex(color);
   }
@@ -78,18 +83,19 @@ $(document).on('click','[data-submit]',function() {
   if(target[2] == "delete") {
     $('#modal_del').modal({
       onApprove : function() {
-        query(targetDir,name,color,type,idActivity,id_elev);
+        query(targetDir,name,color,type,idActivity,id_elev,id_grp);
 
       }
     }).modal('show');
   } else {
-    query(targetDir,name,color,type,idActivity,id_elev,first_name,last_name,post_code,city,id_classe,date_born,classe);
-	
+
+    query(targetDir,name,color,type,idActivity,id_elev,id_grp,groupe,first_name,last_name,post_code,city,id_classe,date_born,classe,id_elevs);
+
   } 
 
 });
 
-function query(targetDir,name,color,type,idActivity,id_elev,first_name,last_name,post_code,city,id_classe,date_born,classe) {
+function query(targetDir,name,color,type,idActivity,id_elev,id_grp,groupe,first_name,last_name,post_code,city,id_classe,date_born,classe,id_elevs) {
 	  
   $.ajax({
     method: "POST",
@@ -100,14 +106,17 @@ function query(targetDir,name,color,type,idActivity,id_elev,first_name,last_name
       color: color,
       name: name,
       idActivity: idActivity,
-	  id_elev:id_elev,
-	  first_name: first_name,
-	  last_name: last_name,
-	  post_code: post_code,
-	  city: city,
-	  id_classe: id_classe,
-	  date_born: date_born,
-	  classe:classe
+      id_elev: id_elev,
+      id_grp: id_grp,
+      groupe: groupe,
+      first_name: first_name,
+      last_name: last_name,
+      post_code: post_code,
+      city: city,
+      id_classe: id_classe,
+      date_born: date_born,
+      classe: classe,
+      id_elevs: id_elevs
     }
   });
   setTimeout(function(){
@@ -176,22 +185,13 @@ $(document).on( "click", '.data_elv',function( event ) {
 	success: function(data){
 
 		$("#data_tbody").html(data);
-		// A MODIFIER //
-		/*$('#data_tbody').transition({
-			animation  :'fade up',
-			onComplete : function() {
-			  $('#data_tbody').removeClass("transition");
-			}
-			});*/
-		// -------- // 
-		
 	}
   });
 	
 });
 
 $(document).on( "click", '.data_elv_info',function( event ) {
-	var val = $( this ).children().text();
+  var val = $( this ).children().attr('id');
 	var targetDir = "list_stud_infostud";
 	$(".data_elv_info").removeClass("myActive");
 	$(this).addClass("myActive");
@@ -207,15 +207,6 @@ $(document).on( "click", '.data_elv_info',function( event ) {
 	success: function(data){
 
 		$("#data_tbody_inf").html(data);
-
-		// A MODIFIER //
-		/*$('#data_tbody').transition({
-			animation  :'fade up',
-			onComplete : function() {
-			  $('#data_tbody').removeClass("transition");
-			}
-			});*/
-		// -------- // 
 		
 	}
   });
@@ -362,15 +353,7 @@ $(document).on( "change", '[data_halfgroup]',function( event ) {
 	success: function(data){
 
 		$("#data_halfgrp").html(data);
-		// A MODIFIER //
-		/*$('#data_tbody').transition({
-			animation  :'fade up',
-			onComplete : function() {
-			  $('#data_tbody').removeClass("transition");
-			}
-			});*/
-		// -------- // 
-		
+
 	}
   });
 	
@@ -407,7 +390,7 @@ $(document).on( "click", '.data_halfgroup',function( event ) {
     data: { 
       targetDir: targetDir,
       val: val,
-	  choix: choix
+	   choix: choix
 
     },
 	success: function(data){
@@ -440,19 +423,51 @@ $(document).on( "click", '.data_grp',function( event ) {
 
 		$("#data_tbodygroup").html(data);
 
-		// A MODIFIER //
-		/*$('#data_tbody').transition({
-			animation  :'fade up',
-			onComplete : function() {
-			  $('#data_tbody').removeClass("transition");
-			}
-			});*/
-		// -------- // 
+	}
+  });
+  var choix = val;
+  targetDir = "list_group_halfgrpacti";
+  $.ajax({
+    method: "POST",
+    url: "/ajax/query.php",
+    data: { 
+      targetDir: targetDir,
+	    choix: choix
+
+    },
+	success: function(data){
+
+		$("#data_tbodyacti").html(data);
+
 		
 	}
   });
 	
 });
+//////////// MODIFIER GROUPES //////////////
+
+$(document).on( "change", '[data_editgrp]',function( event ) {
+	var id_group = $( this ).val();
+	var targetDir = $( this ).attr('data_editgrp');
+
+	
+  $.ajax({
+    method: "POST",
+    url: "/ajax/query.php",
+    data: { 
+      targetDir: targetDir,
+      id_group: id_group
+
+    },
+	success: function(data){
+		$("#grp_name").val(data);
+
+	}
+  });
+	
+});
+
+
 
 //// ------------------------------------- ////
 

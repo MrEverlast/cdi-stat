@@ -4,17 +4,17 @@ $type = $_POST['type'];
 if ($type === "create") $title = "Créer";
 if ($type === "edit") $title = "Modifier";
 if ($type === "delete") $title = "Supprimer";
-$genre="un élève";
+$genre="un groupe";
 ?>
 <i class="close icon"></i>
 <div class="header">
-  <?php echo $title." ".$genre; ?>
+  <?php echo $title." groupes"; ?>
 </div>
 
-<?php include_once $_DIR.'/ajax/content/elv/'.$type.'.php'; ?>
+<?php include_once $_DIR.'/ajax/content/grp/'.$type.'.php'; ?>
 
 <div class="actions">
-  <div class="ui primary button" data-submit="<?php echo 'req_elv_'.$type; ?>"><?php echo $title; ?></div>
+  <div class="ui primary button" data-submit="<?php echo 'req_grp_'.$type; ?>"><?php echo $title; ?></div>
 </div>
 
 <?php include_once $_DIR.'/ajax/content/supprimer.php'; ?>

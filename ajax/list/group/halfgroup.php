@@ -5,7 +5,8 @@ $opatity=40;
 while($data=$req->fetch()){
 	?>
 	<tr class="data_halfgroup" style="background: <?php echo $data['color']. $opatity; ?>" >
-		<td name="<?php echo $data['id'] ?>" id='<?php echo $data['id_division']; ?>' colspan=2 ><?php echo $data['name']; ?></td>
+		<td name="<?php echo $data['id'] ?>" id='<?php echo $data['id_division']; ?>' colspan=2 >
+		<?php echo $data['name']; ?></td>
 	</tr>
 <?php } ?>
 	

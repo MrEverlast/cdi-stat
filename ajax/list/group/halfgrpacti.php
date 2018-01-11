@@ -1,5 +1,4 @@
 <?php 
-$classe = $_POST['val'];
 $choix = $_POST['choix'];
 $opatity=40;
 
