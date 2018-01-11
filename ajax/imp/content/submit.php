@@ -15,7 +15,7 @@ if (
   isset($_SESSION['class_niveau']) &&
   isset($_SESSION['class_color'])
   ) {
-  $class_name = ['Seconde','Première','Terminale','BTS'];
+  $level_name = ['Seconde','Première','Terminale','BTS'];
   ?>
     <div class="ui right fluid labeled input">
       <input id="bddName" type="text" placeholder="Nom de la base de données">
@@ -27,7 +27,7 @@ if (
       ?> 
     <table class="ui table compact">
     <thead>
-      <th><?php echo $class_name[$n]; ?></th>
+      <th><?php echo $level_name[$n]; ?></th>
     </thead>
     <tbody> 
       <?php

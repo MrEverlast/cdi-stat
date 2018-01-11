@@ -13,4 +13,4 @@
 	$port = $json['port'];
 	$bdd = new BDD($ip,$bddName,$user,$password,$port);
 
-  $opatity = $json['opacity'];
+  $opatity = $json['color']['opacity'];

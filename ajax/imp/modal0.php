@@ -1,10 +1,20 @@
 <?php 
   session_start(); 
-  unset($_SESSION['class'],$_SESSION['class_selected'],$_SESSION['class_niveau'],$_SESSION['class_color']); 
-  $_SESSION['class_color'] = array('EBEB0040', '00D70040', 'D7000040', '0000D740');
+  unset($_SESSION['class'],$_SESSION['class_selected'],$_SESSION['class_niveau']);
 ?>
 <div class="container" >
   <input type="file" name="file" id="file" accept=".csv">
+
+  <h2 class="ui icon header aligned center">
+    <i class="warning icon"></i>
+    <div class="content">
+      ATENTION
+      <div class="sub header">Veuillez bien configurer le fichier .csv sous la forme</div>
+      <div class="sub header"><b>NOM,Prénom,Date de naissance,INE,Ville,Code postal</b></div>
+      <div class="sub header">Exemple:</div>
+      <div class="sub header"><b>DUPOND,Pierre,31/12/2000,2012112527V,Nice,06000</b></div>
+    </div>
+  </h2>
 
   <div class="upload-area"  id="uploadfile">
     <h3>Cliquez pour importer le fichier .csv</h3>

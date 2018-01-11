@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 21 Décembre 2017 à 09:29
+-- Généré le :  Jeu 11 Janvier 2018 à 09:46
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -104,7 +104,7 @@ CREATE TABLE `t_groupe` (
   `id` int(16) NOT NULL,
   `name` varchar(256) NOT NULL COMMENT 'nom grp',
   `date_create` datetime NOT NULL COMMENT 'date creation',
-  `color` varchar(7) NOT NULL COMMENT '#FFFFFF',
+  `color` varchar(7) NOT NULL DEFAULT '#EE00FF' COMMENT '#FFFFFF',
   `id_division` int(16) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -226,7 +226,7 @@ ALTER TABLE `t_registration`
 -- AUTO_INCREMENT pour la table `t_activity`
 --
 ALTER TABLE `t_activity`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `t_cdi_horaire`
 --
@@ -236,37 +236,37 @@ ALTER TABLE `t_cdi_horaire`
 -- AUTO_INCREMENT pour la table `t_division`
 --
 ALTER TABLE `t_division`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `t_eleve`
 --
 ALTER TABLE `t_eleve`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `t_eleve_join_groupe`
 --
 ALTER TABLE `t_eleve_join_groupe`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `t_groupe`
 --
 ALTER TABLE `t_groupe`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `t_groupe_join_activity`
 --
 ALTER TABLE `t_groupe_join_activity`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `t_password`
 --
 ALTER TABLE `t_password`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT pour la table `t_registration`
 --
 ALTER TABLE `t_registration`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT COMMENT 'id', AUTO_INCREMENT=2;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT COMMENT 'id';
 --
 -- Contraintes pour les tables exportées
 --

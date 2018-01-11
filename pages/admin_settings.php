@@ -107,6 +107,8 @@ $(document).on('keyup', '#bddName', function(e) {
 
 function importBDD() {
   var bddName = $("#bddName")["0"].value;
+  var mContent = $("#modal_year .content");
+  mContent.html('Importation de la base de données cela peut prendre plusieurs minutes.<img class="ui centered medium image" src="/assets/load.gif">');
   $.ajax({
     method: 'POST',
     url: '/ajax/imp/req/submit.php',
@@ -114,7 +116,7 @@ function importBDD() {
       bddName: bddName
     },
     success: function(data) {
-      alert(bddName);
+      
     }
   });
 
