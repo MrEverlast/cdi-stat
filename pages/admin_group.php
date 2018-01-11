@@ -22,7 +22,7 @@
 					
 					<tbody >
 					<?php 
-						$req = $bdd->requeteBDD("SELECT DISTINCT * FROM `t_groupe` WHERE `id_division`=NULL ORDER BY `date_create` ASC");
+						$req = $bdd->requeteBDD("SELECT DISTINCT * FROM `t_groupe` WHERE `id_division` is NULL ORDER BY `date_create` ASC");
 						while ($data =$req->fetch()){
 					?>
 						<tr  class="data_grp" style="background: <?php echo $data['color'] . $opatity; ?>;">

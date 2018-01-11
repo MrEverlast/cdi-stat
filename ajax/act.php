@@ -4,10 +4,11 @@ $type = $_POST['type'];
 if ($type === "create") $title = "Créer";
 if ($type === "edit") $title = "Modifier";
 if ($type === "delete") $title = "Supprimer";
+$genre="une activité";
 ?>
 <i class="close icon"></i>
 <div class="header">
-  <?php echo $title." activité"; ?>
+  <?php echo $title." ".$genre; ?>
 </div>
 
 <?php include_once $_DIR.'/ajax/content/act/'.$type.'.php'; ?>

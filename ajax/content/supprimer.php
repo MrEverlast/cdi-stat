@@ -1,10 +1,10 @@
 <div id="modal_del" class="ui modal mini">
   <div class="header">
-    <?php echo $title; ?>
+    <?php echo $title." ".$genre; ?>
   </div>
   <div class="content">
-    <p>Etes-vous sur de vouloir supprimer cette activité?</p>
-    <p>Supprimer une activité peut engendrer la perte de stat</p>
+    <p>Etes-vous sur de vouloir supprimer cet élément ?</p>
+    <p>Supprimer un élément peut engendrer la perte de statistique.</p>
   </div>
   <div class="actions">
     <div class="ui negative button">

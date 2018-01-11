@@ -1,13 +1,13 @@
 <?php 
-$nomprenom = $_POST['val'];
+$id_elev = $_POST['val'];
 
-$identite = explode(" ",$nomprenom);
+
 
 
 
 $req = $bdd->requeteBDD("SELECT A.id,A.last_name,A.first_name,A.date_born,A.city,A.post_code,B.nom,B.color 
 						FROM `t_eleve` A INNER JOIN `t_division` B on B.id = A.id_division 
-						WHERE A.last_name='$identite[0]'");
+						WHERE A.id='$id_elev'");
 $opatity=40;
 while($data=$req->fetch()){
 	?>
