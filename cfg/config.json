@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-{"ip":"localhost","user":"root","password":"","BDD":"Rockstarr_2018","port":3006,"color":{"Seconde":"#EBEB00","Premi\u00e8re":"#00D700","Terminale":"#D70000","BTS":"#0000D7","opacity":"40"}}
-=======
-{"ip":"localhost","user":"root","password":"","BDD":"bts_cdi_test_2017","port":3006,"opacity":"40"}
->>>>>>> dab5d3706682993d2907246d3e376d5c1afc9989
+{"ip":"localhost","user":"root","password":"","BDD":"ksjahdgsfvhbajk_2018","port":3006,"color":{"Seconde":"#EBEB00","Premi\u00e8re":"#00D700","Terminale":"#D70000","BTS":"#0000D7","opacity":"40"}}

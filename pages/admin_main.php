@@ -1,7 +1,16 @@
 <div class="ui basic segment">
   <h3 class="ui header">Application Content</h3>
-  <div class="ui equal grid">
-    <div class="six wide column">
+
+  <div class="ui grid">
+    <div class="row">
+      <div class="colg">
+      <div class="ui active text loader">Loading</div>
+      </div>
+      <div class="colg"></div>
+    </div>
+  </div>
+
+
 <script type="text/javascript">
 $(document).ready(function() {
   var ctx = document.getElementById("myChart");
@@ -52,40 +61,5 @@ $(document).ready(function() {
 
     });
 </script>
-      <canvas id="myChart" width="400" height="400"></canvas>
-
-      <button class="ui primary button">Créer</button>
-      <button class="ui primary button">Modifier</button>
-      <button class="ui primary button">Supprimer</button>
-    </div>
-    <div class="eight wide column">
-      <table class="ui compact striped table">
-        <thead>
-          <tr>
-            <th>Name</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="collapsing ui checkbox">
-              <input type="checkbox" name="gift" tabindex="0" class="hidden" data-id="231">
-              <label>Dupond Martin, 1 S</label>
-            </td>
-          </tr>
-          <tr>
-            <td class="collapsing ui checkbox">
-              <input type="checkbox" name="gift" tabindex="0" class="hidden" data-id="231">
-              <label>Dupond Martin, 1 S</label>
-            </td>
-          </tr>
-          <tr>
-            <td class="collapsing ui checkbox">
-              <input type="checkbox" name="gift" tabindex="0" class="hidden" data-id="231">
-              <label>Dupond Martin, 1 S</label>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+  <canvas id="myChart" style="width: calc(100% - 260px)"></canvas>
 </div>

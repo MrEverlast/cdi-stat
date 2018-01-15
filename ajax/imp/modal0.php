@@ -8,7 +8,7 @@
   <h2 class="ui icon header aligned center">
     <i class="warning icon"></i>
     <div class="content">
-      ATENTION
+      ATTENTION
       <div class="sub header">Veuillez bien configurer le fichier .csv sous la forme</div>
       <div class="sub header"><b>NOM,Prénom,Date de naissance,INE,Ville,Code postal</b></div>
       <div class="sub header">Exemple:</div>

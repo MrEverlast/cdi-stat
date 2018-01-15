@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+$json = file_get_contents($_DIR.'/cfg/config.json'); // Fichier de cfg
+$json = json_decode($json,true); // Transformation du fichier en array
+
+$tabColor = $json['color'];
+
 function getSchoolYear() {
   $date = explode(':', date('Y:n'));
   $year = $date[0];
@@ -9,11 +14,11 @@ function getSchoolYear() {
   return $year;
 }
 
+
 if (
   isset($_SESSION['class']) &&
   isset($_SESSION['class_selected']) &&
-  isset($_SESSION['class_niveau']) &&
-  isset($_SESSION['class_color'])
+  isset($_SESSION['class_niveau'])
   ) {
   $level_name = ['Seconde','Première','Terminale','BTS'];
   ?>
@@ -34,8 +39,8 @@ if (
       while ($i < count($_SESSION['class'])) {
         if ($n == $_SESSION['class_niveau'][$i]) {
           $class = $_SESSION['class'][$i];
-          $color = $_SESSION['class_color'][$n];
-          echo "<tr style='background: #".$_SESSION['class_color'][$n]."'><td>".$class."</td></tr>";
+          $color = $tabColor[$level_name[$n]] . $json['color']['opacity'];
+          echo "<tr style='background: ".$color."'><td>".$class."</td></tr>";
         }
         $i++;
       }

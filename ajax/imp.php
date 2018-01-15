@@ -1,5 +1,4 @@
 <div id="modal_year" class="ui modal" data-page="0" style="height: 80%;">
-
   <div class="content scrolling" style="max-height: calc(100% - 64px);">
     <?php include_once $_DIR.'/ajax/imp/modal0.php'; ?>
   </div>

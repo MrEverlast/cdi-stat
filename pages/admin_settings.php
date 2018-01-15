@@ -108,18 +108,29 @@ $(document).on('keyup', '#bddName', function(e) {
 function importBDD() {
   var bddName = $("#bddName")["0"].value;
   var mContent = $("#modal_year .content");
-  mContent.html('Importation de la base de données cela peut prendre plusieurs minutes.<img class="ui centered medium image" src="/assets/load.gif">');
-  $.ajax({
-    method: 'POST',
-    url: '/ajax/imp/req/submit.php',
-    data: {
-      bddName: bddName
-    },
-    success: function(data) {
-      
-    }
-  });
+  bddName = bddName.toLowerCase();
+  
+  if (testBddName(bddName)) {
+    mContent.html('<div class="ui active inverted dimmer" style="max-height: calc(100% - 64px);"><div class="ui text loader">Importation de la base de données cela peut prendre plusieurs minutes.</div></div>');
+    $.ajax({
+      method: 'POST',
+      url: '/ajax/imp/req/submit.php',
+      data: {
+        bddName: bddName
+      },
+      success: function(data) {
+        mContent.html("Success");
+      }
+    });
+  } else {
+    alert("Nom de base de données non conforme.");
+  }
 
+}
+
+function testBddName(str) {
+  var filter = /^([a-z0-9_-]{3,20})+$/;
+  return (filter.test(str));
 }
 
 $(document).on('click', '#previous', function() {
@@ -150,8 +161,8 @@ $(document).on('click', '#previous', function() {
 function changeStatus(modal, fade) {
   var checkbox = $(".collapsing.ui.checkbox");
   var selected = [];
-  var mContent = $("#modal_year .content");
-  mContent.html('<img class="ui centered medium image" src="/assets/load.gif">');
+  var mContent = $("#modal_year .content.scrolling");
+  mContent.html('<div class="ui active inverted dimmer" style="max-height: calc(100% - 64px);"><div class="ui text loader">Loading</div></div>');
   for(var i=0; i<checkbox.length; i++) {
     classes = checkbox[i].className.split(" ");
     if (-1 != $.inArray("checked", classes)) {
@@ -191,12 +202,12 @@ function goToModal(modal, fade) {
 		    success: function(data) {
 		      mContent.html(data);
 		      m.attr('data-page',modal);
+          setTimeout(function() {
+            m.modal('show');
+            $('.ui.checkbox').checkbox();
+          },200);
 		    }
 		  });
-			setTimeout(function() {
-				m.modal('show');
-				$('.ui.checkbox').checkbox();
-			},200);
 		},200);
 	} else {
 		$.ajax({
@@ -222,8 +233,8 @@ function loadFile(file) {
 }
 
 function uploadFile(formdata) {
-  var mContent = $("#modal_year .content");
-  mContent.html('<img class="ui centered medium image" src="/assets/load.gif">');
+  var mContent = $("#modal_year .content.scrolling");
+  mContent.html('<div class="ui active inverted dimmer" style="max-height: calc(100% - 64px);"><div class="ui text loader">Loading</div></div>');
   $.ajax({
     method : 'POST',
     url: '/ajax/file_csv.php',
