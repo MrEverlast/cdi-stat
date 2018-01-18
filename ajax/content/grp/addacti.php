@@ -6,7 +6,7 @@ include_once $_DIR.'/cfg/init.php';
 	<div class="ui form">
     <div class="field">
         <label>Activité</label>
-        <select id="id_elevs" class="ui fluid search dropdown" multiple="">
+        <select id="id_elevs" class="ui fluid search dropdown" >
             <option value="">Elèves</option>
             <?php 
                 $req = $bdd->requeteBDD("SELECT * FROM `t_activity` WHERE `type` = 1"); 

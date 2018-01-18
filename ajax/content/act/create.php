@@ -11,13 +11,13 @@
 			    <div class="field">
 			      <div class="ui radio checkbox">
 			        <input id="checkbox_grp" name="type" type="radio" checked="" tabindex="0" class="hidden" value="0">
-			        <label>Seule</label>
+			        <label>Groupe</label>
 			      </div>
 			    </div>
 			    <div class="field">
 			      <div class="ui radio checkbox">
 			        <input id="checkbox_seule" name="type" type="radio" tabindex="0" class="hidden" value="1">
-			        <label>Groupe</label>
+			        <label>Seule</label>
 			      </div>
 			    </div>
 			  </div>

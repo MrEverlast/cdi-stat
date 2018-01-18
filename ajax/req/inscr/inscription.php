@@ -2,9 +2,10 @@
 
 if((isset($_POST['eleve'])) && (!empty($_POST['eleve'])) && (isset($_POST['activity'])) && 
 	(!empty($_POST['activity'])) && (isset($_POST['duree'])) && (!empty($_POST['duree'])) ){
-		
-	$sth = $bdd->requeteBDD("INSERT INTO `t_registration`(`id_eleve`, `id_activity`,`duration`)
-							VALUES (".$_POST['eleve'].",".$_POST['activity'].",".$_POST['duree'].")");
+
+	$today = date("Y-m-d H:i:s"); 	
+	$sth = $bdd->requeteBDD("INSERT INTO `t_registration`(`id_eleve`, `id_activity`,`date_create`,`duration`)
+							VALUES (".$_POST['eleve'].",".$_POST['activity'].",'$today',".$_POST['duree'].")");
 						
 }
 
