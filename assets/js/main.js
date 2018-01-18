@@ -12,6 +12,7 @@ $(document).ready(function() {
 	  
 });
 
+
 // Afficher le contenue d'un modal
 // ex: btn 'act_create' -> ajax/activity.php
 // res[0] = act; res[1] = create;
@@ -27,6 +28,7 @@ function loadModal(object) {
     },
     success: function(data) {
       $('#modal_main').html(data);
+      if(res[1]=="addacti")afficherCalendar();
     }
   });
   // Évite le problème de positionnement
@@ -472,3 +474,26 @@ $(document).on( "change", '[data_editgrp]',function( event ) {
 
 //// ------------------------------------- ////
 
+///// CALENDAR /////
+function afficherCalendar(){
+//<![CDATA[
+  var myCalendar = new jsSimpleDatePickr();
+  myCalendar.CalAdd({
+  'divId': 'calendarMain',
+  'inputFieldId': 'calendarText',
+  'dateMask': 'JJ/MM/AAAA',
+  'dateCentury': 20,
+  'titleMask': 'M AAAA',
+  'navType': '01',
+  'classTable': 'jsCalendar',
+  'classDay': 'day',
+  'classDaySelected': 'selectedDay',
+  'monthLst': ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+  'dayLst': ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+  'hideOnClick': false,
+  'showOnLaunch': true
+  });
+  myCalendar.CalClick
+  //]]>
+}
+/////////////////////////////

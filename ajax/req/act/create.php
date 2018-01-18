@@ -1,5 +1,5 @@
 <?php 
-
+	date_default_timezone_set("Europe/Paris");
 	$name = $_POST['name'];
 	$color = $_POST['color'];
 	$type = $_POST['type'];

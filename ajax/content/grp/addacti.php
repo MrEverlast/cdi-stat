@@ -19,7 +19,11 @@ include_once $_DIR.'/cfg/init.php';
                 ?>
         </select>
     </div>
-
+    <div class ="field">
+    <div id="calendarMain" class="calendarMain"></div>
+    <div id="calendarText"></div>
+    
+    <div>  
 
         <input id="id_activity" value="<?php echo $groupe; ?>" style="display:none;">
 

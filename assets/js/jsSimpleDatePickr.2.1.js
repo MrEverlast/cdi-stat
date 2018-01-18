@@ -46,11 +46,11 @@ function jsSimpleDatePickr(){
         }
         // ajoute les boutons pour la navigation par mois
         if(data.navType != null && data.navType.charAt(1) == 1){
-            var i = me.DomElementInit('input', {'parent': divNav, 'class': 'calendarNavML', 'type': 'button', 'value': 'â€¹'});
+            var i = me.DomElementInit('input', {'parent': divNav, 'class': 'calendarNavML', 'type': 'button', 'value': '<'});
             i.onclick = function(){
                 me.CalMonthNav(id, '-1');
             };
-            i = me.DomElementInit('input', {'parent': divNav, 'class': 'calendarNavMR', 'type': 'button', 'value': 'â€º'});
+            i = me.DomElementInit('input', {'parent': divNav, 'class': 'calendarNavMR', 'type': 'button', 'value': '>'});
             i.onclick = function(){
                 me.CalMonthNav(id, '+1');
             };

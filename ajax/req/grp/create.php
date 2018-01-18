@@ -1,7 +1,7 @@
 <?php 
 	$groupe = $_POST['groupe'];
 	$id_elevs = $_POST['id_elevs'];
-
+	date_default_timezone_set("Europe/Paris");
 	$today = date("Y-m-d H:i:s"); 
 
 	$query = "INSERT INTO `t_groupe` (`name`,`date_create`) 

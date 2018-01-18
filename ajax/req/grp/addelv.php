@@ -1,6 +1,7 @@
 <?php 
     $id_elevs = $_POST['id_elevs'];
-    $id_grp = $_POST['id_grp'];
+	$id_grp = $_POST['id_grp'];
+	date_default_timezone_set("Europe/Paris");
     $today = date("Y-m-d H:i:s"); 
 
     $lengthof_id_elevs = sizeof($id_elevs);
