@@ -8,6 +8,7 @@ if ($type === "create") $title = "Créer";
 if ($type === "edit") $title = "Modifier";
 if ($type === "delete") $title = "Supprimer";
 if ($type === "addelv") $title = "Ajouter des élèves";
+if ($type === "addacti") $title = "Programmer une activité";
 if ($type === "delelv") {
    $title = "Supprimer un élève";
    $buttoncolor ="red";
@@ -27,7 +28,13 @@ $genre="un groupe";
 <?php include_once $_DIR.'/ajax/content/grp/'.$type.'.php'; ?>
 
 <div class="actions">
-  <div class="ui <?php echo $buttoncolor; ?> button" data-submit="<?php echo 'req_grp_'.$type; ?>"><?php echo $title; ?></div>
+  <div class="ui <?php echo $buttoncolor; ?> button" data-submit="<?php echo 'req_grp_'.$type; ?>"><?php 
+  if($type != "Créer" || $type != "Modifier" || $type != "Supprimer" ){
+    echo "Valider";
+  }
+  else{
+    echo $title; 
+}?></div>
 </div>
 
 <?php include_once $_DIR.'/ajax/content/supprimer.php'; ?>

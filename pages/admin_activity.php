@@ -7,10 +7,10 @@
 		<button id="act_delete" class="ui red button myTrigger"><i class="icon delete"></i>Supprimer</button>
 	</div>
 <div class="ui container fluid">
-	<div class="ui grid padded">
+	<div class="ui equal width grid padded">
 		<div class="row">
 			
-			<div class="five wide column">
+			<div class="column">
 				<?php 
 					$i = 0;
 					$type="Seul";
@@ -42,7 +42,7 @@
 					 ?>
 			</div>
 
-			<div class="five wide column">
+			<div class="column">
 				<table class="ui very inverted compact table">
 					<thead>
 						<tr>
@@ -53,7 +53,7 @@
 				</table>
 			</div>
 
-			<div class="five wide column">
+			<div class="column">
 				<table class="ui very inverted compact table">
 					<thead>
 						<tr>

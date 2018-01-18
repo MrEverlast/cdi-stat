@@ -28,7 +28,7 @@ if (in_array($page, $array)) {
       <?php include_once $_DIR.'/content/admin_sidebar.php'; ?>
       <div class="ui bottom attached segment pushable" style="height: calc(100% - 3em);">
         <div class="pusher">
-          <div class="ui basic segment" style="left:260px;">
+          <div class="ui basic segment" style="left:260px;width: calc(100% - 260px);">
             <?php include_once $_DIR.'/pages/admin_'.$page.".php"; ?>
           </div>
         </div>

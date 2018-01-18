@@ -7,9 +7,9 @@
 		  <button id="elv_delete" class="ui red button myTrigger"><i class="remove user icon"></i>Supprimer</button>
 		</div>
 <div class="ui container fluid">
-	<div class="ui grid padded">
+	<div class="ui equal width grid padded">
 		<div class="row">
-				<div class="five wide column">
+				<div class="column">
 					<?php 
 					$reqNiv = $bdd->requeteBDD("SELECT DISTINCT `niveau`,`ordre` FROM `t_division` ORDER BY `ordre` ASC");
 					while ($dataNiv =$reqNiv->fetch()){
@@ -37,7 +37,7 @@
 					<?php }  ?>
 		
 				</div>
-				<div class="five wide column">
+				<div class="column">
 					<table class="ui very inverted compact table">
 					  <thead>
 						<tr>
@@ -50,7 +50,7 @@
 					  </tbody>
 					</table>
 				</div>
-				<div class="five wide column">
+				<div class="column">
 					<table class="ui very inverted compact table">
 					  <thead>
 						<tr>

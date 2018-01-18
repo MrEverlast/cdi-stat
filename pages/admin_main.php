@@ -3,17 +3,16 @@
 </h2>
 <script type="text/javascript">
 $(document).ready(function() {
-    var ctx = document.getElementById("myChart");
-
-    var myBarChart = new Chart(ctx, {
-        type: 'bar',
-        fillColor: "rgba(220,220,220,0.5)",
-        strokeColor: "rgba(220,220,220,0.8)",
-        highlightFill: "rgba(220,220,220,0.75)",
-        highlightStroke: "rgba(220,220,220,1)",
-        data: [20, 10],
-        options: { scales: {} }
-    });
+  var ctx = document.getElementById("myChart");
+  var myBarChart = new Chart(ctx, {
+    type: 'bar',
+    fillColor: "rgba(220,220,220,0.5)",
+    strokeColor: "rgba(220,220,220,0.8)",
+    highlightFill: "rgba(220,220,220,0.75)",
+    highlightStroke: "rgba(220,220,220,1)",
+    data: [20, 10],
+    options: { scales: {} }
+  });
 
 
 
@@ -67,5 +66,5 @@ $(document).ready(function() {
     });
 </script>
 <div class="ui container" style="heigh=400px;">
-    <canvas id="myChart"></canvas>
+  <canvas id="myChart"></canvas>
 </div>
