@@ -20,7 +20,7 @@ $req = $bdd->requeteBDD("SELECT * FROM `t_groupe_join_activity`
 	}	
 ?>
 			<tr>							
-				<td class="collapsing">
+				<td class="collapsing myTrigger">
 				<i class="plus icon"></i> Programmer une activité
 				</td>
 			</tr>

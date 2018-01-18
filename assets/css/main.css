@@ -54,6 +54,14 @@ body > .grid {
   display: none;
 }
 
+/* --- Admin_setting --- */
+.data_grp:hover{
+  cursor: pointer;
+}
+.data_halfgroup:hover{
+  cursor: pointer;
+}
+
 /* Thumbnail */
 .thumbnail{
   width: 80px;
@@ -62,4 +70,9 @@ body > .grid {
   border: 2px solid lightgray;
   border-radius: 3px;
   float: left;
+}
+
+/* cursor */
+.myTrigger:hover{
+  cursor :pointer;
 }
