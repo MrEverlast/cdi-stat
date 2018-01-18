@@ -9,7 +9,7 @@
 <?php #----------------- Menu login end ---------------# ?>
 
 <div class="ui middle aligned center aligned grid">
-  <div class="column">
+  <div class="column inscr">
     <h1 class="ui blue image header">CDI</h1>
     <form class="ui large form aligned left">
       <div class="ui stacked segment">
