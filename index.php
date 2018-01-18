@@ -1,5 +1,6 @@
 <?php 
   session_start();
+  date_default_timezone_set("Europe/Paris");
   $_DIR = $_SERVER['DOCUMENT_ROOT'];
   if (isset($_GET['p'])) $page = $_GET['p']; else $page = "main";
   if (isset($_GET['s'])) $setting = $_GET['s']; else $setting = "";
