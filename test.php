@@ -48,4 +48,6 @@ if ($file = fopen($_DIR."/ajax/tmp/student.csv", "r")) {
   sort($class);
   print_r($class);
 }
+
+phpinfo();
  ?>

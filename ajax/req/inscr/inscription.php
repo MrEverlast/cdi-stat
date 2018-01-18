@@ -1,5 +1,5 @@
 <?php 
-
+date_default_timezone_set("Europe/Paris");
 if((isset($_POST['eleve'])) && (!empty($_POST['eleve'])) && (isset($_POST['activity'])) && 
 	(!empty($_POST['activity'])) && (isset($_POST['duree'])) && (!empty($_POST['duree'])) ){
 
