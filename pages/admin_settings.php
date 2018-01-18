@@ -1,14 +1,12 @@
-<div class="ui basic segment">
-  <h2 class="ui dividing header">
-    <i class="icon setting"></i>Paramètres
-  </h2>
-  <div class="ui segment basic">
-	  <button id="req_year_create" class="ui button primary"><i class="icon add "></i>Ajouter une nouvelle année</button>
-  </div>
-
-	<?php include_once $_DIR.'/ajax/imp.php'; ?>
-
+<h2 class="ui dividing header">
+  <i class="icon setting"></i>Paramètres
+</h2>
+<div class="ui segment basic">
+  <button id="req_year_create" class="ui button primary"><i class="icon add "></i>Ajouter une nouvelle année</button>
 </div>
+
+<?php include_once $_DIR.'/ajax/imp.php'; ?>
+
 <script type="text/javascript">
   $(document).on('click','#req_year_create',function() {
   	goToModal(0);
@@ -108,10 +106,13 @@ $(document).on('keyup', '#bddName', function(e) {
 function importBDD() {
   var bddName = $("#bddName")["0"].value;
   var mContent = $("#modal_year .content");
+  var cancel = $("#cancel");
+  var next = $('#next');
   bddName = bddName.toLowerCase();
   
   if (testBddName(bddName)) {
     mContent.html('<div class="ui active inverted dimmer" style="max-height: calc(100% - 64px);"><div class="ui text loader">Importation de la base de données cela peut prendre plusieurs minutes.</div></div>');
+    next.addClass("disabled");
     $.ajax({
       method: 'POST',
       url: '/ajax/imp/req/submit.php',
@@ -119,7 +120,14 @@ function importBDD() {
         bddName: bddName
       },
       success: function(data) {
-        mContent.html("Success");
+        $.ajax({
+          method: 'POST',
+          url: '/ajax/imp/content/success.php',
+          success: function(data) {
+            mContent.html(data);
+          }
+        });
+        cancel.html("<i class=\"icon delete\"></i>Quitter")
       }
     });
   } else {

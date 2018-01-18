@@ -1,12 +1,11 @@
-<div class="ui basic segment">
 	<h2 class="ui dividing header">
     Gestion d'activité
   </h2>
-			<div class="ui buttons">
-				<button id="act_create" class="ui green button myTrigger"><i class="icon add"></i>Créer</button>
-				<button id="act_edit" class="ui blue button myTrigger"><i class="icon edit"></i>Modifier</button>
-				<button id="act_delete" class="ui red button myTrigger"><i class="icon delete"></i>Supprimer</button>
-			</div>
+	<div class="ui buttons">
+		<button id="act_create" class="ui green button myTrigger"><i class="icon add"></i>Créer</button>
+		<button id="act_edit" class="ui blue button myTrigger"><i class="icon edit"></i>Modifier</button>
+		<button id="act_delete" class="ui red button myTrigger"><i class="icon delete"></i>Supprimer</button>
+	</div>
 <div class="ui container fluid">
 	<div class="ui grid padded">
 		<div class="row">
@@ -67,7 +66,6 @@
 
 		</div>
 	</div>
-</div>
 
 <div id="modal_main" class="ui modal"></div>
 </div>

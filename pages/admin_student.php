@@ -1,4 +1,3 @@
-<div class="ui basic segment">
 	<h2 class="ui dividing header">
     <i class="users icon"></i>Gestion d'élève
   </h2>
@@ -66,8 +65,6 @@
 					</table>
 				</div>
 				</div>
-			</div>
-		
 	</div>
 	
 	<div id="modal_main" class="ui modal">
