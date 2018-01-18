@@ -6,7 +6,9 @@
 
   include_once $_DIR.'/cfg/init.php';
   
-  
+  if (!$bdd) {
+    $page = "settings";
+  }
  ?>
 
 <!DOCTYPE html>

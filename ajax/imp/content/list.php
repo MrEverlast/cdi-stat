@@ -12,7 +12,6 @@ if ($file = fopen($_DIR."/ajax/tmp/student.csv", "r")) {
   fclose($file);
   $class = array_unique($table);
   array_shift($class);
-  array_pop($class);
   sort($class);
   $i = 0;
   foreach ($class as $key => $value) {
