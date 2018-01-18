@@ -22,7 +22,8 @@ function loadModal(object) {
     method: "POST",
     url: "/ajax/"+res[0]+".php",
     data: { 
-      type: res[1]
+      type: res[1],
+      val: res[2]
     },
     success: function(data) {
       $('#modal_main').html(data);

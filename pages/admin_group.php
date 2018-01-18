@@ -1,4 +1,4 @@
-<div class="ui basic segment">
+
 	<h2 class="ui dividing header">
     Gestion de groupe
     </h2>
@@ -32,29 +32,28 @@
 						<?php }  ?>
 					</tbody>
 				</table>	
-				
+						
 				<table class="ui very inverted compact table">
-					<thead>
-						<tr>
-							<th>Demi-Groupes
-							</th>
-							<th>
-								<select data_halfgroup="data_halfgroup" class="ui dropdown floating">
-								 <option value="">Choisir une classe</option>
-								<?php 
-									$reqClass = $bdd->requeteBDD("SELECT DISTINCT * FROM `t_division` ORDER BY `ordre` ASC");
-									while ($dataClass =$reqClass->fetch()){
-								?>
-									  <option value="<?php echo $dataClass['id'] ?>"><?php echo $dataClass['nom'] ?></option>
-								<?php }  ?>
-								</select>
-								
-							</th>
-						</tr>
-					</thead>
-					<tbody id="data_halfgrp">
-					</tbody>
-				</table>	
+							<thead>
+								<tr>
+									<th> Demi-Groupes  
+										<select data_halfgroup="data_halfgroup" class="ui dropdown floating">
+										<option value="">Choisir une classe</option>
+										<?php 
+											$reqClass = $bdd->requeteBDD("SELECT DISTINCT * FROM `t_division` ORDER BY `ordre` ASC");
+											while ($dataClass =$reqClass->fetch()){
+										?>
+												<option value="<?php echo $dataClass['id'] ?>"><?php echo $dataClass['nom'] ?></option>
+										<?php }  ?>
+										</select>
+										
+									</th>
+								</tr>
+							</thead>
+							<tbody id="data_halfgrp">
+							</tbody>
+					</table>	
+
 			</div>		
 			
 			<div class="five wide column">
@@ -86,7 +85,8 @@
 			</div>	
 			
 		</div>
-		</div>
+
+		
 	</div>
 
 	<div id="modal_main" class="ui modal">
