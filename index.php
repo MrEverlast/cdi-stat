@@ -37,6 +37,14 @@ if (in_array($page, $array)) {
      <?php 
     } else { 
     include_once $_DIR.'/pages/inscription.php';
+    ?>
+<style>
+body {
+    background-image: url(./assets/lvire.jpg);
+    background-repeat: no-repeat;
+}
+</style>
+  <?php
   }
    
 }
