@@ -5,7 +5,63 @@ $(document).ready(function() {
     setTimeout(function() {
       $('select.dropdown').dropdown();
       $('.ui.radio.checkbox').checkbox();
-	  $('.ui.floating.dropdown').dropdown();
+      $('.ui.floating.dropdown').dropdown();
+      $('#example1').calendar({
+        ampm: false,
+        text: {
+          days: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+          months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
+          monthsShort: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Jui', 'Jul', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec'],
+          today: 'Aujourd\'hui',
+          now: 'Maintenant',
+          am: 'AM',
+          pm: 'PM'
+        },
+          monthFirst: false,
+          formatter: {
+            date: function (date, settings) {
+              if (!date) return '';
+                if((date.getDate() )<10){
+                  var dayJ = date.getDate();
+                  var day ="0"+dayJ;
+                }else{
+                  var day =date.getDate();
+                }
+
+                if((date.getMonth() + 1)<10){
+                  var monthJ=date.getMonth() + 1;
+                  var month ="0"+monthJ;
+                }else{
+                  var month =date.getMonth() + 1;
+                }
+              var year = date.getFullYear();
+              return day + '-' + month + '-' + year;
+            },
+
+            time: function (date,settings, forCalendar){
+              if (!date) {
+                return '';
+              }
+                if((date.getHours())<10){
+                  var hourJ = date.getHours();
+                  var hour ="0"+hourJ;
+                }else{
+                  var hour =date.getHours();
+                }
+
+              var minute = date.getMinutes();
+              var ampm = '';
+              if (settings.ampm) {
+                ampm = ' ' + (hour < 12 ? settings.text.am : settings.text.pm);
+                hour = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
+              }
+            return hour + ':' + (minute < 10 ? '0' : '') + minute + ampm;
+              
+
+            }
+          }
+        });
+
     },150);
 		
 	});
@@ -475,25 +531,6 @@ $(document).on( "change", '[data_editgrp]',function( event ) {
 //// ------------------------------------- ////
 
 ///// CALENDAR /////
-function afficherCalendar(){
-//<![CDATA[
-  var myCalendar = new jsSimpleDatePickr();
-  myCalendar.CalAdd({
-  'divId': 'calendarMain',
-  'inputFieldId': 'calendarText',
-  'dateMask': 'JJ/MM/AAAA',
-  'dateCentury': 20,
-  'titleMask': 'M AAAA',
-  'navType': '01',
-  'classTable': 'jsCalendar',
-  'classDay': 'day',
-  'classDaySelected': 'selectedDay',
-  'monthLst': ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-  'dayLst': ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-  'hideOnClick': false,
-  'showOnLaunch': true
-  });
-  myCalendar.CalClick
-  //]]>
-}
+$('#example1').calendar();
+
 /////////////////////////////

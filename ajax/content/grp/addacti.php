@@ -7,7 +7,7 @@ include_once $_DIR.'/cfg/init.php';
     <div class="field">
         <label>Activité</label>
         <select id="id_elevs" class="ui fluid search dropdown" >
-            <option value="">Elèves</option>
+            <option value="">Activité</option>
             <?php 
                 $req = $bdd->requeteBDD("SELECT * FROM `t_activity` WHERE `type` = 1"); 
                 
@@ -20,8 +20,13 @@ include_once $_DIR.'/cfg/init.php';
         </select>
     </div>
     <div class ="field">
-    <div id="calendarMain" class="calendarMain"></div>
-    <div id="calendarText"></div>
+        <div class="ui calendar" id="example1">
+            <div class="ui input left icon">
+                <i class="calendar icon"></i>
+                <input type="text" placeholder="Date/Time" readonly="true">
+            </div>
+        </div>
+    </div>
     
     <div>  
 

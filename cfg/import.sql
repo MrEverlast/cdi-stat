@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 11 Janvier 2018 à 09:46
+-- Généré le :  Lun 22 Janvier 2018 à 15:16
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `bts`
+-- Base de données :  `bts_cdi_2018`
 --
 
 -- --------------------------------------------------------
@@ -118,7 +118,8 @@ CREATE TABLE `t_groupe_join_activity` (
   `id` int(16) NOT NULL,
   `id_activity` int(16) NOT NULL,
   `id_groupe` int(16) NOT NULL,
-  `date_prog` datetime NOT NULL COMMENT 'date_programmé'
+  `date_prog` datetime NOT NULL COMMENT 'date_programmé',
+  `duration` int(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -131,6 +132,13 @@ CREATE TABLE `t_password` (
   `id` int(11) NOT NULL,
   `password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `t_password`
+--
+
+INSERT INTO `t_password` (`id`, `password`) VALUES
+(6, 'Fq$1579s6$V8');
 
 -- --------------------------------------------------------
 
@@ -226,7 +234,7 @@ ALTER TABLE `t_registration`
 -- AUTO_INCREMENT pour la table `t_activity`
 --
 ALTER TABLE `t_activity`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `t_cdi_horaire`
 --
@@ -236,22 +244,22 @@ ALTER TABLE `t_cdi_horaire`
 -- AUTO_INCREMENT pour la table `t_division`
 --
 ALTER TABLE `t_division`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 --
 -- AUTO_INCREMENT pour la table `t_eleve`
 --
 ALTER TABLE `t_eleve`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1281;
 --
 -- AUTO_INCREMENT pour la table `t_eleve_join_groupe`
 --
 ALTER TABLE `t_eleve_join_groupe`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT pour la table `t_groupe`
 --
 ALTER TABLE `t_groupe`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 --
 -- AUTO_INCREMENT pour la table `t_groupe_join_activity`
 --
@@ -261,7 +269,7 @@ ALTER TABLE `t_groupe_join_activity`
 -- AUTO_INCREMENT pour la table `t_password`
 --
 ALTER TABLE `t_password`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT pour la table `t_registration`
 --
