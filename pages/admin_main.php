@@ -16,27 +16,33 @@
       <table class="ui very compact table">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Status</th>
-            <th>Another Status</th>
-            <th>Notes</th>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Heure d'arrivé</th>
+            <th>Temps</th>
+            <th>Activité</th>
           </tr>
         </thead>
         <tbody>
           <?php 
             for ($i=1; $i <= 4; $i++) { 
               
-              $req = "SELECT *, NOW(), CURRENT_TIME 
+              $req = "SELECT A.date_create, A.duration, B.last_name, B.first_name, C.name
                       FROM `t_registration` AS A
-                      INNER JOIN `t_eleve` AS B ON A.id_eleve = B.id
-                      WHERE NOW() < ADDDATE(`date_create`, INTERVAL $i HOUR) AND `duration` = $i";
+                      INNER JOIN `t_eleve` AS B ON A.`id_eleve` = B.`id`
+                      INNER JOIN `t_activity` AS C ON A.`id_activity` = C.`id`
+                      WHERE NOW() < ADDDATE(A.`date_create`, INTERVAL $i HOUR) AND A.`duration` = $i";
+
               $statement = $bdd->requeteBDD($req);
               while ($data = $statement->fetch()) {
+                $date = new DateTime($data['date_create']);
+                $date = $date->getTimestamp();
                 echo "<tr>";
                 echo "<td>".$data['last_name']."</td>";
                 echo "<td>".$data['first_name']."</td>";
-                echo "<td>".$data['date_create']."</td>";
-                echo "<td>".$data['duration']."</td>";
+                echo "<td>".date("H:i:s", $date)."</td>";
+                echo "<td>".$data['duration']."h</td>";
+                echo "<td>".$data['name']."</td>";
                 echo "<tr>";
               }
             }
@@ -51,122 +57,56 @@
 </div>
 
 <script type="text/javascript">
-var config = {
-  type: 'pie',
-  data: {
-    datasets: [{
-      data: [
-        0,
-        12,
-        122,
-        51
-      ],
-      backgroundColor: [
-        "#EBEB00A0",
-        "#00D700A0",
-        "#D70000A0",
-        "#0000D7A0",
-      ],
-      hoverBackgroundColor: [
-        "#EBEB00B0",
-        "#00D700B0",
-        "#D70000B0",
-        "#0000D7B0",
-      ],
-      label: 'Dataset 1'
-    }],
-    labels: [
-      "Seconde",
-      "Premi\u00e8re",
-      "Terminale",
-      "BTS"
-    ]
-  },
-  options: {
-    responsive: true
+var nbEleve = [];
+ $.ajax({
+  method: 'POST',
+  url: '/ajax/main/req/pie.php',
+  success: function(obj) {
+    obj = JSON.parse(obj);
+    for (elem in obj) {
+       nbEleve.push(obj[elem]);
+    }
+    console.log(nbEleve);
+    config = pie(nbEleve);
+
+    var ctx = $("#myChart");
+    window.myPie = new Chart(ctx, config);
   }
-};
+});
+    
+function pie(nbEleve) {
+  var test = {
+    type: 'pie',
+    data: {
+      datasets: [{
+        data: nbEleve,
+        backgroundColor: [
+          "#EBEB00A0",
+          "#00D700A0",
+          "#D70000A0",
+          "#0000D7A0",
+        ],
+        hoverBackgroundColor: [
+          "#EBEB00B0",
+          "#00D700B0",
+          "#D70000B0",
+          "#0000D7B0",
+        ],
+        label: 'Dataset 1'
+      }],
+      labels: [
+        "Seconde",
+        "Premi\u00e8re",
+        "Terminale",
+        "BTS"
+      ]
+    },
+    options: {
+      responsive: true
+    }
+  };
+  return test;
+  
+}
 
-window.onload = function() {
-  var ctx = $("#myChart");
-  window.myPie = new Chart(ctx, config);
-};
-
-
-
-
-
-
-// $(document).ready(function() {
-//   var ctx = document.getElementById("myChart");
-//   var myBarChart = new Chart(ctx, {
-//     type: 'bar',
-//     data: {
-
-//       labels: ['Italy', 'UK', 'USA', 'Germany', 'France', 'Japan'],
-//       datasets: [
-//         {
-//           label: '2010 customers #',
-//           fillColor: '#382765',
-//           data: [2500, 1902, 1041, 610, 1245, 952]
-//         },
-//         {
-//           label: '2014 customers #',
-//           fillColor: '#7BC225',
-//           data: [3104, 1689, 1318, 589, 1199, 1436]
-//         }
-//       ]
-//     }
-//   });
-
-
-
-
-
-//   var myChart = new Chart(ctx, {
-//       type: 'bar',
-//       data: {
-//           labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-//           datasets: [{
-//               label: '# of Votes',
-//               data: [10,12,115,30,25],
-//               backgroundColor: [
-//                   'rgba(255, 99, 132, 0.2)',
-//                   'rgba(54, 162, 235, 0.2)',
-//                   'rgba(255, 206, 86, 0.2)',
-//                   'rgba(75, 192, 192, 0.2)',
-//                   'rgba(153, 102, 255, 0.2)',
-//                   'rgba(255, 159, 64, 0.2)'
-//               ],
-//               borderColor: [
-//                   'rgba(255,99,132,1)',
-//                   'rgba(54, 162, 235, 1)',
-//                   'rgba(255, 206, 86, 1)',
-//                   'rgba(75, 192, 192, 1)',
-//                   'rgba(153, 102, 255, 1)',
-//                   'rgba(255, 159, 64, 1)'
-//               ],
-//               borderWidth: 1
-//           },{
-//             fillColor: "rgba(220,220,220,0.5)",
-//             strokeColor: "rgba(220,220,220,0.8)",
-//             highlightFill: "rgba(220,220,220,0.75)",
-//             highlightStroke: "rgba(220,220,220,1)",
-//             yAxesGroup: "main",
-//             data: [10,14,50,15,60],
-//         }]
-//       },
-//       options: {
-//            scales: {
-//             xAxes: [{
-//                 stacked: true
-//             }],
-//             yAxes: [{
-//                 stacked: true
-//             }]
-//         }
-//       }
-//   });
-
-//    });
 </script>
