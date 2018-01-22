@@ -17,7 +17,7 @@
         <thead>
           <tr>
             <th>Nom</th>
-            <th>Prenom</th>
+            <th>Prénom</th>
             <th>Classe</th>
             <th>Heure d'arrivé</th>
             <th>Temps</th>
