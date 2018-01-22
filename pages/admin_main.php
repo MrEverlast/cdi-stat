@@ -18,35 +18,14 @@
           <tr>
             <th>Nom</th>
             <th>Prenom</th>
+            <th>Classe</th>
             <th>Heure d'arrivé</th>
             <th>Temps</th>
             <th>Activité</th>
           </tr>
         </thead>
-        <tbody>
-          <?php 
-            for ($i=1; $i <= 4; $i++) { 
-              
-              $req = "SELECT A.date_create, A.duration, B.last_name, B.first_name, C.name
-                      FROM `t_registration` AS A
-                      INNER JOIN `t_eleve` AS B ON A.`id_eleve` = B.`id`
-                      INNER JOIN `t_activity` AS C ON A.`id_activity` = C.`id`
-                      WHERE NOW() < ADDDATE(A.`date_create`, INTERVAL $i HOUR) AND A.`duration` = $i";
+        <tbody id="tList">
 
-              $statement = $bdd->requeteBDD($req);
-              while ($data = $statement->fetch()) {
-                $date = new DateTime($data['date_create']);
-                $date = $date->getTimestamp();
-                echo "<tr>";
-                echo "<td>".$data['last_name']."</td>";
-                echo "<td>".$data['first_name']."</td>";
-                echo "<td>".date("H:i:s", $date)."</td>";
-                echo "<td>".$data['duration']."h</td>";
-                echo "<td>".$data['name']."</td>";
-                echo "<tr>";
-              }
-            }
-          ?>
         </tbody>
       </table>
     </div>
@@ -57,25 +36,50 @@
 </div>
 
 <script type="text/javascript">
-var nbEleve = [];
- $.ajax({
-  method: 'POST',
-  url: '/ajax/main/req/pie.php',
-  success: function(obj) {
-    obj = JSON.parse(obj);
-    for (elem in obj) {
-       nbEleve.push(obj[elem]);
-    }
-    console.log(nbEleve);
-    config = pie(nbEleve);
 
-    var ctx = $("#myChart");
-    window.myPie = new Chart(ctx, config);
-  }
+setInterval(function() {
+  loadPie();
+  loadList();
+},300000);
+
+$(document).ready(function() {
+  loadPie();
+  loadList();
 });
+
+function loadList() {
+  var list = $("#tList");
+  $.ajax({
+    method: 'POST',
+    url: '/ajax/main/req/listEleve.php',
+    success: function(data) {
+      list.html(data);
+    }
+  });
+}
+
+function loadPie() {
+  var nbEleve = [];
+  if (window.myPie)
+    window.myPie.destroy(); 
+  $.ajax({
+    method: 'POST',
+    url: '/ajax/main/req/pie.php',
+    success: function(obj) {
+      obj = JSON.parse(obj);
+      for (elem in obj) {
+        nbEleve.push(obj[elem]);
+      }
+      config = pie(nbEleve);
+
+      var ctx = $("#myChart");
+      window.myPie = new Chart(ctx, config);
+    }
+  });
+}
     
 function pie(nbEleve) {
-  var test = {
+  var config = {
     type: 'pie',
     data: {
       datasets: [{
@@ -105,7 +109,7 @@ function pie(nbEleve) {
       responsive: true
     }
   };
-  return test;
+  return config;
   
 }
 
