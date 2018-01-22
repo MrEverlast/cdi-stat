@@ -4,7 +4,7 @@
     CDI
   </a>
   <div class="right menu">
-	  <a class="item">
+	  <a id="print" class="item">
 	    Imprimer
 	  </a>
 	  <a href="/settings" class="item">
