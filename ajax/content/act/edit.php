@@ -6,7 +6,7 @@ include_once $_DIR.'/cfg/init.php';
 	<div class="ui form">
   <div class="field">
     <label>Activité</label>
-    <select id="id_activity" class="ui search dropdown">
+    <select id="id_activity" data_acti="req_act_edit" class="ui search dropdown">
       <option value="">Sélectionner une activité</option>
       <?php 
         $req = $bdd->requeteBDD("SELECT * FROM `t_activity` ORDER BY `type` DESC, `date_create` DESC"); 
@@ -32,14 +32,16 @@ include_once $_DIR.'/cfg/init.php';
         <div class="grouped fields">
           <label for="fruit">Type d'activité:</label>
           <div class="field">
-            <div class="ui radio checkbox">
+            <div id="checkbox_groupe" class="ui radio checkbox">
+
               <input id="checkbox_grp" name="type" type="radio" checked="" tabindex="0" class="hidden">
+
               <label>Groupe</label>
             </div>
           </div>
           <div class="field">
-            <div class="ui radio checkbox">
-              <input id="checkbox_seule" name="type" type="radio" tabindex="0" class="hidden">
+            <div id="checkbox_seule" class="ui radio checkbox">
+              <input id="checkbox_seul" name="type" type="radio" checked="" tabindex="0" class="hidden">
               <label>Seule</label>
             </div>
           </div>

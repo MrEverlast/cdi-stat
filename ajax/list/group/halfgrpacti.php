@@ -1,9 +1,15 @@
 <?php 
 $choix = $_POST['choix'];
 $opatity=40;
+date_default_timezone_set("Europe/Paris");
+$str_date=date("Y-m-d H:i:s");
 
-$req = $bdd->requeteBDD("SELECT A.id,A.id_activity,A.date_prog,B.name,B.color FROM `t_groupe_join_activity` A
-                        INNER JOIN `t_activity` B ON `id_activity`=B.id WHERE `id_groupe`='$choix' ORDER BY A.date_prog ASC");
+$req = $bdd->requeteBDD("SELECT A.id,A.id_activity,A.date_prog,B.name,B.color 
+						FROM `t_groupe_join_activity` A
+                        INNER JOIN `t_activity` B ON A.id_activity=B.id 
+						WHERE A.id_groupe='$choix' 
+						AND A.date_prog > '$str_date'
+						ORDER BY A.date_prog ASC");
 						
 	while($data=$req->fetch()){
 

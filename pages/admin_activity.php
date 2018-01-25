@@ -28,8 +28,8 @@
 							<?php 
 								while($data = $req->fetch()) { 
 								?>
-						    <tr style="background: <?php echo $data['color'] . $opatity; ?>;">
-						      <td colspan=2 ><?php echo $data['name']; ?></td>
+						    <tr class="data_act" style="background: <?= $data['color'] . $opatity ?>;">
+						      <td id="<?= $data['id']?> " colspan=2 ><?= $data['name'] ?></td>
 						     
 						    </tr>
 							<?php } ?>
@@ -42,25 +42,15 @@
 					 ?>
 			</div>
 
-			<div class="column">
-				<table class="ui very inverted compact table">
-					<thead>
-						<tr>
-							<th>Description</th>
-						</tr>
-					</thead>
-					<tbody id="data_grp"></tbody>
-				</table>
-			</div>
 
 			<div class="column">
 				<table class="ui very inverted compact table">
 					<thead>
 						<tr>
-							<th>Grp</th>
+							<th>Groupes</th>
 						</tr>
 					</thead>
-					<tbody id="data_grp"></tbody>
+					<tbody id="tbody_data_grp"></tbody>
 				</table>
 			</div>
 

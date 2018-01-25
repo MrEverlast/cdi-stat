@@ -182,15 +182,15 @@ function query(targetDir,name,color,type,idActivity,id_elev,id_grp,groupe,first_
       date_prog: date_prog,
       duree: duree,
       demi_grp: demi_grp
-    },
+    }/*,
     success: function(data){
      alert(demi_grp);
      alert(data);
-    }
+    }*/
   });
-  /*setTimeout(function(){
+  setTimeout(function(){
 	window.location.reload();  
-  },150);*/
+  },150);
   
 }
 
@@ -566,6 +566,70 @@ $(document).on( "change", '[data_editgrp]',function( event ) {
 });
 
 
+
+//// ------------------------------------- ////
+
+//////////// Activité //////////////
+
+$(document).on("change", '[data_acti]',function(event){
+  var id_acti= $(this).val();
+  var targetDir= $(this).attr('data_acti');
+  
+
+  $.ajax({
+    method: "POST",
+    url: "/ajax/query.php",
+    data: { 
+      targetDir: targetDir,
+      id_acti: id_acti
+
+    },
+	success: function(data){
+    
+    $res = data.split(" ")
+    
+    $('#name').val($res[0]);
+    $('#color').attr("value",$res[1]);
+    loadColor();
+    if($res[2]=="1"){
+      $('#checkbox_seul').removeAttr('checked');
+      $('#checkbox_grp').attr('checked','checked');
+      
+    } else {
+      $('#checkbox_grp').removeAttr('checked');
+      $('#checkbox_seul').attr('checked','checked');
+  
+    }
+	}
+  });
+  
+
+});
+
+$(document).on("click", '.data_act',function( event ){
+
+  $(".data_act").removeClass("myActive");
+	$(this).addClass("myActive");
+
+  var val = $( this ).children().attr('id');
+	
+	
+	var targetDir = "list_act_listgroup";
+  $.ajax({
+    method: "POST",
+    url: "/ajax/query.php",
+    data: { 
+      targetDir: targetDir,
+      val: val
+
+    },
+	success: function(data){
+
+		$("#tbody_data_grp").html(data);
+
+	}
+  });
+});
 
 //// ------------------------------------- ////
 

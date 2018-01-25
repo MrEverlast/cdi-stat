@@ -38,6 +38,11 @@ body > .grid {
   box-shadow: 0 0 5px 0 #888888;
   transition: 0.2s;
 }
+/* --- Admin_activity --- */
+.data_act:hover {
+  cursor: pointer;
+}
+
 /* --- Admin_setting --- */
 .upload-area:hover{
   cursor: pointer;
