@@ -6,7 +6,7 @@ $(document).ready(function() {
       $('select.dropdown').dropdown();
       $('.ui.radio.checkbox').checkbox();
       $('.ui.floating.dropdown').dropdown();
-      $('#example1').calendar({
+      $('#calendar1').calendar({
         ampm: false,
         text: {
           days: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
@@ -133,6 +133,8 @@ $(document).on('click','[data-submit]',function() {
   var groupe =$('#grp_name').val();
   var id_grp=$('#id_grp').val();
 
+  var date_prog=$('#date_prog').val();
+  var duree=$('#duree').val();
   
   if (color != undefined) {
     color = rgb2hex(color);
@@ -148,13 +150,13 @@ $(document).on('click','[data-submit]',function() {
     }).modal('show');
   } else {
 
-    query(targetDir,name,color,type,idActivity,id_elev,id_grp,groupe,first_name,last_name,post_code,city,id_classe,date_born,classe,id_elevs);
+    query(targetDir,name,color,type,idActivity,id_elev,id_grp,groupe,first_name,last_name,post_code,city,id_classe,date_born,classe,id_elevs,date_prog,duree);
 
   } 
 
 });
 
-function query(targetDir,name,color,type,idActivity,id_elev,id_grp,groupe,first_name,last_name,post_code,city,id_classe,date_born,classe,id_elevs) {
+function query(targetDir,name,color,type,idActivity,id_elev,id_grp,groupe,first_name,last_name,post_code,city,id_classe,date_born,classe,id_elevs,date_prog,duree) {
 	  
   $.ajax({
     method: "POST",
@@ -175,8 +177,14 @@ function query(targetDir,name,color,type,idActivity,id_elev,id_grp,groupe,first_
       id_classe: id_classe,
       date_born: date_born,
       classe: classe,
-      id_elevs: id_elevs
-    }
+      id_elevs: id_elevs,
+      date_prog: date_prog,
+      duree: duree
+    }/*,
+    success: function(data){
+
+     alert(data);
+    }*/
   });
   setTimeout(function(){
 	window.location.reload();  
@@ -530,7 +538,3 @@ $(document).on( "change", '[data_editgrp]',function( event ) {
 
 //// ------------------------------------- ////
 
-///// CALENDAR /////
-$('#example1').calendar();
-
-/////////////////////////////

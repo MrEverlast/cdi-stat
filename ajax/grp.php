@@ -13,8 +13,14 @@ if ($type === "delelv") {
    $title = "Supprimer un élève";
    $buttoncolor ="red";
 } else $buttoncolor="primary";
+if ($type === "delacti") {
+  $title = "Supprimer une activité";
+  $buttoncolor ="red";
+} else $buttoncolor="primary";
+
 $genre="un groupe";
 ?>
+
 <i class="close icon"></i>
 <div class="header">
   <?php if($type != "Créer" || $type != "Modifier" || $type != "Supprimer" ){
