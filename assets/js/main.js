@@ -128,6 +128,7 @@ $(document).on('click','[data-submit]',function() {
   var id_elev = $('#id_elev').val();
   var date_born = $('#date_born').val();
   var classe = $('#classe').val();
+  var demi_grp = $('#demi_grp').val();
 
   var id_elevs = $('#id_elevs').val();
   var groupe =$('#grp_name').val();
@@ -150,13 +151,13 @@ $(document).on('click','[data-submit]',function() {
     }).modal('show');
   } else {
 
-    query(targetDir,name,color,type,idActivity,id_elev,id_grp,groupe,first_name,last_name,post_code,city,id_classe,date_born,classe,id_elevs,date_prog,duree);
+    query(targetDir,name,color,type,idActivity,id_elev,id_grp,groupe,first_name,last_name,post_code,city,id_classe,date_born,classe,id_elevs,date_prog,duree,demi_grp);
 
   } 
 
 });
 
-function query(targetDir,name,color,type,idActivity,id_elev,id_grp,groupe,first_name,last_name,post_code,city,id_classe,date_born,classe,id_elevs,date_prog,duree) {
+function query(targetDir,name,color,type,idActivity,id_elev,id_grp,groupe,first_name,last_name,post_code,city,id_classe,date_born,classe,id_elevs,date_prog,duree,demi_grp) {
 	  
   $.ajax({
     method: "POST",
@@ -179,16 +180,17 @@ function query(targetDir,name,color,type,idActivity,id_elev,id_grp,groupe,first_
       classe: classe,
       id_elevs: id_elevs,
       date_prog: date_prog,
-      duree: duree
-    }/*,
+      duree: duree,
+      demi_grp: demi_grp
+    },
     success: function(data){
-
+     alert(demi_grp);
      alert(data);
-    }*/
+    }
   });
-  setTimeout(function(){
+  /*setTimeout(function(){
 	window.location.reload();  
-  },150);
+  },150);*/
   
 }
 
@@ -299,7 +301,8 @@ $(document).on("change",'[data-selected]',function() {
 					$("#classe").val(res[4]);
 					$("#date_born").val(res[5]);
 					$("#city").val(res[2]);
-					$("#post_code").val(res[3]);
+          $("#post_code").val(res[3]);
+          $("#demi_grp").val(res[6]);
 					var class_deroulante = $(".class_deroulante");
 					for(var i=0; i<class_deroulante.length;i++)
 					{
@@ -311,6 +314,21 @@ $(document).on("change",'[data-selected]',function() {
 						else {
 							var choice = class_deroulante[i];
 							choice.className = 'item class_deroulante';
+							}
+							
+          }
+          
+          var demigrp_deroulante = $(".demigrp_deroulante");
+					for(var i=0; i<demigrp_deroulante.length;i++)
+					{
+					
+						if (demigrp_deroulante[i].innerText == res[6]){
+							var choice = demigrp_deroulante[i];
+							choice.className = 'item demigrp_deroulante active selected';
+						}
+						else {
+							var choice = demigrp_deroulante[i];
+							choice.className = 'item demigrp_deroulante';
 							}
 							
 					}
@@ -327,6 +345,19 @@ $(document).on("click",'[class-selected]',function() {
 		var choice = class_deroulante[i];
 		if (choice.className == "item class_deroulante active selected"){
 			$("#classe").val(choice.innerText);
+		}
+	}
+
+});
+
+$(document).on("click",'[demigrp-selected]',function() {
+	
+	var demigrp_deroulante = $(".demigrp_deroulante");
+	for(var i=0; i<demigrp_deroulante.length;i++)
+	{		
+		var choice = demigrp_deroulante[i];
+		if (choice.className == "item demigrp_deroulante active selected"){
+			$("#demi_grp").val(choice.innerText);
 		}
 	}
 

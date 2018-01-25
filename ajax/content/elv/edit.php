@@ -24,26 +24,40 @@ include_once $_DIR.'/cfg/init.php';
 		 <label>Classe</label>
 		    
 				<div class="ui input">
-				<input id="classe" readonly="" type="text">
+					<input id="classe" readonly="" type="text">
 
-				  <div class="ui floating dropdown icon button">
-				  <i class="dropdown icon"></i>
-					<div  class="menu class_name" class-selected="selected-class">
-					<?php 
-					$req = $bdd->requeteBDD("SELECT * FROM `t_division`  
-											 ORDER BY `t_division`.`ordre` ASC, `t_division`.`nom` ASC"); 
-					
-					  while($data = $req->fetch()) { 
-					  
-					  ?>
-						<div class="item class_deroulante"><?php echo $data['nom']; ?></div>
-					  <?php
-					  }
-					  ?> 
-					</div>
+						<div class="ui floating dropdown icon button">
+						<i class="dropdown icon"></i>
+						<div  class="menu class_name" class-selected="selected-class">
+						<?php 
+						$req = $bdd->requeteBDD("SELECT * FROM `t_division`  
+												ORDER BY `t_division`.`ordre` ASC, `t_division`.`nom` ASC"); 
+						
+							while($data = $req->fetch()) { 
+							
+							?>
+							<div class="item class_deroulante"><?php echo $data['nom']; ?></div>
+							<?php
+							}
+							?> 
+						</div>
 				  </div>
 				</div>
 			
+		 </div>
+		 <div class="field">
+		 <label>Demi-groupe</label>
+					<div class="ui input">
+					<input id="demi_grp" readonly="" type="text">
+
+				  <div class="ui floating dropdown icon button">
+						<i class="dropdown icon"></i>
+							<div class="menu demigrp_name" demigrp-selected="selected-demi_grp">
+								<div class="item demigrp_deroulante">Groupe 1</div>
+								<div class="item demigrp_deroulante">Groupe 2</div>
+							</div>
+						</div>
+					</div>
 		 </div>
 		</div>
 	  <div class="two fields">
