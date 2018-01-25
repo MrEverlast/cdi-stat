@@ -43,7 +43,7 @@
 						<option value="">Selectionnez l'activité..</option>
 						<!--          // BASE //           -->
 						<?php 
-						$sth = $bdd->requeteBDD("SELECT `id`,`name` FROM `t_activity` ");
+						$sth = $bdd->requeteBDD("SELECT `id`,`name` FROM `t_activity` WHERE `type` = 0");
 						while($result = $sth->fetch())
 						echo "<option value=".$result[0].">".$result[1]."</option> "; 
 						$sth = null;
