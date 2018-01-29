@@ -1,5 +1,5 @@
 <h2 class="ui dividing header">
-  <i class="icon bar chart"></i>Main
+  <i class="icon bar chart"></i>Accueil
 </h2>
 
 <div class="ui padded grid">
