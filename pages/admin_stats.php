@@ -4,7 +4,7 @@
 <div class="ui container">
   <canvas id="myChart"></canvas>
 </div>
-
+<input id="stat" type="hidden" value="year,-1">
 <script>
 
 $.ajax({
@@ -16,8 +16,9 @@ $.ajax({
     for (elem in obj) {
       nbEleve.push(obj[elem]);
     }
+    var date = getSchoolDate();
     barChartData = loadConfigYear(nbEleve);
-    loadChart(barChartData);
+    loadChart(barChartData, 'Année '+date);
   }
 });
 
@@ -81,9 +82,9 @@ function getDiff(nb1, nb2) {
   return (nb2 - nb1) + 1;
 }
 
-function loadChart(barChartData) {
+
+function loadChart(barChartData, title) {
     var ctx = $("#myChart");
-    var date = getSchoolDate();
     if (window.myBar)
       window.myBar.destroy(); 
     window.myBar = new Chart(ctx, {
@@ -96,7 +97,7 @@ function loadChart(barChartData) {
             },
             title: {
                 display: true,
-                text: 'Année ' + date,
+                text: title
             },
             scales: {
                 yAxes: [{
@@ -109,37 +110,114 @@ function loadChart(barChartData) {
                     }
                 }]
             },
-            onClick: handleClick
+            onClick: handleClick,
+            onHover: mouseHover
         }
     });
-
-    
 };
+
+function mouseHover(evt) {
+  var activeElement = window.myBar.getElementAtEvent(evt);
+  if (activeElement[0])
+    document.body.style.cursor = 'pointer';
+  else
+    document.body.style.cursor = 'default';
+}
 
 function handleClick(evt) {
   var activeElement = window.myBar.getElementAtEvent(evt);
   if (activeElement[0]) {
+    var stat = $('#stat');
+    var tabStat = stat.val().split(',');
+    var mode = tabStat[0];
+    var month = tabStat[1];
+    var week = tabStat[2];
+    console.log(week);
+    var tabYear = ["Septembre", "Octobre", "Novembre", "Décembre", "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet"];
+    var iMonth = 0;
     var i = 0;
-    var month = activeElement[0]._index;
-    month++;
-    while (i < 8) {
-      if (month >= 12)
-        month = 0;
+    if (month == -1) {
+      month = activeElement[0]._index;
+      iMonth = month;
       month++;
-      i++;
+      while (i < 8) {
+        if (month >= 12)
+          month = 0;
+        month++;
+        i++;
+      }
     }
     if (month > 8) year = getSchoolDate() -1;
     else year = getSchoolDate();
 
     date = moment(year + "-" + month + "-01", "YYYY-MM-DD"); // 2000-12-01
 
-    console.log(date.isoWeekday());
+    //console.log(date.isoWeekday());
 
-    weeks = getWeeks(date.format('YYYY-MM-DD'));
+    switch (mode) {
+      case 'year':
+        weeks = getWeeks(date.format('YYYY-MM-DD'));
+        data = dataMonth(month, weeks);
+        barChartData = loadConfigMonth(data, weeks);
+        loadChart(barChartData, tabYear[iMonth] + ' ' + year);
+        stat.val('month,' + month + ',' + weeks['first_week']);
+        break;
+        
+      case 'month':
+        data = dataWeek(week);
+        barChartData = loadConfigWeek(data, days);
+        stat.val('week,' + month + ',' + week['first_week']);
+        break;
+    
+      default:
 
-    barChartData = loadConfigMonth([10,42,12,32], weeks);
-    loadChart(barChartData);
+        break;
+    }
   }
+}
+
+function dataMonth(month, weeks) {
+  var weekDiff = getDiff(weeks["first_week"], weeks['last_week']);
+  var weekFirst = weeks["first_week"];
+  var nbEleve = [];
+  $.ajax({
+    async: false,
+    method: 'POST',
+    url: '/ajax/stats/req/elv_inscrit_month.php',
+    data: {
+      weekFirst: weekFirst,
+      weekDiff: weekDiff,
+      month: month
+    },
+    success: function(obj) {
+      obj = JSON.parse(obj);
+      for (elem in obj) {
+        nbEleve.push(obj[elem]);
+      }
+    }
+  });
+  console.log(nbEleve);
+  return nbEleve;
+}
+
+function dataDay(week) {
+  var nbEleve = [];
+  $.ajax({
+    async: false,
+    method: 'POST',
+    url: '/ajax/stats/req/elv_inscrit_week.php',
+    data: {
+      week: week
+    },
+    success: function(obj) {
+      obj = JSON.parse(obj);
+      for (elem in obj) {
+        nbEleve.push(obj[elem]);
+      }
+    }
+  });
+  console.log(nbEleve);
+  return nbEleve;
 }
 
 // ---------------- Year -------------------
@@ -165,7 +243,7 @@ function loadConfigYear(nbEleve) {
 function loadConfigMonth(nbEleve, weeks) {
   var color = Chart.helpers.color;
   var labels = [];
-  for (var i = 0; i < getDiff(weeks["first_week"], weeks['last_week']); i++) {
+  for (var i = 0; i < (getDiff(weeks["first_week"], weeks['last_week'])) ; i++) {
     labels[i] = "Semaine " + (parseInt(weeks["first_week"]) + i + 1);
   }
   var config = {
@@ -184,5 +262,18 @@ function loadConfigMonth(nbEleve, weeks) {
 
 
 // ---------------- Week -------------------
+function GoInFullscreen(element) {
+	if(element.requestFullscreen)
+		element.requestFullscreen();
+	else if(element.mozRequestFullScreen)
+		element.mozRequestFullScreen();
+	else if(element.webkitRequestFullscreen)
+		element.webkitRequestFullscreen();
+	else if(element.msRequestFullscreen)
+		element.msRequestFullscreen();
+}
 
+$(document).on('click','div',() => {
+  GoInFullscreen($('html').get(0))
+})
 </script>

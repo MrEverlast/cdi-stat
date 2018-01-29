@@ -3,9 +3,10 @@
     <i class="home icon"></i>
     Accueil
   </a>
-  <b class="item">
-    STATS
-  </b>
+    <a class="item" href="/stats">
+      <i class="chart bar icon"></i>
+      STATS
+    </a>
   <div class="item">
     <div class="header">GESTIONS</div>
       <a href="/student" class="item">Élèves</a>
