@@ -18,7 +18,7 @@
 <body>
 
 <?php 
-$array = array("inscription","main","activity","student","settings","group");
+$array = array("inscription","main","activity","student","settings","group","stats");
 if (in_array($page, $array)) {
   if (isset($_SESSION['connected'])) {
   
@@ -35,9 +35,12 @@ if (in_array($page, $array)) {
         </div>
         </div>
      <?php 
-    } else { 
-    include_once $_DIR.'/pages/inscription.php';
-    ?>
+    } else {
+      if ($page == "settings") {
+        include_once $_DIR."/pages/admin_settings.php";
+      } else {
+        include_once $_DIR.'/pages/inscription.php';
+        ?>
 <style>
 body {
     background-image: url(./assets/lvire.jpg);
@@ -46,6 +49,7 @@ body {
 </style>
   <?php
   }
+}
    
 }
  ?>

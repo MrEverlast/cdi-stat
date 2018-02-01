@@ -188,6 +188,7 @@ function query(targetDir,name,color,type,idActivity,id_elev,id_grp,groupe,first_
      alert(data);
     }*/
   });
+  
   setTimeout(function(){
 	window.location.reload();  
   },150);
@@ -385,9 +386,11 @@ $(document).on("click",'[demigrp-selected]',function() {
 				url: '/ajax/query.php',
 				data: { targetDir: targetDir, eleve:eleve, activity:activity, duree:duree},
 				success: function(reponse) {
-        location.reload();
-        $("#modal_success").modal('show');
-  			}
+        $("#form_senregistrer").addClass("success");
+          setTimeout(function() {
+            location.reload();
+          },350);
+				}
 			});
 		}
 		afficherError(eleve, activity, duree);
@@ -405,8 +408,7 @@ $(document).on("click",'[demigrp-selected]',function() {
    }
   function afficheModalAdmin() {
 	  $('.ui.mini.basic.modal')
-		.modal('show')
-	;
+		.modal('show');
 	  
   }
   
@@ -635,3 +637,43 @@ $(document).on("click", '.data_act',function( event ){
 
 //// ------------------------------------- ////
 
+//////////// Admin settings //////////////
+$(document).on("click",'#btn_modifmdp', function(event){
+var mdpactuel = $( "#id_mdpactuel" ).val();
+var newmdp = $( "#id_newmdp" ).val();
+var confirmmdp =  $( "#id_confirm_newmdp" ).val();
+var targetDir = "req_settings_mdp";
+
+  $.ajax({
+    method: "POST",
+    url: "/ajax/query.php",
+    data: { 
+      targetDir: targetDir,
+      mdpactuel: mdpactuel,
+      newmdp: newmdp,
+      confirmmdp: confirmmdp
+
+    },
+      success:function(data){
+        switch (data){
+          case "0":
+            $( "#form_mdp" ).addClass("success");  
+            setTimeout(function() {
+              location.reload();
+            },250);
+            
+            break;
+            
+          case "1":
+            $( "#id_mdpactuel" ).parent().addClass('error');
+            break;
+
+          case "2":
+            $( "#id_confirm_newmdp" ).parent().addClass('error');
+            $( "#id_newmdp" ).parent().addClass('error');
+            break;
+        }
+       
+      }
+    });
+});

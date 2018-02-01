@@ -1,11 +1,84 @@
 <h2 class="ui dividing header">
   <i class="icon setting"></i>Paramètres
 </h2>
-
-        <div class="ui segment basic">
-          <button id="req_year_create" class="ui button primary"><i class="icon add "></i>Ajouter une nouvelle année</button>
+    <div class="row">
+      <div class="ui segment basic">
+        <button id="req_year_create" class="ui button primary"><i class="icon add "></i>Ajouter une nouvelle année</button>
+      </div>
+    </div>
+<div class="ui container fluid">
+  <div class="ui equal width grid padded">
+    <div class="row" >
+      <div class="column" > 
+        <h3>
+          Gestion de mot de passe
+        </h3>
+        <div class="ui form" id="form_mdp">
+          <div class="row">
+                  <div class="field">
+                    <label>Mot de passe actuel</label>
+                    <input id="id_mdpactuel" placeholder="" type="password">
+                  </div>
+          </div>
+          <div class="row">
+                  <div class="field">
+                    <label>Nouveau mot de passe</label>
+                    <input id="id_newmdp" placeholder="" type="password">
+                  </div>
+          </div>
+          <div class="row">
+                  <div class="field">
+                    <label>Confirmation du nouveau mot de passe</label>
+                    <input id="id_confirm_newmdp" placeholder="" type="password">
+                  </div>
+          </div>
+          <div class="ui success message">
+                  <p>Le mot de passe a bien été changé.</p>
+          </div>
+          <div class="row">
+                  <button id="btn_modifmdp" class="ui button primary myTrigger">Modifier</button>
+          </div>
         </div>
-    
+      </div>
+      <div class="column" >
+        <h3>
+          Planning
+        </h3> 
+        <div class="column">
+          <div class="ui form">
+         
+            <div class="grouped fields">
+            <?php
+              $semaine= array(
+                    0 => "Lundi",
+                    1 => "Mardi",
+                    2 => "Mercredi",
+                    3 => "Jeudi",
+                    4 => "Vendredi",
+                    5 => "Samedi",
+                    6 => "Dimanche"
+              );
+
+              for($i = 0; $i<7;$i++){
+                ?>
+                <div class="field">
+                  <div class="ui radio checkbox">
+                    <input name="frequency" checked="checked" type="radio">
+                    <label><?= $semaine[$i]; ?></label>
+                  </div>
+                </div>
+              <?php } ?>
+
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          df
+          </div>
+      </div>
+    </div>      
+  </div>
+</div>
 
 <?php include_once $_DIR.'/ajax/imp.php'; ?>
 

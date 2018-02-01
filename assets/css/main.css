@@ -33,6 +33,10 @@ body > .grid {
 .data_elv:hover {
   cursor: pointer;
 }
+
+.data_elv_info:hover {
+  cursor: pointer;
+}
 .myActive {
   -webkit-box-shadow: 0 0 5px 0 #888888;
   box-shadow: 0 0 5px 0 #888888;

@@ -1,6 +1,6 @@
 <?php #----------------- Menu login ---------------# ?>
-<div class="ui secondary  menu">
-  <div class="right menu">
+<div class="ui secondary inverted menu">
+  <div class="right  menu">
     <a onclick="afficheModalAdmin()" class="ui item">
       Login
     </a>
@@ -10,13 +10,14 @@
 
 <div class="ui middle aligned center aligned grid">
   <div class="column inscr">
-    <h1 class="ui blue image header">CDI</h1>
+    <h1 class="ui inverted image header">CDI</h1>
     <form class="ui large form aligned left">
-      <div class="ui stacked segment">
+			<div class="ui form" id="form_senregistrer">
+      <div class="ui inverted stacked segment">
 		
 				<div class="field" id="divEleve">
 					<div class="field">
-		      	<div class="ui blue ribbon label large" style="left:-183px;">
+		      	<div class="ui red ribbon label large" style="left:-183px;">
 			        <i class="user icon"></i> Élève
 			      </div>
 	      	</div>
@@ -35,7 +36,7 @@
 			 
 				<div class="field " id="divActivity">
 					<div class="field">
-		      	<div class="ui blue ribbon label large" style="left:-171px;">
+		      	<div class="ui red ribbon label large" style="left:-171px;">
 			        <i class="tasks icon"></i> Acitivité
 			      </div>
 	      	</div>
@@ -43,7 +44,7 @@
 						<option value="">Selectionnez l'activité..</option>
 						<!--          // BASE //           -->
 						<?php 
-						$sth = $bdd->requeteBDD("SELECT `id`,`name` FROM `t_activity` ");
+						$sth = $bdd->requeteBDD("SELECT `id`,`name` FROM `t_activity` WHERE `type` = 0");
 						while($result = $sth->fetch())
 						echo "<option value=".$result[0].">".$result[1]."</option> "; 
 						$sth = null;
@@ -54,7 +55,7 @@
 			
 				<div class="field" id="divDuree">
 					<div class="field">
-		      	<div class="ui blue ribbon label large" style="left:-180px;">
+		      	<div class="ui red ribbon label large" style="left:-180px;">
 			        <i class="hourglass start icon"></i> Durée
 			      </div>
 	      	</div>
@@ -68,11 +69,15 @@
 						<!--        /////////////////     -->
 					</select>
 				</div>
-	      <div class="ui fluid large primary submit button" onclick="enregistrerEleve()">
+	      <div class="ui fluid large red submit button" onclick="enregistrerEleve()">
 	      	S'enregistrer
 	      </div>
       </div>
       <div class="ui error message"></div>
+			<div class="ui success message">
+          <p>Vous vous êtes bien enregistré.</p>
+      </div>
+			</div>
     </form>
   </div>
 </div>
@@ -106,5 +111,11 @@
 <?php #----------------- MODAL ADMIN END ---------------# ?>
 <?php /*-- Pour les selects --*/ ?>
 <script type="text/javascript">
-  $('select.dropdown').dropdown();
+	$('select.dropdown').dropdown();
+	
+	$(document).ready(function(){
+		$("body").on("contextmenu",function(){
+			return false;
+		})
+	})
 </script>
