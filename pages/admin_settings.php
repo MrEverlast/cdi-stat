@@ -1,9 +1,11 @@
 <h2 class="ui dividing header">
   <i class="icon setting"></i>Paramètres
 </h2>
-<div class="ui segment basic">
-  <button id="req_year_create" class="ui button primary"><i class="icon add "></i>Ajouter une nouvelle année</button>
-</div>
+
+        <div class="ui segment basic">
+          <button id="req_year_create" class="ui button primary"><i class="icon add "></i>Ajouter une nouvelle année</button>
+        </div>
+    
 
 <?php include_once $_DIR.'/ajax/imp.php'; ?>
 

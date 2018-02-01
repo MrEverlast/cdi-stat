@@ -76,7 +76,15 @@
     </form>
   </div>
 </div>
+<div id="modal_success" class="ui modal mini">
+  <div class="header">
+    TEST
+  </div>
+  <div class="content">
+    <p>Succès.</p>
 
+  </div>
+</div>		 
 
 <?php #----------------- MODAL ADMIN ---------------# ?>
 <div class="ui mini basic modal ">

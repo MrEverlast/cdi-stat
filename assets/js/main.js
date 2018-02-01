@@ -84,7 +84,7 @@ function loadModal(object) {
     },
     success: function(data) {
       $('#modal_main').html(data);
-      if(res[1]=="addacti")afficherCalendar();
+      if(res[1]=="addacti") afficherCalendar();
     }
   });
   // Évite le problème de positionnement
@@ -376,7 +376,8 @@ $(document).on("click",'[demigrp-selected]',function() {
   function enregistrerEleve() {
 		var eleve = $("#eleve").val();
 		var activity = $("#activity").val();
-		var duree = $("#duree").val();
+    var duree = $("#duree").val();
+    
 		var targetDir = "req_inscr_inscription";
 		if(eleve != "" && activity != "" && duree != ""){
 			$.ajax({
@@ -384,8 +385,9 @@ $(document).on("click",'[demigrp-selected]',function() {
 				url: '/ajax/query.php',
 				data: { targetDir: targetDir, eleve:eleve, activity:activity, duree:duree},
 				success: function(reponse) {
-				location.reload();
-				}
+        location.reload();
+        $("#modal_success").modal('show');
+  			}
 			});
 		}
 		afficherError(eleve, activity, duree);
