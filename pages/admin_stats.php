@@ -82,9 +82,9 @@ function loadCalender(id, initialDate = getCalendarEdge()) {
       if (verifDates(date1, date2)) {
         $.ajax({
           method: 'POST',
-          url: '/ajax/stats/req/ele_inscrit_test.php',
+          url: '/ajax/stats/req/elv_inscrit_test.php',
           data: {
-            diff: getDayDiff(date1, date2),
+            diff: getDayDiff(moment(date1), moment(date2)),
             date: date1
           },
           success: function(data) {
@@ -104,8 +104,9 @@ loadCalender('calendar2', maxDate);
 $('#calendar1').calendar('set date', minDate, updateInput = false, fireChange = true);
 $('#calendar2').calendar('set date', maxDate, updateInput = false, fireChange = true);
 
-function getDayGiff(date1, date2) {
-  return date1.diff(date2,'days');
+function getDayDiff(date1, date2) {
+  console.log(Math.abs(date1.diff(date2.format(),'days')));
+  return Math.abs(date1.diff(date2.format(),'days'));
 }
 
 function verifDates(date1, date2) {
