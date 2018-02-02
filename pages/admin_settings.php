@@ -9,73 +9,122 @@
 <div class="ui container fluid">
   <div class="ui equal width grid padded">
     <div class="row" >
-      <div class="column" > 
-        <h3>
-          Gestion de mot de passe
-        </h3>
-        <div class="ui form" id="form_mdp">
-          <div class="row">
-                  <div class="field">
-                    <label>Mot de passe actuel</label>
-                    <input id="id_mdpactuel" placeholder="" type="password">
-                  </div>
-          </div>
-          <div class="row">
-                  <div class="field">
-                    <label>Nouveau mot de passe</label>
-                    <input id="id_newmdp" placeholder="" type="password">
-                  </div>
-          </div>
-          <div class="row">
-                  <div class="field">
-                    <label>Confirmation du nouveau mot de passe</label>
-                    <input id="id_confirm_newmdp" placeholder="" type="password">
-                  </div>
-          </div>
-          <div class="ui success message">
-                  <p>Le mot de passe a bien été changé.</p>
-          </div>
-          <div class="row">
-                  <button id="btn_modifmdp" class="ui button primary myTrigger">Modifier</button>
-          </div>
-        </div>
-      </div>
-      <div class="column" >
-        <h3>
-          Planning
-        </h3> 
-        <div class="column">
-          <div class="ui form">
-         
-            <div class="grouped fields">
-            <?php
-              $semaine= array(
-                    0 => "Lundi",
-                    1 => "Mardi",
-                    2 => "Mercredi",
-                    3 => "Jeudi",
-                    4 => "Vendredi",
-                    5 => "Samedi",
-                    6 => "Dimanche"
-              );
 
-              for($i = 0; $i<7;$i++){
-                ?>
-                <div class="field">
-                  <div class="ui radio checkbox">
-                    <input name="frequency" checked="checked" type="radio">
-                    <label><?= $semaine[$i]; ?></label>
-                  </div>
-                </div>
-              <?php } ?>
-
+        <div class="column" > 
+          <h3>
+            Gestion de mot de passe
+          </h3>
+          <div class="ui form" id="form_mdp">
+            <div class="row">
+                    <div class="field">
+                      <label>Mot de passe actuel</label>
+                      <input id="id_mdpactuel" placeholder="" type="password">
+                    </div>
+            </div>
+            <div class="row">
+                    <div class="field">
+                      <label>Nouveau mot de passe</label>
+                      <input id="id_newmdp" placeholder="" type="password">
+                    </div>
+            </div>
+            <div class="row">
+                    <div class="field">
+                      <label>Confirmation du nouveau mot de passe</label>
+                      <input id="id_confirm_newmdp" placeholder="" type="password">
+                    </div>
+            </div>
+            <div class="ui success message">
+                    <p>Le mot de passe a bien été changé.</p>
+            </div>
+            <div class="row">
+                    <button id="btn_modifmdp" class="ui button primary myTrigger">Modifier</button>
             </div>
           </div>
         </div>
+
+       
         <div class="column">
-          df
-          </div>
-      </div>
+          <h3>
+             Planning
+          </h3> 
+            <div class="ui equal width grid padded">
+              <div class="row" >
+                <div class="column" >
+                  <div class="ui form">           
+                    <div class="grouped fields">
+                      <?php
+                                $semaine= array(
+                                      0 => "Lundi",
+                                      1 => "Mardi",
+                                      2 => "Mercredi",
+                                      3 => "Jeudi",
+                                      4 => "Vendredi",
+                                      5 => "Samedi",
+                                      6 => "Dimanche"
+                                );
+
+                                for($i = 0; $i<7;$i++){
+                                  ?>
+                                  <div class="field">
+                                    <div class="ui radio checkbox">
+                                      <input name="frequency" checked="checked" type="radio">
+                                      <label><?= $semaine[$i]; ?></label>
+                                    </div>
+                                  </div>
+                      <?php } ?>
+
+                    </div>
+                  </div>
+                </div>
+
+                <div class="column">
+                  <label> Matin</label>
+
+                  <div class="field">     
+                      <div class="ui calendar" id="horaireMatin1">
+                          <div class="ui input left icon">
+                              <i class="calendar icon"></i>
+                              <input id='horaireMatin1' type="text" placeholder="hh:mm" readonly="true">
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="field">     
+                      <div class="ui calendar" id="horaireMatin2">
+                          <div class="ui input left icon">
+                              <i class="calendar icon"></i>
+                              <input id='horaireMatin2' type="text" placeholder="hh:mm" readonly="true">
+                          </div>
+                      </div>
+                  </div>
+
+                  <label> Après midi</label>
+
+                  <div class="field">     
+                      <div class="ui calendar" id="horaireAprem1">
+                          <div class="ui input left icon">
+                              <i class="calendar icon"></i>
+                              <input id='horaireAprem1' type="text" placeholder="hh:mm" readonly="true">
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="field">     
+                      <div class="ui calendar" id="horaireAprem2">
+                          <div class="ui input left icon">
+                              <i class="calendar icon"></i>
+                              <input id='horaireAprem2' type="text" placeholder="hh:mm" readonly="true">
+                          </div>
+                      </div>
+                  </div>
+
+
+
+
+                </div>
+              </div>      
+            </div>
+        </div>
     </div>      
   </div>
 </div>
@@ -335,4 +384,43 @@ function checkFile(file) {
   return ext === "csv";
 }
 
+//------------CALENDAR------------//
+function loadHoraire(id){
+
+    $('#'+id).calendar({
+          ampm: false,
+          type: 'time',
+          monthFirst: false,
+          formatter: {
+ 
+              time: function (date,settings, forCalendar){
+                if (!date) {
+                  return '';
+                }
+                  if((date.getHours())<10){
+                    var hourJ = date.getHours();
+                    var hour ="0"+hourJ;
+                  }else{
+                    var hour =date.getHours();
+                  }
+
+                var minute = date.getMinutes();
+                var ampm = '';
+                if (settings.ampm) {
+                  ampm = ' ' + (hour < 12 ? settings.text.am : settings.text.pm);
+                  hour = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
+                }
+              return hour + ':' + (minute < 10 ? '0' : '') + minute + ampm;
+                
+
+              }
+          }
+    });
+}
+
+var tabIdHoraire = ['horaireMatin1','horaireMatin2','horaireAprem1','horaireAprem2'];
+for(var i=0;i<4;i++){
+  loadHoraire(tabIdHoraire[i]);
+  
+}
 </script>
