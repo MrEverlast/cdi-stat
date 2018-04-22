@@ -12,7 +12,7 @@
       <h3>Fin</h3>
       <div class="ui calendar" id="calendar2"></div>
     </div>
-    <div class="column thirteen wide">
+    <div id="test">
       <canvas id="myChart"></canvas>
     </div>
   </div>
@@ -195,6 +195,18 @@ function addData(chart, label, data) {
   chart.data.datasets.forEach((dataset) => {
     dataset.data.push(data);
   });
+}
+
+$(window).on('resize', () => {
+  resize();
+});
+
+$(window).on('load', () => {
+  resize();
+});
+
+function resize() {
+  $("#test").css("width", (window.innerWidth - 615) + "px");
 }
 
 
