@@ -99,6 +99,7 @@ function loadCalender(id, initialDate = getCalendarEdge()) {
             },
             success: function(data) {
               loadGraph(data, date1, date2);
+              
             }
           });
         }
@@ -128,10 +129,12 @@ function verifDates(date1, date2) {
 function loadGraph(_data, date1, date2) {
   var json = JSON.parse(_data);
   var ctx = $("#myChart");
+  console.log(json);
+
 
   var title = moment(date1).format('D MMM YYYY') + ' à ' + moment(date2).format('D MMM YYYY'); 
   if (window.myLineChart)
-      window.myLineChart.destroy(); 
+      window.myLineChart.destroy();
   
   window.myLineChart = new Chart(ctx, {
     type: 'line',
@@ -183,8 +186,10 @@ function loadGraph(_data, date1, date2) {
   });
   
   var arr = $.map(json, function(el) { return el });
+  
 
   arr.forEach((element, index) => {
+    console.log(element);
     addData(window.myLineChart, moment(date1).add(index, 'days').format('D MMM'), element);
   });
   window.myLineChart.update();
