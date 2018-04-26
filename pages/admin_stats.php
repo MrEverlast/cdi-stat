@@ -2,7 +2,6 @@
   <i class="icon bar chart"></i>Statistiques
 </h2>
 
-
 <div class="ui grid padded">
   <div class="row">
     <div class="column" style="width: 306px;">
@@ -46,6 +45,10 @@ var text = {
   now: 'Maintenant',
   am: 'AM',
   pm: 'PM'
+};
+
+window.chartColors = {
+	red: '#ff6384'
 };
 
 var minDate = getCalendarEdge();
@@ -92,14 +95,15 @@ function loadCalender(id, initialDate = getCalendarEdge()) {
         if (verifDates(date1, date2)) {
           $.ajax({
             method: 'POST',
-            url: '/ajax/stats/req/elv_inscrit_test.php',
+            url: '/ajax/stats/req/elv_inscrit.php',
             data: {
               diff: getDayDiff(moment(date1), moment(date2)),
               date: date1
             },
             success: function(data) {
-              loadGraph(data, date1, date2);
-              
+              get_activities((activities) => {
+                loadGraph(data, date1, date2, activities);
+              });
             }
           });
         }
@@ -126,10 +130,34 @@ function verifDates(date1, date2) {
   return moment(date1).isBefore(date2) || moment(date1).isSame(date2);
 }
 
-function loadGraph(_data, date1, date2) {
+function loadGraph(_data, date1, date2, activities) {
   var json = JSON.parse(_data);
+  var jsonActivities = JSON.parse(activities);
   var ctx = $("#myChart");
-  console.log(json);
+  var arr = $.map(json, function(el) { return el });
+  var datasets = [];
+
+
+  arr.forEach((element, index) => {
+    if (index == 0) {
+      label = 'Élèves total'
+      backgroundColor = window.chartColors.red + "14";
+      borderColor = window.chartColors.red;
+    } else {
+      label = jsonActivities[index].name;
+      backgroundColor = jsonActivities[index].color + "14";
+      borderColor = jsonActivities[index].color;
+    }
+    tempDatasets = {
+            label: label,
+            data: [],
+            backgroundColor: backgroundColor,
+					  borderColor: borderColor,
+            borderSize: 1
+          };
+
+    datasets[index] = tempDatasets;
+  });
 
 
   var title = moment(date1).format('D MMM YYYY') + ' à ' + moment(date2).format('D MMM YYYY'); 
@@ -139,18 +167,8 @@ function loadGraph(_data, date1, date2) {
   window.myLineChart = new Chart(ctx, {
     type: 'line',
     data: {
-        labels: [],
-        datasets: [{
-            label: 'Élèves',
-            data: [],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)'
-            ],
-            borderWidth: 1
-        }]
+      labels: [],
+      datasets: datasets
     },
     options: {
 				responsive: true,
@@ -184,21 +202,31 @@ function loadGraph(_data, date1, date2) {
 				}
 			}
   });
-  
-  var arr = $.map(json, function(el) { return el });
-  
 
   arr.forEach((element, index) => {
-    console.log(element);
-    addData(window.myLineChart, moment(date1).add(index, 'days').format('D MMM'), element);
+    var eacharr = $.map(element, function(el) { return el });
+
+    eacharr.forEach((element, i) => {
+      addData(window.myLineChart, moment(date1).add(i, 'days').format('D MMM'), element, index);
+    });
+
   });
   window.myLineChart.update();
 }
 
-function addData(chart, label, data) {
-  chart.data.labels.push(label);
-  chart.data.datasets.forEach((dataset) => {
-    dataset.data.push(data);
+function addData(chart, label, data, datasetIndex) {
+  if (datasetIndex === 0)
+    chart.data.labels.push(label);
+  chart.data.datasets[datasetIndex].data.push(data);
+}
+
+function get_activities(cb) {
+  $.ajax({
+    method: 'POST',
+    url: '/ajax/stats/req/get_act.php',
+    success: function(data) {
+      cb(data);
+    }
   });
 }
 
@@ -213,6 +241,5 @@ $(window).on('load', () => {
 function resize() {
   $("#test").css("width", (window.innerWidth - 615) + "px");
 }
-
 
 </script>
