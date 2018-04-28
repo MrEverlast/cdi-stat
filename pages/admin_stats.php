@@ -121,12 +121,10 @@ $('#calendar1').calendar('set date', minDate, updateInput = false, fireChange = 
 $('#calendar2').calendar('set date', maxDate, updateInput = false, fireChange = true);
 
 function getDayDiff(date1, date2) {
-  //console.log(Math.abs(date1.diff(date2.format(),'days')));
   return Math.abs(date1.diff(date2.format(),'days'));
 }
 
 function verifDates(date1, date2) {
-  //console.log(moment(date1).isBefore(date2) || moment(date1).isSame(date2));
   return moment(date1).isBefore(date2) || moment(date1).isSame(date2);
 }
 
