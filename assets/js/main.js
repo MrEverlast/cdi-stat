@@ -677,3 +677,42 @@ var targetDir = "req_settings_mdp";
       }
     });
 });
+
+$(document).on("click",'#btn_modifplanning', function(event){
+
+  var jourSemaine = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+  var tabHoraire = ['inputMatinD','inputMatinF','inputApremD','inputApremF'];
+  var tabId=[];
+  var valuePlaning=[];
+  var idTab=0;
+  var idName;
+  for(var d=0; d<6; d++){
+    for(var h=0; h<4; h++){
+      tabId[idTab]=tabHoraire[h]+jourSemaine[d];
+      idTab++;
+    }
+  }
+
+  for(var i=0;i<idTab;i++){
+    idName="#"+tabId[i];
+    valuePlaning[i]=$(idName).val();
+    
+  }
+
+  var targetDir = "req_settings_planning";
+  
+    $.ajax({
+      method: "POST",
+      url: "/ajax/query.php",
+      data: { 
+        targetDir: targetDir,
+        valuePlaning: valuePlaning,
+        idTab: idTab
+  
+      },
+        success:function(data){
+          alert(data);
+         
+        }
+      });
+  });

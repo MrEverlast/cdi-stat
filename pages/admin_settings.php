@@ -1,131 +1,146 @@
 <h2 class="ui dividing header">
   <i class="icon setting"></i>Paramètres
 </h2>
-    <div class="row">
-      <div class="ui segment basic">
-        <button id="req_year_create" class="ui button primary"><i class="icon add "></i>Ajouter une nouvelle année</button>
-      </div>
-    </div>
+   
 <div class="ui container fluid">
-  <div class="ui equal width grid padded">
-    <div class="row" >
+  <div class="ui two column centered grid">
 
-        <div class="column" > 
-          <h3>
-            Gestion de mot de passe
-          </h3>
-          <div class="ui form" id="form_mdp">
-            <div class="row">
-                    <div class="field">
-                      <label>Mot de passe actuel</label>
-                      <input id="id_mdpactuel" placeholder="" type="password">
-                    </div>
-            </div>
-            <div class="row">
-                    <div class="field">
-                      <label>Nouveau mot de passe</label>
-                      <input id="id_newmdp" placeholder="" type="password">
-                    </div>
-            </div>
-            <div class="row">
-                    <div class="field">
-                      <label>Confirmation du nouveau mot de passe</label>
-                      <input id="id_confirm_newmdp" placeholder="" type="password">
-                    </div>
-            </div>
-            <div class="ui success message">
-                    <p>Le mot de passe a bien été changé.</p>
-            </div>
-            <div class="row">
-                    <button id="btn_modifmdp" class="ui button primary myTrigger">Modifier</button>
-            </div>
-          </div>
+        <div class="ui horizontal divider"> Gestion de base données </div>
+
+        <div class="row">
+            <div class="ui segment basic">
+              <button id="req_year_create" class="ui button primary"><i class="icon add "></i>Ajouter une nouvelle année</button>
+           </div>
         </div>
 
-       
-        <div class="column">
-          <h3>
-             Planning
-          </h3> 
-            <div class="ui equal width grid padded">
-              <div class="row" >
-                <div class="column" >
-                  <div class="ui form">           
-                    <div class="grouped fields">
-                      <?php
-                                $semaine= array(
-                                      0 => "Lundi",
-                                      1 => "Mardi",
-                                      2 => "Mercredi",
-                                      3 => "Jeudi",
-                                      4 => "Vendredi",
-                                      5 => "Samedi",
-                                      6 => "Dimanche"
-                                );
+        <div class="ui horizontal divider"> Gestion de mot de passe </div>
 
-                                for($i = 0; $i<7;$i++){
-                                  ?>
-                                  <div class="field">
-                                    <div class="ui radio checkbox">
-                                      <input name="frequency" checked="checked" type="radio">
-                                      <label><?= $semaine[$i]; ?></label>
-                                    </div>
-                                  </div>
-                      <?php } ?>
+        <div class="row">
 
-                    </div>
-                  </div>
+            <div class="column" > 
+               
+              <div class="ui form" id="form_mdp">
+                <div class="row">
+                        <div class="field">
+                          <label>Mot de passe actuel</label>
+                          <input id="id_mdpactuel" placeholder="" type="password">
+                        </div>
                 </div>
-
-                <div class="column">
-                  <label> Matin</label>
-
-                  <div class="field">     
-                      <div class="ui calendar" id="horaireMatin1">
-                          <div class="ui input left icon">
-                              <i class="calendar icon"></i>
-                              <input id='horaireMatin1' type="text" placeholder="hh:mm" readonly="true">
-                          </div>
-                      </div>
-                  </div>
-
-                  <div class="field">     
-                      <div class="ui calendar" id="horaireMatin2">
-                          <div class="ui input left icon">
-                              <i class="calendar icon"></i>
-                              <input id='horaireMatin2' type="text" placeholder="hh:mm" readonly="true">
-                          </div>
-                      </div>
-                  </div>
-
-                  <label> Après midi</label>
-
-                  <div class="field">     
-                      <div class="ui calendar" id="horaireAprem1">
-                          <div class="ui input left icon">
-                              <i class="calendar icon"></i>
-                              <input id='horaireAprem1' type="text" placeholder="hh:mm" readonly="true">
-                          </div>
-                      </div>
-                  </div>
-
-                  <div class="field">     
-                      <div class="ui calendar" id="horaireAprem2">
-                          <div class="ui input left icon">
-                              <i class="calendar icon"></i>
-                              <input id='horaireAprem2' type="text" placeholder="hh:mm" readonly="true">
-                          </div>
-                      </div>
-                  </div>
-
-
-
-
+                <div class="row">
+                        <div class="field">
+                          <label>Nouveau mot de passe</label>
+                          <input id="id_newmdp" placeholder="" type="password">
+                        </div>
                 </div>
-              </div>      
+                <div class="row">
+                        <div class="field">
+                          <label>Confirmation du nouveau mot de passe</label>
+                          <input id="id_confirm_newmdp" placeholder="" type="password">
+                        </div>
+                </div>
+                <div class="ui success message">
+                        <p>Le mot de passe a bien été changé.</p>
+                </div>
+                <div class="row">
+                        <button id="btn_modifmdp" class="ui button primary center aligned myTrigger">Modifier</button>
+                </div>
+              </div>
             </div>
         </div>
-    </div>      
+
+        <div class="ui horizontal divider"> Planning </div>
+
+        <div class ="row">
+            <div class="column">
+                <div class="ui equal width grid padded">
+                  <div class="row" >
+                    <div class="column" >
+                      <div class="ui form">           
+                        <div class="grouped fields">
+                          <div class="ui three column grid container">
+                            <?php
+                                    $semaine= array(
+                                          0 => "Lundi",
+                                          1 => "Mardi",
+                                          2 => "Mercredi",
+                                          3 => "Jeudi",
+                                          4 => "Vendredi",
+                                          5 => "Samedi",
+                                    );
+                                    
+                                    for($i = 0; $i<6;$i++){
+                                      if($i==3){
+                                        ?> <div class="row">
+                                           
+                                        <?php
+                                      }
+                                      
+                                        $req = $bdd->requeteBDD("SELECT * FROM `t_cdi_horaire` A WHERE A.code=$i");
+                                        while ($data =$req->fetch()){
+                                          $h_ouvert_m=$data['h_ouvert_m'];
+                                          $h_fermer_m=$data['h_fermer_m'];
+                                          $h_ouvert_s=$data['h_ouvert_s'];
+                                          $h_fermer_s=$data['h_fermer_s'];
+                                        }
+                                      ?>
+                                      <div class="column">
+                                      <h3 class="ui centered " ><?= $semaine[$i]; ?></h3>
+                                        <label> Matin</label>
+
+                                        <div class="field">     
+                                            <div class="ui calendar" id="horaireMatinD<?= $semaine[$i] ?>">
+                                                <div class="ui input left icon">
+                                                    <i class="calendar icon"></i>
+                                                    <input id='inputMatinD<?= $semaine[$i] ?>' type="text" placeholder="hh:mm" readonly="true" value='<?= $h_ouvert_m ?>'>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="field">     
+                                            <div class="ui calendar" id="horaireMatinF<?= $semaine[$i] ?>">
+                                                <div class="ui input left icon">
+                                                    <i class="calendar icon"></i>
+                                                    <input id='inputMatinF<?= $semaine[$i] ?>' type="text" placeholder="hh:mm" readonly="true" value='<?= $h_fermer_m ?>'>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <label> Après midi</label>
+
+                                        <div class="field">     
+                                            <div class="ui calendar" id="horaireApremD<?= $semaine[$i] ?>">
+                                                <div class="ui input left icon">
+                                                    <i class="calendar icon"></i>
+                                                    <input id='inputApremD<?= $semaine[$i] ?>' type="text" placeholder="hh:mm" readonly="true" value='<?= $h_ouvert_s ?>'>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="field">     
+                                            <div class="ui calendar" id="horaireApremF<?= $semaine[$i] ?>">
+                                                <div class="ui input left icon">
+                                                    <i class="calendar icon"></i>
+                                                    <input id='inputApremF<?= $semaine[$i] ?>' type="text" placeholder="hh:mm" readonly="true" value='<?= $h_fermer_s ?>'>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                      </div>
+                             <?php } ?>
+                          </div>
+                          <div class="row">
+                            <button id="btn_modifplanning" class="ui button primary center aligned myTrigger">Modifier</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    
+                  </div>      
+                </div>
+            </div>
+        </div>
+        
   </div>
 </div>
 
@@ -385,12 +400,14 @@ function checkFile(file) {
 }
 
 //------------CALENDAR------------//
-function loadHoraire(id){
+function loadHoraire(id,id_debut,id_fin){
 
     $('#'+id).calendar({
           ampm: false,
           type: 'time',
           monthFirst: false,
+          startCalendar: $('#'+id_debut),
+          endCalendar:$('#'+id_fin),
           formatter: {
  
               time: function (date,settings, forCalendar){
@@ -418,9 +435,29 @@ function loadHoraire(id){
     });
 }
 
-var tabIdHoraire = ['horaireMatin1','horaireMatin2','horaireAprem1','horaireAprem2'];
-for(var i=0;i<4;i++){
-  loadHoraire(tabIdHoraire[i]);
-  
+
+
+
+var jourSemaine = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+var tabHoraire = ['horaireMatinD','horaireMatinF','horaireApremD','horaireApremF'];
+var tabId=[];
+var idTab=0;
+for(var d=0; d<6; d++){
+  for(var h=0; h<4; h++){
+    tabId[idTab]=tabHoraire[h]+jourSemaine[d];
+    idTab++;
+  }
+}
+for(var i=0;i<idTab;i++){
+  if(i==0 || i==4 || i==8 || i==12 || i==16 || i==20 ){ //QUE APRES
+    loadHoraire(tabId[i],null,tabId[i+1]);
+  }
+  else if(i==3 || i==7 || i==11 || i==15 || i==19 || i==23 ){
+    loadHoraire(tabId[i],tabId[i-1],null);
+  }
+  else {
+    loadHoraire(tabId[i],tabId[i-1],tabId[i+1]);
+  }
+
 }
 </script>

@@ -11,7 +11,7 @@ $req = $bdd->requeteBDD("SELECT A.id,A.last_name,A.first_name,A.date_born,A.city
 $opatity=40;
 while($data=$req->fetch()){
 	?>
-	<tr class="data_elv_info" style="background: <?php echo $data['color']. $opatity; ?>" >
+	<tr style="background: <?php echo $data['color']. $opatity; ?>" >
 		<th >NOM</th>
 		<td ><?php echo $data['last_name']; ?></td>
 	</tr>
