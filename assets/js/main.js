@@ -711,7 +711,7 @@ $(document).on("click",'#btn_modifplanning', function(event){
   
       },
         success:function(data){
-          alert(data);
+          window.location.reload();
          
         }
       });

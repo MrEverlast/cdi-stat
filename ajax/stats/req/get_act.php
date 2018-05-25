@@ -11,4 +11,8 @@ while($data = $query->fetch(PDO::FETCH_ASSOC)) {
   $res[$l] = $data;
   $l++;
 }
-print_r(json_encode($res));
+if (isset($res)) {
+  print_r(json_encode($res));
+} else {
+  echo "null";
+}

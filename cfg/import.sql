@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 22 Janvier 2018 à 15:16
+-- Généré le :  Ven 25 Mai 2018 à 12:28
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `bts_cdi_2018`
+-- Base de données :  `cdibdd_2018`
 --
 
 -- --------------------------------------------------------
@@ -47,8 +47,21 @@ CREATE TABLE `t_cdi_horaire` (
   `h_ouvert_m` time NOT NULL,
   `h_fermer_m` time NOT NULL,
   `h_ouvert_s` time NOT NULL,
-  `h_fermer_s` time NOT NULL
+  `h_fermer_s` time NOT NULL,
+  `code` int(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `t_cdi_horaire`
+--
+
+INSERT INTO `t_cdi_horaire` (`id`, `jour`, `h_ouvert_m`, `h_fermer_m`, `h_ouvert_s`, `h_fermer_s`, `code`) VALUES
+(1, 'lundi', '08:00:00', '12:00:00', '13:00:00', '17:00:00', 0),
+(2, 'mardi', '08:00:00', '11:00:00', '15:00:00', '17:00:00', 1),
+(3, 'mercredi', '08:00:00', '11:00:00', '15:00:00', '17:00:00', 2),
+(4, 'jeudi', '08:00:00', '11:00:00', '15:00:00', '17:00:00', 3),
+(5, 'vendredi', '08:00:00', '11:00:00', '15:00:00', '17:00:00', 4),
+(6, 'samedi', '08:00:00', '11:00:00', '15:00:00', '17:00:00', 5);
 
 -- --------------------------------------------------------
 
@@ -239,17 +252,17 @@ ALTER TABLE `t_activity`
 -- AUTO_INCREMENT pour la table `t_cdi_horaire`
 --
 ALTER TABLE `t_cdi_horaire`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT pour la table `t_division`
 --
 ALTER TABLE `t_division`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 --
 -- AUTO_INCREMENT pour la table `t_eleve`
 --
 ALTER TABLE `t_eleve`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1281;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2561;
 --
 -- AUTO_INCREMENT pour la table `t_eleve_join_groupe`
 --
@@ -259,7 +272,7 @@ ALTER TABLE `t_eleve_join_groupe`
 -- AUTO_INCREMENT pour la table `t_groupe`
 --
 ALTER TABLE `t_groupe`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=174;
 --
 -- AUTO_INCREMENT pour la table `t_groupe_join_activity`
 --

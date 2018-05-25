@@ -41,13 +41,13 @@
                 <div class="ui success message">
                         <p>Le mot de passe a bien été changé.</p>
                 </div>
-                <div class="row">
-                        <button id="btn_modifmdp" class="ui button primary center aligned myTrigger">Modifier</button>
-                </div>
+                
               </div>
             </div>
         </div>
-
+        <div class="row">
+            <button id="btn_modifmdp" class="ui button primary center aligned myTrigger">Modifier</button>
+        </div>
         <div class="ui horizontal divider"> Planning </div>
 
         <div class ="row">
@@ -128,9 +128,7 @@
                                       </div>
                              <?php } ?>
                           </div>
-                          <div class="row">
-                            <button id="btn_modifplanning" class="ui button primary center aligned myTrigger">Modifier</button>
-                          </div>
+                          
                         </div>
                       </div>
                     </div>
@@ -141,6 +139,9 @@
             </div>
         </div>
         
+  </div>
+  <div class="row">
+    <button id="btn_modifplanning" class="ui button primary center aligned myTrigger">Modifier</button>
   </div>
 </div>
 

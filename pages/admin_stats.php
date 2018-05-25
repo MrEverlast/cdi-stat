@@ -102,6 +102,7 @@ function loadCalender(id, initialDate = getCalendarEdge()) {
             },
             success: function(data) {
               get_activities((activities) => {
+                console.log(activities)
                 loadGraph(data, date1, date2, activities);
               });
             }
