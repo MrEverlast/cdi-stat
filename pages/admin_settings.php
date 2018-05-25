@@ -1,7 +1,8 @@
-<h2 class="ui dividing header">
+<?php if (isset($_SESSION['connected'])) { ?>
+  <h2 class="ui dividing header">
   <i class="icon setting"></i>Paramètres
-</h2>
-   
+</h2> 
+<?php } ?>
 <div class="ui container fluid">
   <div class="ui two column centered grid">
 
@@ -12,7 +13,7 @@
               <button id="req_year_create" class="ui button primary"><i class="icon add "></i>Ajouter une nouvelle année</button>
            </div>
         </div>
-
+<?php if (isset($_SESSION['connected'])) { ?>
         <div class="ui horizontal divider"> Gestion de mot de passe </div>
 
         <div class="row">
@@ -143,6 +144,8 @@
   <div class="row">
     <button id="btn_modifplanning" class="ui button primary center aligned myTrigger">Modifier</button>
   </div>
+
+  <?php } ?>
 </div>
 
 <?php include_once $_DIR.'/ajax/imp.php'; ?>

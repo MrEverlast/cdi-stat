@@ -45,6 +45,7 @@ if (in_array($page, $array)) {
 body {
     background-image: url(./assets/lvire.jpg);
     background-repeat: no-repeat;
+    background-size: cover;
 }
 </style>
   <?php

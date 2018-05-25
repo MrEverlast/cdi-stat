@@ -3,4 +3,5 @@
   <div class="content">
     Importation terminée
   </div>
+  <a href="/" id="previous" class="ui button primary"><i class="icon home"></i>Retour</a>
 </h2>
