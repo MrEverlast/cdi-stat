@@ -25,6 +25,7 @@
 			$bdd->query("use $bddName");
 
 			$import = file_get_contents($_DIR.'/cfg/import.sql');
+			$path_bdd_name = 
 			$wait = 1;
 			$wait = $bdd->exec($import);
 
@@ -37,6 +38,7 @@
 			$json['BDD'] = $bddName;
 			$json = json_encode($json);
 			file_put_contents($_DIR.'/cfg/config.json', $json);
+			file_put_contents($_DIR.'/cfg/nom_bdd.txt', $bddName);
 			
 			//insertAllData();
 
