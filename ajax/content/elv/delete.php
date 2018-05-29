@@ -15,7 +15,7 @@ include_once $_DIR.'/cfg/init.php';
 	          while($data = $req->fetch()) { 
 	            
 	          ?> 
-	          <option value=" <?php echo $data['id']; ?> " > <?php echo $data['first_name']." ".$data['last_name']." ".$data['nom']; ?> </option>
+	          <option value=" <?php echo $data['id']; ?> " > <?php echo $data['last_name']." ".$data['first_name']." ".$data['nom']; ?> </option>
 	          <?php
 	          }
 	       ?>
