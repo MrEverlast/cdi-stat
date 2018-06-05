@@ -25,7 +25,6 @@
 			$bdd->query("use $bddName");
 
 			$import = file_get_contents($_DIR.'/cfg/import.sql');
-			$path_bdd_name = 
 			$wait = 1;
 			$wait = $bdd->exec($import);
 
