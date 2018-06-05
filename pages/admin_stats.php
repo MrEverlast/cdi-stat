@@ -7,10 +7,14 @@
     <div class="column" style="width: 306px;">
       <h3>Debut</h3>
       <div class="ui calendar" id="calendar1"></div>
-      <br>
+      
+    </div>
+    <div class="column" style="width: 306px;">
       <h3>Fin</h3>
       <div class="ui calendar" id="calendar2"></div>
     </div>
+  </div>
+  <div class="row">
     <div id="test">
       <canvas id="myChart"></canvas>
     </div>
@@ -238,7 +242,7 @@ $(window).on('load', () => {
 });
 
 function resize() {
-  $("#test").css("width", (window.innerWidth - 615) + "px");
+  $("#test").css("width", (window.innerWidth - 260) + "px");
 }
 
 </script>
