@@ -36,9 +36,13 @@
 			
 			$json['BDD'] = $bddName;
 			$json = json_encode($json);
-			file_put_contents($_DIR.'/cfg/config.json', $json);
-			file_put_contents($_DIR.'/cfg/nom_bdd.txt', $bddName);
 			
+			$wait = 0;
+			$wait = file_put_contents($_DIR.'/cfg/nom_bdd.txt', $bddName);
+
+			while ($wait == 0) {
+			}
+			file_put_contents($_DIR.'/cfg/config.json', $json);
 			//insertAllData();
 
 		} catch(PDOExeption $e) {
