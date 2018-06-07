@@ -37,7 +37,7 @@
 				<div class="field " id="divActivity">
 					<div class="field">
 		      	<div class="ui red ribbon label large" style="left:-171px;">
-			        <i class="tasks icon"></i> Acitivité
+			        <i class="tasks icon"></i> Activités
 			      </div>
 	      	</div>
 					<select class="ui search dropdown" id="activity">
